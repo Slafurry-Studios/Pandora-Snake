@@ -1,7 +1,7 @@
 using Game.AI;
 using UnityEngine;
 
-public class NPCMovement : MonoBehaviour
+public class NPCMovement : MonoBehaviour, IEntityMovement
 {
     [Header("Steering Settings")]
     public float rayDistance = 1.5f;
@@ -13,6 +13,8 @@ public class NPCMovement : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private string chaseBool = "Chase";
 
+    [Header("Audio")]
+    public string movementSoundName;
 
     private Rigidbody2D rb;
     private EntityBrain brain;
@@ -37,6 +39,8 @@ public class NPCMovement : MonoBehaviour
         }
     }
 
+    bool wasMoving = false;
+
 
     public void SetMovement(Vector2 desiredDirection, float speed)
     {
@@ -52,7 +56,14 @@ public class NPCMovement : MonoBehaviour
         if (brain != null && brain.aiAnimation != null && !string.IsNullOrEmpty(chaseBool))
         {
             brain.aiAnimation.SetBool(chaseBool, isMoving);
+
+            if (isMoving && !wasMoving)
+            {
+                SoundManager.Instance.PlaySound2D(movementSoundName);
+            }
         }
+
+        wasMoving = isMoving;
 
 
         if (!isMoving)

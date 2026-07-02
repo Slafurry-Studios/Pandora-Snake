@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 using Game.Core;
+using Game.Generic;
 
 namespace Game.Gameplay
 {
@@ -9,9 +10,24 @@ namespace Game.Gameplay
     {
         public static BulletManager Instance { get; private set; }
 
+        [Header("Global Bullet Effects")]
+        [SerializeField] private GameObject hitVFXPrefab;
+        [SerializeField] private GameObject explosionPrefab;
+        [SerializeField] private float explosionRadius = 3f;
+        [SerializeField] private float explosionForce = 10f;
+        [SerializeField] private int maxBounces = 3;
+
+        private class ActiveBulletData
+        {
+            public Bullet bullet;
+            public int bouncesLeft;
+        }
+
         private Dictionary<int, ObjectPool<Bullet>> pools = new Dictionary<int, ObjectPool<Bullet>>();
-        private List<Bullet> activeBullets = new List<Bullet>();
+        private List<ActiveBulletData> activeBullets = new List<ActiveBulletData>();
+
         private Collider2D[] hitResults = new Collider2D[1];
+        private Collider2D[] explosionResults = new Collider2D[32];
 
         private void Awake()
         {
@@ -39,8 +55,8 @@ namespace Game.Gameplay
             Bullet bullet = pools[prefabID].Get();
             bullet.transform.position = startPos;
             bullet.Setup(prefabID, damage, speed, maxDistance, direction, targetMask, hitRadius, isExplosive, isRichochet);
-            
-            activeBullets.Add(bullet);
+
+            activeBullets.Add(new ActiveBulletData { bullet = bullet, bouncesLeft = maxBounces });
         }
 
         private void CreatePoolForPrefab(Bullet prefab, int prefabID)
@@ -61,40 +77,124 @@ namespace Game.Gameplay
         {
             for (int i = activeBullets.Count - 1; i >= 0; i--)
             {
-                Bullet b = activeBullets[i];
-                
+                ActiveBulletData data = activeBullets[i];
+                Bullet b = data.bullet;
+
                 b.transform.position += (Vector3)(b.direction * b.speed * Time.deltaTime);
 
                 int hits = Physics2D.OverlapCircleNonAlloc(b.transform.position, b.hitRadius, hitResults, b.targetMask);
                 if (hits > 0)
                 {
-                    IDamageable damageable = hitResults[0].GetComponent<IDamageable>();
-                    if (damageable != null)
+                    Collider2D hitCollider = hitResults[0];
+                    Health health = hitCollider.GetComponent<Health>();
+
+                    SpawnHitObject(b, hitCollider);
+
+                    if (b.isExplosive)
                     {
-                        damageable.TakeDamage(b.damage);
+                        Explode(b);
+                        ReturnBullet(data, i);
+                        continue;
                     }
-                    
-                    ReturnBullet(b, i);
-                    continue; 
+
+                    if (health != null && !health.IsDead)
+                    {
+                        health.TakeDamage(b.damage);
+                        ReturnBullet(data, i);
+                    }
+                    else if (b.isRichochet && data.bouncesLeft > 0)
+                    {
+                        Ricochet(data, hitCollider);
+                    }
+                    else
+                    {
+                        ReturnBullet(data, i);
+                    }
+                    continue;
                 }
 
                 if (Vector2.Distance(b.startPosition, b.transform.position) >= b.maxDistance)
                 {
-                    ReturnBullet(b, i);
+                    if (b.isExplosive)
+                    {
+                        Explode(b);
+                    }
+                    ReturnBullet(data, i);
                 }
             }
         }
 
-        private void ReturnBullet(Bullet b, int index)
+        private void Ricochet(ActiveBulletData data, Collider2D hitCollider)
+        {
+            Bullet b = data.bullet;
+            Vector2 hitPoint = hitCollider.ClosestPoint(b.transform.position);
+            Vector2 normal = ((Vector2)b.transform.position - hitPoint).normalized;
+
+            if (normal.sqrMagnitude < 0.0001f)
+            {
+                normal = -b.direction;
+            }
+
+            Vector2 reflected = Vector2.Reflect(b.direction, normal).normalized;
+            b.direction = reflected;
+            data.bouncesLeft--;
+
+            b.transform.position += (Vector3)(normal * 0.05f);
+            b.startPosition = b.transform.position;
+        }
+
+        private void SpawnHitObject(Bullet b, Collider2D hitCollider)
+        {
+            if (hitVFXPrefab == null) return;
+
+            Vector2 hitPoint = hitCollider.ClosestPoint(b.transform.position);
+            Instantiate(hitVFXPrefab, hitPoint, Quaternion.identity);
+        }
+
+        private void Explode(Bullet b)
+        {
+            Vector2 explosionPos = b.transform.position;
+
+            if (explosionPrefab != null)
+            {
+                Instantiate(explosionPrefab, explosionPos, Quaternion.identity);
+            }
+
+            int count = Physics2D.OverlapCircleNonAlloc(explosionPos, explosionRadius, explosionResults, b.targetMask);
+            for (int j = 0; j < count; j++)
+            {
+                Collider2D col = explosionResults[j];
+                if (col == null) continue;
+
+                Vector2 toTarget = (Vector2)col.transform.position - explosionPos;
+                float distance = toTarget.magnitude;
+                float falloff = Mathf.Clamp01(1f - (distance / explosionRadius));
+
+                Health health = col.GetComponent<Health>();
+                if (health != null && !health.IsDead)
+                {
+                    health.TakeDamage(b.damage * falloff);
+                }
+
+                Rigidbody2D rb = col.attachedRigidbody;
+                if (rb != null)
+                {
+                    Vector2 forceDir = distance > 0.0001f ? toTarget.normalized : Random.insideUnitCircle.normalized;
+                    rb.AddForce(forceDir * explosionForce * falloff, ForceMode2D.Impulse);
+                }
+            }
+        }
+
+        private void ReturnBullet(ActiveBulletData data, int index)
         {
             activeBullets.RemoveAt(index);
-            if (pools.TryGetValue(b.prefabID, out ObjectPool<Bullet> pool))
+            if (pools.TryGetValue(data.bullet.prefabID, out ObjectPool<Bullet> pool))
             {
-                pool.Release(b);
+                pool.Release(data.bullet);
             }
             else
             {
-                b.gameObject.SetActive(false); // Fallback
+                data.bullet.gameObject.SetActive(false); // Fallback
             }
         }
     }

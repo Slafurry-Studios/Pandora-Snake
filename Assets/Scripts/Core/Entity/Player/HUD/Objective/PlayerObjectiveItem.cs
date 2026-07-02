@@ -14,7 +14,6 @@ namespace Game.UI.HUD
         [Header("Completion Fade")]
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private float fadeDuration = 0.6f;
-        [SerializeField] private float completedAlpha = 0.5f;
         public event System.Action<PlayerObjectiveItem> OnFadeCompleted;
 
         private ObjectiveProgress progress;

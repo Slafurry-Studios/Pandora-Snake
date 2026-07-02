@@ -190,6 +190,10 @@ MonoBehaviour:
   hitAnim: Hit
   hitSound: Bullet_Hit_Human
   deathSound: Soldier_Death
+  deathLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  deathChatType: 3
 --- !u!114 &3987714821460101945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +213,7 @@ MonoBehaviour:
   rayCount: 9
   rayAngle: 90
   chaseBool: Chase
+  movementSoundName: 
 --- !u!114 &6784798830675087970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +263,7 @@ MonoBehaviour:
   panicRadius: 5
   safeRadius: 8
   speedMultiplier: 0.8
+  panicSoundName: Police_Reports
 --- !u!114 &8043073496683345044
 MonoBehaviour:
   m_ObjectHideFlags: 0

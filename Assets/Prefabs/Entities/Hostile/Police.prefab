@@ -188,8 +188,12 @@ MonoBehaviour:
   objective: {fileID: 11400000, guid: cfcc755ee9f76c2b0b3e346255a066cc, type: 2}
   dieAnim: Death
   hitAnim: Hit
-  hitSound: Bullet_Hit_Human
+  hitSound: Bullet_HIt_Human
   deathSound: Police_Death
+  deathLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  deathChatType: 3
 --- !u!114 &489954732526789305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +213,7 @@ MonoBehaviour:
   rayCount: 9
   rayAngle: 90
   chaseBool: Chase
+  movementSoundName: 
 --- !u!114 &2957986954296912947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +263,7 @@ MonoBehaviour:
   panicRadius: 5
   safeRadius: 8
   speedMultiplier: 0.8
+  panicSoundName: Police_Reports
 --- !u!114 &547230888474849596
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Game.AI
 {
-    [RequireComponent(typeof(NPCMovement))]
     public class EntityBrain : MonoBehaviour
     {
         [Header("Universal References")]
@@ -14,12 +13,22 @@ namespace Game.AI
         [Tooltip("The brain checks this list from top to bottom. The first state whose conditions are met will run!")]
         public List<EntityState> stateList = new List<EntityState>();
 
-        public NPCMovement Movement { get; private set; }
+        /// <summary>
+        /// Any component implementing IEntityMovement works here - NPCMovement (Humanoid)
+        /// or CarMovement (Cars) are both valid, and more can be added later without
+        /// touching EntityBrain again.
+        /// </summary>
+        public IEntityMovement Movement { get; private set; }
         private EntityState currentState;
 
         private void Awake()
         {
-            Movement = GetComponent<NPCMovement>();
+            Movement = GetComponent<IEntityMovement>();
+            if (Movement == null)
+            {
+                Debug.LogError($"{gameObject.name}: EntityBrain requires a component implementing IEntityMovement (e.g. NPCMovement or CarMovement).");
+            }
+
             if (aiAnimation == null) aiAnimation = GetComponentInChildren<Animator>();
         }
 

@@ -14,6 +14,9 @@ namespace Game.AI
         [Header("Movement")]
         public float speedMultiplier = 5f;
 
+        [Header("Audio")]
+        public string panicSoundName;
+
         private bool isPanicking = false; 
 
         public override bool CheckConditions(EntityBrain brain)
@@ -36,6 +39,7 @@ namespace Game.AI
         public override void EnterState(EntityBrain brain) 
         { 
             isPanicking = true;
+            SoundManager.Instance.PlaySound2D(panicSoundName);
         }
 
         public override void UpdateState(EntityBrain brain)

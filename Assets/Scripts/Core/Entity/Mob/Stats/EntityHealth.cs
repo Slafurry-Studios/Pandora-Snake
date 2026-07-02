@@ -13,6 +13,7 @@ public class EntityHealth : Health
     [SerializeField] private string hitAnim;
     [SerializeField] private string hitSound;
     [SerializeField] private string deathSound;
+    [SerializeField] private LayerMask deathLayerMask;
     [SerializeField] private StreamChatType deathChatType = StreamChatType.KILL_HOSTILES;
     private IVisualEffect[] visualEffects;
 
@@ -45,13 +46,15 @@ public class EntityHealth : Health
         SoundManager.Instance.PlaySound2D(deathSound);
 
         Debug.Log("[ExampleEntityHealth] Entity has died!");
+        SetLayerRecursively(gameObject, LayerMaskToLayer(deathLayerMask));
 
         foreach (BaseObjectiveChannel channel in destroyChannel)
         {
             channel.Raise(1);
         }
 
-        ObjectiveManager.Instance.AddObjective(objective.Objective);
+        if (objective != null)
+            ObjectiveManager.Instance.AddObjective(objective.Objective);
         StreamChatManager.Instance.HandleStreamChat(deathChatType, 5);
         if (entityBrain != null)
         {
@@ -63,12 +66,32 @@ public class EntityHealth : Health
             if (entityBrain.Movement != null)
             {
                 entityBrain.Movement.SetMovement(Vector2.zero, 0f);
-                entityBrain.Movement.enabled = false;
+                ((Behaviour)entityBrain.Movement).enabled = false;
             }
-
 
             entityBrain.enabled = false;
             GetComponent<Collider2D>().isTrigger = true;
+        }
+    }
+
+    private static int LayerMaskToLayer(LayerMask mask)
+    {
+        int value = mask.value;
+        int layer = 0;
+        while (value > 1)
+        {
+            value >>= 1;
+            layer++;
+        }
+        return layer;
+    }
+
+    private static void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, layer);
         }
     }
 }
