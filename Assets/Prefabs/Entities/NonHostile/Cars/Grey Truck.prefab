@@ -15,14 +15,12 @@ GameObject:
   - component: {fileID: 833007532285183361}
   - component: {fileID: 8826499373012994697}
   - component: {fileID: 7309757566765153357}
-  - component: {fileID: 6489951291425933019}
   - component: {fileID: 1423395821517462431}
-  - component: {fileID: 5935322300510209069}
-  - component: {fileID: 8772692597575975365}
   - component: {fileID: 5756994276646811308}
   - component: {fileID: 5471385886034717725}
+  - component: {fileID: 7189524776469745682}
   m_Layer: 14
-  m_Name: Carrier
+  m_Name: Grey Truck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +36,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.9700003, y: 2.9700003, z: 2.9700003}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2136734722826678396}
@@ -85,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: -1266888717
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2035856612, guid: f9d5b39d6c4970e47bec313db500a8c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b395a98ead855f740bbfb825b0046a9f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,18 +126,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0001513511, y: 0.00009316206}
+  m_Offset: {x: 0.009695888, y: -0.11099738}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.22, y: 0.3}
+    oldSize: {x: 2.24, y: 2.24}
     newSize: {x: 0.18, y: 0.31}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.18381521, y: 0.3141436}
+  m_Size: {x: 0.93411565, y: 1.7463702}
   m_EdgeRadius: 0
 --- !u!50 &5321074834523320867
 Rigidbody2D:
@@ -183,8 +181,6 @@ MonoBehaviour:
   Target: {fileID: 0}
   aiAnimation: {fileID: 8826499373012994697}
   stateList:
-  - {fileID: 5935322300510209069}
-  - {fileID: 8772692597575975365}
   - {fileID: 5756994276646811308}
   - {fileID: 5471385886034717725}
 --- !u!95 &8826499373012994697
@@ -197,7 +193,7 @@ Animator:
   m_GameObject: {fileID: 798790902345116482}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f955ddd300dae16498aef1cb19d48838, type: 2}
+  m_Controller: {fileID: 9100000, guid: fd3c0b9bd0042414e889874ae394c5e8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -220,10 +216,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0708f13337f5534aa96903ce94175246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 3
   destroyChannel:
-  - {fileID: 11400000, guid: 60eb881e67f21e015830f10e526039e2, type: 2}
-  objective: {fileID: 11400000, guid: 47108246470e90494abf9f75ce2b12ee, type: 2}
+  - {fileID: 11400000, guid: 1aace1b53127957f6bdef9ed7bb69d07, type: 2}
+  objective: {fileID: 11400000, guid: 00d38d3bd0bfbc5c0b4e1d09f4e80249, type: 2}
   dieAnim: Die
   hitAnim: 
   hitSound: 
@@ -231,21 +227,8 @@ MonoBehaviour:
   deathLayerMask:
     serializedVersion: 2
     m_Bits: 6144
-  deathChatType: 3
+  deathChatType: 1
   collisionDmg: 1
---- !u!114 &6489951291425933019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798790902345116482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7597e1b39d7137fef8cb644d58b6dde7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  channel: {fileID: 11400000, guid: 60eb881e67f21e015830f10e526039e2, type: 2}
 --- !u!114 &1423395821517462431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,58 +241,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab46d83bfb29c4749eb9fc86782188a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteFacing: 1
+  spriteFacing: 0
   turnSpeed: 120
   turnSpeedPenalty: 0.5
   brakeDeceleration: 15
   forwardFireConeAngle: 20
   reverseAngleThreshold: 120
-  reverseSpeedMultiplier: 0.6
+  reverseSpeedMultiplier: 0.349
   reversingBool: IsReversing
---- !u!114 &5935322300510209069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798790902345116482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe00dc6b9f08609119b77f1359c588a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackRadius: 15
-  pursuitSpeedMultiplier: 1.2
-  fireRate: 0.6
-  shootingBool: IsShooting
-  attackSound: 
-  bulletPrefab: {fileID: 2891568854193911666, guid: 38ef8fdfe9fea02438cc2868250bead0, type: 3}
-  firePoint: {fileID: 2136734722826678396}
-  bulletDamage: 1
-  bulletSpeed: 12
-  bulletMaxDistance: 20
-  bulletHitRadius: 0.2
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 8
-  requiresLineOfSight: 1
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 6208
---- !u!114 &8772692597575975365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 798790902345116482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 359ec94e17cb0b9c5ab771346ebe30b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chaseRadius: 20
-  speedMultiplier: 1
 --- !u!114 &5756994276646811308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panicRadius: 6
   safeRadius: 10
-  speedMultiplier: 1.5
+  speedMultiplier: 1
 --- !u!114 &5471385886034717725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,9 +276,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0281f4bdc8bf1c994b5a1aae38e50922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1.5
+  speedMultiplier: 0.5
   minWanderTime: 2
   maxWanderTime: 5
+--- !u!114 &7189524776469745682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798790902345116482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7597e1b39d7137fef8cb644d58b6dde7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  channel: {fileID: 11400000, guid: 1aace1b53127957f6bdef9ed7bb69d07, type: 2}
 --- !u!1 &7485948538368896459
 GameObject:
   m_ObjectHideFlags: 0

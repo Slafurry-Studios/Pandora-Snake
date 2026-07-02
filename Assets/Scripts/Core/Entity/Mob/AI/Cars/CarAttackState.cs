@@ -19,7 +19,8 @@ namespace Game.AI
         public float fireRate = 0.6f;
 
         [Header("Animation")]
-        [SerializeField] private string attackAnim;
+        [Tooltip("Animator bool set to true for the whole time this state is active. Combined with CarMovement's IsReversing, this drives the animator between Foward_shoot and Backward_shoot.")]
+        [SerializeField] private string shootingBool = "IsShooting";
         [SerializeField] private string attackSound;
 
         [Header("Bullet Settings")]
@@ -65,6 +66,8 @@ namespace Game.AI
             {
                 Debug.LogWarning($"{gameObject.name}: CarAttackState works best with a CarMovement component (needed to know the forward-fire cone). Falling back to raw direction-to-target.");
             }
+
+            SetShootingAnim(brain, true);
         }
 
         public override void UpdateState(EntityBrain brain)
@@ -90,9 +93,14 @@ namespace Game.AI
 
         public override void ExitState(EntityBrain brain)
         {
-            if (brain.aiAnimation != null && !string.IsNullOrEmpty(attackAnim))
+            SetShootingAnim(brain, false);
+        }
+
+        private void SetShootingAnim(EntityBrain brain, bool isShooting)
+        {
+            if (brain.aiAnimation != null && !string.IsNullOrEmpty(shootingBool))
             {
-                brain.aiAnimation.ResetTrigger(attackAnim);
+                brain.aiAnimation.SetBool(shootingBool, isShooting);
             }
         }
 
@@ -122,12 +130,6 @@ namespace Game.AI
             );
 
             SoundManager.Instance.PlaySound2D(attackSound);
-
-            if (brain.aiAnimation != null && !string.IsNullOrEmpty(attackAnim))
-            {
-                brain.aiAnimation.ResetTrigger(attackAnim);
-                brain.aiAnimation.SetTrigger(attackAnim);
-            }
 
             lastFireTime = Time.time;
         }

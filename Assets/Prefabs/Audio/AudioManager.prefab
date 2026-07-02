@@ -305,7 +305,7 @@ MonoBehaviour:
   - groupID: Shotgun_Punchy
     clips:
     - {fileID: 8300000, guid: 0f890c3d4b93425589bc27f208ff3f85, type: 3}
-    volume: 4.65
+    volume: 2.6
   - groupID: Snake_Eating
     clips:
     - {fileID: 8300000, guid: 67be32f8fba8ebbfb94bd2241ec45e58, type: 3}

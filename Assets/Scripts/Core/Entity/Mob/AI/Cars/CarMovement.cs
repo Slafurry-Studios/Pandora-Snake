@@ -7,13 +7,19 @@ using UnityEngine;
 /// it can't strafe or snap-turn. This also means a car can only ever fire "forward",
 /// which CarAttackState relies on via IsAlignedWithDirection().
 ///
-/// Assumes the car sprite's nose points "up" (transform.up) at rotation 0, matching the
-/// usual top-down car sprite convention. If your art faces a different way, offset the
-/// sprite inside a child object rather than changing this script.
+/// Different car sprites may be drawn facing different ways (some artists draw the nose
+/// pointing up, some down). Set "Sprite Facing" in the Inspector to match this particular
+/// sprite - the script handles the rest, no need to nest/rotate child objects.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class CarMovement : MonoBehaviour, IEntityMovement
 {
+    public enum SpriteFacing { Up, Down, Right, Left }
+
+    [Header("Sprite Orientation")]
+    [Tooltip("Which way this car's sprite is drawn facing at rotation 0. Must match the art - different artists/sprites may face different ways.")]
+    public SpriteFacing spriteFacing = SpriteFacing.Up;
+
     [Header("Steering Settings")]
     [Tooltip("How fast the car can turn, in degrees per second.")]
     public float turnSpeed = 120f;
@@ -28,63 +34,144 @@ public class CarMovement : MonoBehaviour, IEntityMovement
     [Tooltip("Total cone angle (degrees) in front of the car considered 'lined up' for a shot.")]
     public float forwardFireConeAngle = 20f;
 
+    [Header("Reverse Driving")]
+    [Tooltip("If the desired direction is more than this many degrees away from the car's nose, the car reverses instead of doing a slow full turn (like a real car backing up).")]
+    public float reverseAngleThreshold = 120f;
+    [Tooltip("Reverse speed as a fraction of the requested speed.")]
+    [Range(0f, 1f)] public float reverseSpeedMultiplier = 0.6f;
+
     [Header("Animation")]
-    [SerializeField] private string drivingBool = "Driving";
+    [Tooltip("Animator bool set to true while the car is driving in reverse. Matches Animator states: Foward / Foward_shoot (false), Backward / Backward_shoot (true).")]
+    [SerializeField] private string reversingBool = "IsReversing";
 
     private Rigidbody2D rb;
     private EntityBrain brain;
+    private float facingOffsetDegrees;
 
-    /// <summary>Current forward speed the car is actually driving at (after turn penalty/braking).</summary>
+    /// <summary>Current forward speed the car is actually driving at (after turn penalty/braking). Negative while reversing.</summary>
     public float CurrentSpeed { get; private set; }
 
-    /// <summary>The car's current forward direction (its nose).</summary>
-    public Vector2 Forward => transform.up;
+    /// <summary>True while the car is currently driving in reverse.</summary>
+    public bool IsReversing { get; private set; }
+
+    /// <summary>The car's current forward direction (its nose), accounting for how the sprite is drawn.</summary>
+    public Vector2 Forward => Quaternion.Euler(0f, 0f, facingOffsetDegrees) * transform.up;
+
+    /// <summary>Which way the car turned last (+1 = counter-clockwise, -1 = clockwise).
+    /// Used to break ties when the desired direction is ~180 degrees away, where
+    /// floating-point noise can otherwise make it flip-flop direction every frame.</summary>
+    private float lastTurnSign = 1f;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         brain = GetComponent<EntityBrain>();
+        facingOffsetDegrees = GetFacingOffsetDegrees(spriteFacing);
+
+        // Steering relies on rb.MoveRotation actually rotating the body. If "Freeze
+        // Rotation Z" is checked on the Rigidbody2D (common on prefabs duplicated from
+        // Humanoid, which never rotates), the car will silently always drive toward
+        // world-up (its default facing) no matter what direction it's told to go.
+        if ((rb.constraints & RigidbodyConstraints2D.FreezeRotation) != 0)
+        {
+            Debug.LogWarning($"{gameObject.name}: Rigidbody2D had Freeze Rotation Z enabled - this blocks car steering entirely. Auto-disabling it. Uncheck it in the Inspector to remove this warning.");
+            rb.constraints &= ~RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
+
+    private static float GetFacingOffsetDegrees(SpriteFacing facing)
+    {
+        switch (facing)
+        {
+            case SpriteFacing.Up: return 0f;
+            case SpriteFacing.Down: return 180f;
+            case SpriteFacing.Right: return -90f;
+            case SpriteFacing.Left: return 90f;
+            default: return 0f;
+        }
     }
 
     public void SetMovement(Vector2 desiredDirection, float speed)
     {
         bool wantsToMove = desiredDirection != Vector2.zero && speed > 0f;
 
-        if (brain != null && brain.aiAnimation != null && !string.IsNullOrEmpty(drivingBool))
-        {
-            brain.aiAnimation.SetBool(drivingBool, wantsToMove);
-        }
-
         if (!wantsToMove)
         {
             CurrentSpeed = Mathf.MoveTowards(CurrentSpeed, 0f, brakeDeceleration * Time.deltaTime);
-            rb.velocity = (Vector2)transform.up * CurrentSpeed;
+            rb.velocity = Forward * CurrentSpeed;
+            SetReversing(false);
             return;
         }
 
         // Steer: rotate the car toward the desired direction, limited by turnSpeed.
-        float angleToTarget = Vector2.SignedAngle(transform.up, desiredDirection);
+        float angleToTarget = GetStableSteeringAngle(desiredDirection);
+        float absAngle = Mathf.Abs(angleToTarget);
+
         float step = turnSpeed * Time.deltaTime;
         float appliedTurn = Mathf.Clamp(angleToTarget, -step, step);
         rb.MoveRotation(rb.rotation + appliedTurn);
+        if (Mathf.Abs(appliedTurn) > 0.001f) lastTurnSign = Mathf.Sign(appliedTurn);
 
-        // Drive forward along the car's own nose, not straight at the target -
-        // the car curves into the direction over time instead of teleport-facing it.
-        float turnRatio = Mathf.Abs(angleToTarget) / 180f; // 0 = dead ahead, 1 = fully behind
-        float speedFactor = Mathf.Lerp(1f, 1f - turnSpeedPenalty, turnRatio);
+        // If the target is well behind the car, reverse toward it instead of doing a
+        // slow full turn - a real car would just back up rather than loop all the way around.
+        bool shouldReverse = absAngle > reverseAngleThreshold;
 
-        CurrentSpeed = speed * speedFactor;
-        rb.velocity = (Vector2)transform.up * CurrentSpeed;
+        if (shouldReverse)
+        {
+            CurrentSpeed = speed * reverseSpeedMultiplier;
+            rb.velocity = -Forward * CurrentSpeed;
+        }
+        else
+        {
+            // Drive forward along the car's own nose, not straight at the target -
+            // the car curves into the direction over time instead of teleport-facing it.
+            float turnRatio = absAngle / 180f; // 0 = dead ahead, 1 = fully behind
+            float speedFactor = Mathf.Lerp(1f, 1f - turnSpeedPenalty, turnRatio);
+
+            CurrentSpeed = speed * speedFactor;
+            rb.velocity = Forward * CurrentSpeed;
+        }
+
+        SetReversing(shouldReverse);
+    }
+
+    private void SetReversing(bool reversing)
+    {
+        IsReversing = reversing;
+
+        if (brain != null && brain.aiAnimation != null && !string.IsNullOrEmpty(reversingBool))
+        {
+            brain.aiAnimation.SetBool(reversingBool, reversing);
+        }
     }
 
     public void FaceDirection(Vector2 direction)
     {
         if (direction == Vector2.zero) return;
 
-        float angleToTarget = Vector2.SignedAngle(transform.up, direction);
+        float angleToTarget = GetStableSteeringAngle(direction);
         float step = turnSpeed * Time.deltaTime;
         float appliedTurn = Mathf.Clamp(angleToTarget, -step, step);
         rb.MoveRotation(rb.rotation + appliedTurn);
+        if (Mathf.Abs(appliedTurn) > 0.001f) lastTurnSign = Mathf.Sign(appliedTurn);
+    }
+
+    /// <summary>
+    /// Same as Vector2.SignedAngle(transform.up, direction), except when the direction
+    /// is (near) directly behind the car (~180 degrees), where it's numerically ambiguous
+    /// which way is "shorter". In that case it keeps turning the same way it turned last,
+    /// instead of flip-flopping between +180/-180 every frame.
+    /// </summary>
+    private float GetStableSteeringAngle(Vector2 direction)
+    {
+        float angle = Vector2.SignedAngle(Forward, direction);
+
+        if (Mathf.Abs(angle) > 179f)
+        {
+            return lastTurnSign * Mathf.Abs(angle);
+        }
+
+        return angle;
     }
 
     /// <summary>
@@ -94,6 +181,6 @@ public class CarMovement : MonoBehaviour, IEntityMovement
     public bool IsAlignedWithDirection(Vector2 direction)
     {
         if (direction == Vector2.zero) return false;
-        return Vector2.Angle(transform.up, direction) <= forwardFireConeAngle * 0.5f;
+        return Vector2.Angle(Forward, direction) <= forwardFireConeAngle * 0.5f;
     }
 }

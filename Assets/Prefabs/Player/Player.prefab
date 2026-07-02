@@ -340,10 +340,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b49d6b9b8d360c4b8994d9f550bbf4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 5
   playerDizzyAnimator: {fileID: 0}
   playerMovement: {fileID: 6509561818730051545}
-  collisionDmg: 1
+  collisionDmg: 2
 --- !u!1 &4429060512440676248
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +507,6 @@ GameObject:
   - component: {fileID: 6509561818730051545}
   - component: {fileID: 6660862487378927628}
   - component: {fileID: 1629668303741475805}
-  - component: {fileID: 7136088979940069454}
   m_Layer: 3
   m_Name: Actions
   m_TagString: Untagged
@@ -578,7 +577,8 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 20480
-  angleSpacing: 5
+  bulletCount: 1
+  angleSpacing: 10
 --- !u!114 &1629668303741475805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,22 +596,6 @@ MonoBehaviour:
   orbitRadius: 0
   rotateIndicator: 1
   rotationOffset: -90
---- !u!114 &7136088979940069454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6303137427063149201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24df933577d5357a4850aa9856a8e90a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eatRange: 1.5
-  consumableLayer:
-    serializedVersion: 2
-    m_Bits: 16384
 --- !u!1 &7363620672987081836
 GameObject:
   m_ObjectHideFlags: 0

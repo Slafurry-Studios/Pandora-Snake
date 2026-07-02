@@ -27,7 +27,7 @@ MonoBehaviour:
     name: Citizen 1
     dialog: Excuse me sir. You are the police
   - faceShotSprite: {fileID: 1728068740, guid: 936e052064696fd43bb1e7773c487035, type: 3}
-    name: Police
+    name: Civilian???
     dialog: PLEASEE SOMEONEEE!! CALL THE AMBULANCE!!!
   - faceShotSprite: {fileID: 2131098688, guid: d164698313e7fd4feaab48b5cf23d453, type: 3}
     name: Pandora
