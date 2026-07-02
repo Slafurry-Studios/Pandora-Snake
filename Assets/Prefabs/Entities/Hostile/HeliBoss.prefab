@@ -61,6 +61,7 @@ MonoBehaviour:
   rayCount: 8
   rayAngle: 90
   chaseBool: Chase
+  movementSoundName: 
 --- !u!114 &2210022688956511991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,8 +185,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 80
+  m_LinearDrag: 0.7
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}

@@ -152,8 +152,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
+  m_Mass: 80
+  m_LinearDrag: 0.7
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -186,6 +186,10 @@ MonoBehaviour:
   hitAnim: 
   hitSound: 
   deathSound: 
+  deathLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  deathChatType: 3
 --- !u!114 &792531063697810798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +209,7 @@ MonoBehaviour:
   rayCount: 9
   rayAngle: 90
   chaseBool: Chase
+  movementSoundName: 
 --- !u!114 &5822605787995532997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +259,7 @@ MonoBehaviour:
   panicRadius: 5
   safeRadius: 8
   speedMultiplier: 0.8
+  panicSoundName: 
 --- !u!114 &9020442859590452372
 MonoBehaviour:
   m_ObjectHideFlags: 0

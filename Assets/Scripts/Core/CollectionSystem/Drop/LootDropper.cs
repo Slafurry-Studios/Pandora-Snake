@@ -15,21 +15,6 @@ namespace Game.Gameplay
         [Tooltip("If true, automatically drops loot when this object is destroyed (useful for enemies).")]
         public bool dropOnDestroy = false;
 
-        private bool isQuitting = false;
-
-        private void OnApplicationQuit()
-        {
-            isQuitting = true;
-        }
-
-        private void OnDestroy()
-        {
-            if (dropOnDestroy && !isQuitting)
-            {
-                DropLoot();
-            }
-        }
-
         public void DropLoot()
         {
             if (dropData == null || dropData.drops == null) return;

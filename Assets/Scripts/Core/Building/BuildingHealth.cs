@@ -2,6 +2,7 @@ using UnityEngine;
 using Game.Generic;
 using Game.Core.Effects;
 using Game.Manager;
+using Game.Gameplay;
 
 
 public class BuildingHealth : Health
@@ -44,7 +45,7 @@ public class BuildingHealth : Health
         }
 
         ObjectiveManager.Instance.AddObjective(destroyObjectives.Objective);
-
+        GetComponent<LootDropper>()?.DropLoot();
         Destroy(gameObject);
     }
 }

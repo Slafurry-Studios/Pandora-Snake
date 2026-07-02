@@ -10,6 +10,7 @@ namespace Game.Player
         [Header("Death Settings")]
         [SerializeField] private Animator playerDizzyAnimator;
         [SerializeField] private PlayerMovement playerMovement;
+        [SerializeField] private GameObject gameOverScreen;
 
         [SerializeField] private float collisionDmg = 1f;
         public IVisualEffect[] visualEffects;
@@ -62,6 +63,7 @@ namespace Game.Player
                     playerDizzyAnimator.speed = 0f;
                 }
             }
+            
         }
 
         public void IncreaseMaxHealth(float amount)
