@@ -11,9 +11,8 @@ namespace Game.Gameplay
         public LayerMask targetMask { get; private set; }
         public float hitRadius { get; private set; }
 
-        public Vector2 startPosition { get; private set; }
-        public Vector2 direction { get; private set; }
-
+        public Vector2 startPosition;
+        public Vector2 direction;
         public bool isExplosive { get; private set; }
         public bool isRichochet { get; private set; }
 

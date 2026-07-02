@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2568806823863336089}
   - component: {fileID: 5216690922700936955}
   - component: {fileID: 6110810434214893122}
-  m_Layer: 3
+  m_Layer: 14
   m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,8 +34,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.69, y: 6.38, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4.08, y: 4.08, z: 4.08}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1266888717
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf, type: 3}
   m_Color: {r: 0.20015311, g: 1, b: 0, a: 1}
@@ -149,6 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
+  destroyChannel: []
+  dieAnim: 
+  hitAnim: 
 --- !u!50 &8671876967882078367
 Rigidbody2D:
   serializedVersion: 4
@@ -194,6 +197,7 @@ MonoBehaviour:
     m_Bits: 64
   rayCount: 8
   rayAngle: 90
+  chaseBool: Chase
 --- !u!114 &2568806823863336089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
+  aiAnimation: {fileID: 0}
   stateList:
   - {fileID: 6110810434214893122}
   - {fileID: 5216690922700936955}

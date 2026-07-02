@@ -1,16 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.PlayerLoop;
 
 public class ObjectiveManager : Singleton<ObjectiveManager>
 {
     private readonly List<Objective> activeObjectives = new();
+    private readonly HashSet<Objective> completedObjectives = new(); // ← baru
     private readonly Dictionary<Objective, float> progress = new();
     private readonly Dictionary<Objective, System.Action<float>> handlers = new();
 
     public event System.Action<Objective, float> OnObjectiveProgress;
     public event System.Action<Objective> OnObjectiveCompleted;
     public event System.Action<Objective> OnObjectiveAdded;
+
     public void AddObjective(Objective objective)
     {
         if (objective.Channel == null)
@@ -19,9 +20,15 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
             return;
         }
 
+        if (completedObjectives.Contains(objective)) // ← block re-add
+        {
+            // Debug.LogWarning($"Objective '{objective.DisplayName}' already completed, skipping.");
+            return;
+        }
+
         if (activeObjectives.Contains(objective))
         {
-            Debug.LogWarning($"Objective '{objective.DisplayName}' already active, skipping.");
+            // Debug.LogWarning($"Objective '{objective.DisplayName}' already active, skipping.");
             return;
         }
 
@@ -34,6 +41,7 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
 
         OnObjectiveAdded?.Invoke(objective);
     }
+
     public void RemoveObjective(Objective objective)
     {
         if (!activeObjectives.Contains(objective))
@@ -64,6 +72,7 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
 
     private void CompleteObjective(Objective objective)
     {
+        completedObjectives.Add(objective); // ← tandai completed permanen
         OnObjectiveCompleted?.Invoke(objective);
         objective.Channel.OnCompleted();
         RemoveObjective(objective);
@@ -79,6 +88,11 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
         return activeObjectives.Contains(objective);
     }
 
+    public bool IsCompleted(Objective objective) // ← opsional, berguna buat query dari luar
+    {
+        return completedObjectives.Contains(objective);
+    }
+
     private void OnDisable()
     {
         foreach (var kvp in handlers)
@@ -88,5 +102,7 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
         handlers.Clear();
         progress.Clear();
         activeObjectives.Clear();
+        // completedObjectives sengaja TIDAK di-clear, biar tetap keinget kalau OnDisable/OnEnable siklus
+        // (kalau memang mau reset total pas scene reload, itu urusan terpisah, lihat catatan di bawah)
     }
 }

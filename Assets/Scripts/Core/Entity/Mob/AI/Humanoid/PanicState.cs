@@ -1,0 +1,63 @@
+using UnityEngine;
+
+namespace Game.AI
+{
+    public class PanicState : EntityState
+    {
+        [Header("Panic Thresholds")]
+        [Tooltip("How close the snek must be to trigger panic")]
+        public float panicRadius = 5f; 
+        
+        [Tooltip("How far away the snek must be before the NPC feels safe again")]
+        public float safeRadius = 8f;  
+        
+        [Header("Movement")]
+        public float speedMultiplier = 5f;
+
+        [Header("Audio")]
+        public string panicSoundName;
+
+        private bool isPanicking = false; 
+
+        public override bool CheckConditions(EntityBrain brain)
+        {
+            if (brain.Target == null) return false;
+            
+            float distance = Vector2.Distance(transform.position, brain.Target.position);
+
+            if (isPanicking)
+            {
+                return distance <= safeRadius;
+            }
+
+            else
+            {
+                return distance <= panicRadius;
+            }
+        }
+
+        public override void EnterState(EntityBrain brain) 
+        { 
+            isPanicking = true;
+            SoundManager.Instance.PlaySound2D(panicSoundName);
+        }
+
+        public override void UpdateState(EntityBrain brain)
+        {
+            var player = brain.Target.GetComponent<Game.Player.PlayerMovement>();
+
+            float playerSpeed = (player != null) ? player.CurrentSpeed : 5f;
+
+            float runSpeed = playerSpeed * speedMultiplier;
+
+            Vector2 runDirection = ((Vector2)transform.position - (Vector2)brain.Target.position).normalized;
+            brain.Movement.SetMovement(runDirection, runSpeed);
+        }
+
+        public override void ExitState(EntityBrain brain)
+        {
+            isPanicking = false;
+            brain.Movement.SetMovement(Vector2.zero, 0f);
+        }
+    }
+}

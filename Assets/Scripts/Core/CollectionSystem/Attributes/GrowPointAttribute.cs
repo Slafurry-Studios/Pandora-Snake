@@ -8,7 +8,7 @@ namespace Game.Gameplay.Attributes
     {
         public override void Apply(GameObject target, float amount)
         {
-            PlayerGrowth growth = target.GetComponent<PlayerGrowth>();
+            PlayerGrowth growth = target.GetComponentInChildren<PlayerGrowth>();
             if (growth != null)
             {
                 growth.AddGrowPoints(Mathf.RoundToInt(amount));

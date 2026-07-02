@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1732273435638356492}
   - component: {fileID: 8065942031380492402}
   - component: {fileID: 3863220329364332668}
+  - component: {fileID: 713522624482060045}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -95,7 +96,7 @@ MonoBehaviour:
   subsThresholds:
   - Name: First Time Starting
     Level: 1
-    ThresholdValue: 0
+    ThresholdValue: 100
   - Name: 500 Subs
     Level: 2
     ThresholdValue: 500
@@ -137,6 +138,12 @@ MonoBehaviour:
   - Name: Oh shit!
     Level: 4
     ThresholdValue: 5000
+  threatPointChannel:
+  - {fileID: 11400000, guid: 22e59adf54cb913f7b1962f637301c87, type: 2}
+  - {fileID: 11400000, guid: 2ac6c56cca9542c24a35d1c56779be5a, type: 2}
+  Objective: {fileID: 11400000, guid: dcae155f2df13306ba1b5e06e505e0bd, type: 2}
+  threatPoints: 0
+  currentThreatState: 0
 --- !u!114 &3641634936374996148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +162,7 @@ MonoBehaviour:
   burstInterval: 0.3
   enableDebugKeys: 1
   debugChatCount: 3
+  chatRoller: {fileID: 0}
 --- !u!114 &937571056604835971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,3 +222,22 @@ MonoBehaviour:
   ThreatHUD: {fileID: 0}
   PauseHUD: {fileID: 0}
   DonationHUD: {fileID: 0}
+--- !u!114 &713522624482060045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4747456712980624973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6faee0dbc14de03ebfb5975afc483cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawners:
+  - spawnerName: Police Spawner
+    threatState: 1
+    spawner: {fileID: 0}
+  - spawnerName: Army Spawner
+    threatState: 2
+    spawner: {fileID: 0}

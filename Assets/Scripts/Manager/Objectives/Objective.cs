@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public struct Objective
+public struct Objective : System.IEquatable<Objective>
 {
     public string DisplayName;
     public BaseObjectiveChannel Channel;
@@ -9,14 +9,18 @@ public struct Objective
     public ObjectiveType ObjectiveType;
     public bool IsMainMission;
 
+    public bool Equals(Objective other)
+    {
+        return Channel == other.Channel;
+    }
+
     public override bool Equals(object obj)
     {
-        if (obj is not Objective other) return false;
-        return DisplayName == other.DisplayName && Channel == other.Channel;
+        return obj is Objective other && Equals(other);
     }
 
     public override int GetHashCode()
     {
-        return System.HashCode.Combine(DisplayName, Channel);
+        return Channel != null ? Channel.GetHashCode() : 0;
     }
 }

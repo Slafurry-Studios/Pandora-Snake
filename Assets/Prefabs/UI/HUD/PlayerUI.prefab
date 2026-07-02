@@ -263,19 +263,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4293673733631446383, guid: d36e90fdf9ecd21f59d0105192a696d9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4293673733631446383, guid: d36e90fdf9ecd21f59d0105192a696d9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4293673733631446383, guid: d36e90fdf9ecd21f59d0105192a696d9, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4293673733631446383, guid: d36e90fdf9ecd21f59d0105192a696d9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4293673733631446383, guid: d36e90fdf9ecd21f59d0105192a696d9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -315,11 +315,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4293673733631446383, guid: d36e90fdf9ecd21f59d0105192a696d9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -489
+      value: 151
       objectReference: {fileID: 0}
     - target: {fileID: 4293673733631446383, guid: d36e90fdf9ecd21f59d0105192a696d9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 139.72
+      value: -484.10495
       objectReference: {fileID: 0}
     - target: {fileID: 4293673733631446383, guid: d36e90fdf9ecd21f59d0105192a696d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -541,14 +541,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerStats
       objectReference: {fileID: 0}
-    - target: {fileID: 5291754609902958579, guid: c581012e6c48555359b31fe8e9cdffbd, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291754609902958579, guid: c581012e6c48555359b31fe8e9cdffbd, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -570,14 +562,6 @@ PrefabInstance:
     - target: {fileID: 2393769911463243864, guid: 80fde1534bbe22207a495cf285938ad5, type: 3}
       propertyPath: m_Name
       value: ThreatPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3093463046721234372, guid: 80fde1534bbe22207a495cf285938ad5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3093463046721234372, guid: 80fde1534bbe22207a495cf285938ad5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8285410026592655507, guid: 80fde1534bbe22207a495cf285938ad5, type: 3}
       propertyPath: m_Pivot.x

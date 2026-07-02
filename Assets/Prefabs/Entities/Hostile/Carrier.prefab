@@ -20,7 +20,8 @@ GameObject:
   - component: {fileID: 5665653850164230388}
   - component: {fileID: 4146312981250179984}
   - component: {fileID: 8826499373012994697}
-  m_Layer: 3
+  - component: {fileID: 6489951291425933019}
+  m_Layer: 14
   m_Name: Carrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +38,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.9700003, y: 2.9700003, z: 2.9700003}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,8 +81,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1266888717
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 2035856612, guid: f9d5b39d6c4970e47bec313db500a8c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -181,8 +182,11 @@ MonoBehaviour:
   maxHealth: 8
   destroyChannel:
   - {fileID: 11400000, guid: 60eb881e67f21e015830f10e526039e2, type: 2}
+  objective: {fileID: 11400000, guid: 47108246470e90494abf9f75ce2b12ee, type: 2}
   dieAnim: 
   hitAnim: 
+  hitSound: 
+  deathSound: 
 --- !u!114 &6394911700071653905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +202,7 @@ MonoBehaviour:
   rayDistance: 5
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 6208
   rayCount: 9
   rayAngle: 90
   chaseBool: Chase
@@ -266,6 +270,7 @@ MonoBehaviour:
   attackRadius: 10
   fireRate: 0.5
   attackAnim: 
+  attackSound: 
   bulletPrefab: {fileID: 2891568854193911666, guid: 38ef8fdfe9fea02438cc2868250bead0, type: 3}
   firePoint: {fileID: 5234375615173244130}
   bulletDamage: 1
@@ -274,7 +279,7 @@ MonoBehaviour:
   bulletHitRadius: 0.2
   targetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 6208
   requiresLineOfSight: 1
   obstacleLayer:
     serializedVersion: 2
@@ -314,3 +319,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6489951291425933019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798790902345116482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7597e1b39d7137fef8cb644d58b6dde7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  channel: {fileID: 11400000, guid: 60eb881e67f21e015830f10e526039e2, type: 2}

@@ -40,7 +40,7 @@ namespace Game.UI.HUD
             originalPosition = sliderRectTransform.localPosition;
         }
 
-        void Oisable()
+        void OnDisable()
         {
             threatPointManager.OnCurrentThreatStateChanged -= UpdateBackground;
             threatPointManager.OnThreatPointIncreased -= UpdateThreat;
@@ -67,7 +67,7 @@ namespace Game.UI.HUD
 
         private void UpdateThreat(float currentThreat, float maxThreat)
         {
-            threatSlider.value = currentThreat / maxThreat;
+            threatSlider.value = currentThreat;
         }
 
         private void UpdateBackground(int state)

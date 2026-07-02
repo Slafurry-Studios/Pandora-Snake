@@ -11,6 +11,11 @@ namespace Game.UI.HUD
 
         private readonly Queue<GameObject> _activeChats = new Queue<GameObject>();
 
+        private void OnEnable()
+        {
+            StreamChatManager.Instance.chatRoller = this;
+        }
+
         public void AddChatMessage(string user, string message)
         {
             GameObject chatHandler = Instantiate(chatHandlerPrefab, transform);

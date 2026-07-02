@@ -8,6 +8,7 @@ public class BuildingHealth : Health
 {
     [SerializeField] private int ThreatPointValue;
     [SerializeField] private int SubsPointValue;
+    [SerializeField] private ObjectiveScriptableObject destroyObjectives;
 
     private IVisualEffect[] effects;
 
@@ -41,6 +42,8 @@ public class BuildingHealth : Health
         {
             channel.Raise(1);
         }
+
+        ObjectiveManager.Instance.AddObjective(destroyObjectives.Objective);
 
         Destroy(gameObject);
     }

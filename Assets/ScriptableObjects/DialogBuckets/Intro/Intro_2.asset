@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: intro_2
   dialogs:
-  - faceShotSprite: {fileID: 84243967, guid: 1911d66551321d6f0baeb880397beb20, type: 3}
+  - faceShotSprite: {fileID: 21300000, guid: 41f917c7f178cd12a839643bfac74857, type: 3}
     name: Pandora
     dialog: Moderator! Ban them!
-  - faceShotSprite: {fileID: 84243967, guid: 1911d66551321d6f0baeb880397beb20, type: 3}
+  - faceShotSprite: {fileID: 21300000, guid: 322ac543267fb4206b8a94fd03d7deda, type: 3}
     name: Jormugandr
     dialog: You... don't have a moderator
-  - faceShotSprite: {fileID: 84243967, guid: 1911d66551321d6f0baeb880397beb20, type: 3}
+  - faceShotSprite: {fileID: 21300000, guid: 434cdf58bef4cd049ba5587c26722b19, type: 3}
     name: Pandora
     dialog: Oh... right
