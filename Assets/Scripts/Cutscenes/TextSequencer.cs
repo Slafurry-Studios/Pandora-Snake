@@ -63,6 +63,12 @@ public class TMPFadeArray : MonoBehaviour
         StopTypeSfx();
     }
 
+    public void ChangeScene(string newScene)
+    {
+        Stop();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(newScene);
+    }
+
     private IEnumerator FadeRoutine()
     {
         if (textComponent == null || texts == null || texts.Length == 0)

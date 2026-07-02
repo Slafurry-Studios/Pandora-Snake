@@ -9,6 +9,7 @@ public class GameOver : MonoBehaviour
 {
     [Header("Game")]
     [SerializeField] private string levelScene = "MainMenu";
+    [SerializeField] private string restartScene = "IntroCutscene";
     [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private GameObject respawnPos;
     [SerializeField] private TextMeshProUGUI threatPoint;
@@ -17,7 +18,7 @@ public class GameOver : MonoBehaviour
 
     [Header("Player Data")]
     [SerializeField] private PlayerHealth playerHealth;
-    [SerializeField] private PlayerCollection playerGrowth;
+    [SerializeField] private PlayerGrowth playerGrowth;
     [SerializeField] private ThreatPointManager playerThreath;
     [SerializeField] private SubscriptionPointManager playerSubs;
     // [SerializeField] private PlayerGrowth playerGrowth;
@@ -78,7 +79,7 @@ public class GameOver : MonoBehaviour
 
         if (growthPoint != null && playerGrowth != null)
         {
-            growthPoint.text = playerGrowth.GetOrbs() + " Growth";
+            growthPoint.text = playerGrowth.GetCurrentGrowPoints() + " Growth";
         }
 
         if (gameOverCanvas != null)
@@ -91,20 +92,18 @@ public class GameOver : MonoBehaviour
 
     public void Restart()
     {
-        gameOver = false;
-        if (RestartTimer.Instance != null)
+        Time.timeScale = 1f;
+
+        if (string.IsNullOrEmpty(restartScene))
         {
-            RestartTimer.Instance.TriggerRestart();
+            Debug.LogWarning("Restart scene name belum diisi.");
+            return;
         }
+
+        if (TransitionManager.Instance != null)
+            TransitionManager.Instance.LoadScene(restartScene);
         else
-        {
-            Debug.LogWarning("RestartTimer Instance not found!");
-            Time.timeScale = 1f;
-            if (TransitionManager.Instance != null)
-                TransitionManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
-            else
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+            SceneManager.LoadScene(restartScene);
     }
 
     public void GoToMainMenu()

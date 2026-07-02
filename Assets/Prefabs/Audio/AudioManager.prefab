@@ -305,7 +305,7 @@ MonoBehaviour:
   - groupID: Shotgun_Punchy
     clips:
     - {fileID: 8300000, guid: 0f890c3d4b93425589bc27f208ff3f85, type: 3}
-    volume: 4.65
+    volume: 2.6
   - groupID: Snake_Eating
     clips:
     - {fileID: 8300000, guid: 67be32f8fba8ebbfb94bd2241ec45e58, type: 3}
@@ -313,7 +313,7 @@ MonoBehaviour:
   - groupID: Sub_Point
     clips:
     - {fileID: 8300000, guid: 07f7d051c14e9ea16b00d453af0c06a9, type: 3}
-    volume: 4.65
+    volume: 3.27
   - groupID: Superchat
     clips:
     - {fileID: 8300000, guid: 93ad8e4ecbb0471b497e36ce2bd88907, type: 3}
@@ -367,7 +367,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4ac198fe2f2ae02218817669a039d3e9, type: 3}
     volume: 3.32
   - trackName: Stage_1_Loop
-    clip: {fileID: 8300000, guid: 7fc66d52671194d469240dc0e446e0d9, type: 3}
+    clip: {fileID: 8300000, guid: f54349bd26aa75c27b3b635b145a882c, type: 3}
     volume: 0.29
   - trackName: Game_Over
     clip: {fileID: 8300000, guid: e88a11da3a7488c57b1ddfc2c91ff91a, type: 3}

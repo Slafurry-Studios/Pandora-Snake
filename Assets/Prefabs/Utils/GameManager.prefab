@@ -204,6 +204,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70bafd4abfc5d994a9ba4f37ec16470f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitVFXPrefab: {fileID: 5033423947735385122, guid: 36073411dd58d3d409696e1a44db0642, type: 3}
+  explosionPrefab: {fileID: 5033423947735385122, guid: 36073411dd58d3d409696e1a44db0642, type: 3}
+  explosionRadius: 3
+  explosionForce: 10
+  maxBounces: 3
 --- !u!114 &3863220329364332668
 MonoBehaviour:
   m_ObjectHideFlags: 0

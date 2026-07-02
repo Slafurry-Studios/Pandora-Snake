@@ -1,5 +1,115 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &29819786181662994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8858308674850691163}
+  - component: {fileID: 4367656817852099700}
+  m_Layer: 0
+  m_Name: CarrierSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8858308674850691163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29819786181662994}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 951.01556, y: 397.02722, z: 0.13494267}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 642379943560529269}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4367656817852099700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29819786181662994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62be55fa07f5d6a28859a02d488d27e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  entityPrefabs:
+  - {fileID: 798790902345116482, guid: f9bb51d4690b67a409c9937a84713369, type: 3}
+  maxEntities: 100
+  spawnInterval: 2
+  spawnsPerTick: 1
+  minSpawnRadius: 6
+  maxSpawnRadius: 14
+  maxAttemptsPerSpawn: 10
+--- !u!1 &652446927984887247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8848167390511491766}
+  - component: {fileID: 6260738375830212751}
+  m_Layer: 0
+  m_Name: CarSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8848167390511491766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652446927984887247}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 951.01556, y: 397.02722, z: 0.13494267}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 642379943560529269}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6260738375830212751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652446927984887247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62be55fa07f5d6a28859a02d488d27e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  entityPrefabs:
+  - {fileID: 798790902345116482, guid: b22551d05c3c55491a2eecad63f40943, type: 3}
+  - {fileID: 798790902345116482, guid: d5df3152e3853ef0d88e7c4d71e80e8c, type: 3}
+  - {fileID: 798790902345116482, guid: 139d1dd8b40a7f3728ebfbc167b23479, type: 3}
+  - {fileID: 798790902345116482, guid: 43e33ddcc3564abce9c832156ee00ebf, type: 3}
+  - {fileID: 798790902345116482, guid: 511d6619d9bd23e6198598b5b055f870, type: 3}
+  maxEntities: 100
+  spawnInterval: 2
+  spawnsPerTick: 1
+  minSpawnRadius: 6
+  maxSpawnRadius: 14
+  maxAttemptsPerSpawn: 10
 --- !u!1 &731017564662321437
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +211,61 @@ MonoBehaviour:
   player: {fileID: 0}
   entityPrefabs:
   - {fileID: 7315821036877757477, guid: 21fba290c9b7360489d302ebd73494d1, type: 3}
-  maxEntities: 10
+  maxEntities: 100
+  spawnInterval: 2
+  spawnsPerTick: 1
+  minSpawnRadius: 6
+  maxSpawnRadius: 14
+  maxAttemptsPerSpawn: 10
+--- !u!1 &3337948859608710005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5659391672510817310}
+  - component: {fileID: 8364160754881385472}
+  m_Layer: 0
+  m_Name: CivilianSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5659391672510817310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3337948859608710005}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 951.01556, y: 397.02722, z: 0.13494267}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 642379943560529269}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8364160754881385472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3337948859608710005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62be55fa07f5d6a28859a02d488d27e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  entityPrefabs:
+  - {fileID: 7315821036877757477, guid: dc5520f279f47206cb4d6eaea260e820, type: 3}
+  - {fileID: 7315821036877757477, guid: 62f757d2ea07cb8a9816a89f642ec5d5, type: 3}
+  maxEntities: 100
   spawnInterval: 2
   spawnsPerTick: 1
   minSpawnRadius: 6
@@ -330,8 +494,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5659391672510817310}
+  - {fileID: 8848167390511491766}
   - {fileID: 5106154157280884108}
   - {fileID: 3728725648027450183}
+  - {fileID: 8858308674850691163}
   m_Father: {fileID: 4016166453176487220}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6338689857568189495
@@ -414,7 +581,7 @@ MonoBehaviour:
   player: {fileID: 0}
   entityPrefabs:
   - {fileID: 5321207816764167371, guid: b931bb516f6677943b70b2f4513a1777, type: 3}
-  maxEntities: 10
+  maxEntities: 100
   spawnInterval: 2
   spawnsPerTick: 1
   minSpawnRadius: 6

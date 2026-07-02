@@ -48,26 +48,7 @@ MonoBehaviour:
   secondDialogBucket: intro_2
   thirdDialogBucket: intro_3
   fourthDialogBucket: intro_4
-  firstObjective:
-    DisplayName: Destroy Building
-    Channel: {fileID: 11400000, guid: b33d7556fdf30298fb4efe9847b34b07, type: 2}
-    ObjectiveThreshold: 1
-    ObjectiveType: 0
-    IsMainMission: 0
+  firstObjective: {fileID: 11400000, guid: fc5845ad75fa759f291c7889d7077b8e, type: 2}
   mainObjectives:
-  - DisplayName: Reach Maximum Threat
-    Channel: {fileID: 11400000, guid: 22e59adf54cb913f7b1962f637301c87, type: 2}
-    ObjectiveThreshold: 5000
-    ObjectiveType: 2
-    IsMainMission: 1
-  - DisplayName: Destroy HQ Building
-    Channel: {fileID: 11400000, guid: ddd7e5e272123b2078deab362f38c49e, type: 2}
-    ObjectiveThreshold: 1
-    ObjectiveType: 0
-    IsMainMission: 1
-  - DisplayName: Defeat Helicopter
-    Channel: {fileID: 11400000, guid: 44ad14524f7cd03759ecdb115f8f9dd6, type: 2}
-    ObjectiveThreshold: 1
-    ObjectiveType: 5
-    IsMainMission: 1
+  - {fileID: 11400000, guid: fda6de4cea1e5e6e78102f69b109bbd7, type: 2}
   CurrentSequence: 0

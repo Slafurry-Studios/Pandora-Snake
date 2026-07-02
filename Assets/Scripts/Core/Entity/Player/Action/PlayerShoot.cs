@@ -7,14 +7,6 @@ namespace Game.Player
     [RequireComponent(typeof(PlayerAim))]
     public class PlayerShoot : MonoBehaviour
     {
-        private enum ShotMode
-        {
-            Single,
-            Double,
-            Triple,
-            Five
-        }
-
         [Header("Shooting Settings")]
         [SerializeField] private Bullet bulletPrefab;
         [SerializeField] private float bulletNormalRadius = 0.2f;
@@ -30,11 +22,11 @@ namespace Game.Player
 
         [Header("Multi-Shot Settings")]
         [Tooltip("Jarak antar sudul tembakan (kelipatan 5).")]
+        [SerializeField] private int bulletCount = 1;
         [SerializeField] private float angleSpacing = 5f;
 
         private PlayerAim playerAim;
         private float nextFireTime;
-        private ShotMode shotMode = ShotMode.Single;
         private bool isExplosive = false;
         private bool isRichochet = false;
 
@@ -58,7 +50,8 @@ namespace Game.Player
         private void Shoot()
         {
             Vector3 currentAimDirection = playerAim.CurrentAimDirection;
-            if (currentAimDirection == Vector3.zero) return;
+            if (currentAimDirection == Vector3.zero)
+                return;
 
             foreach (float angle in GetShotAngles())
             {
@@ -66,27 +59,18 @@ namespace Game.Player
                 SpawnBullet(dir);
             }
         }
-
         private float[] GetShotAngles()
         {
-            switch (shotMode)
+            float[] angles = new float[bulletCount];
+
+            float startAngle = -(bulletCount - 1) * angleSpacing * 0.5f;
+
+            for (int i = 0; i < bulletCount; i++)
             {
-                case ShotMode.Five:
-                    return new float[]
-                    {
-                        -angleSpacing * 2f,
-                        -angleSpacing,
-                        0f,
-                        angleSpacing,
-                        angleSpacing * 2f
-                    };
-                case ShotMode.Triple:
-                    return new float[] { -angleSpacing, 0f, angleSpacing };
-                case ShotMode.Double:
-                    return new float[] { -angleSpacing, angleSpacing };
-                default:
-                    return new float[] { 0f };
+                angles[i] = startAngle + (i * angleSpacing);
             }
+
+            return angles;
         }
 
         private void SpawnBullet(Vector3 dir)
@@ -113,24 +97,23 @@ namespace Game.Player
 
         public void MoreDakka()
         {
-            shotMode = ShotMode.Double;
+            bulletCount += 1;
         }
 
         public void DakkaEverywhere()
         {
-            shotMode = ShotMode.Triple;
+            bulletCount += 2;
         }
 
         public void MoreEspresso()
         {
-            fireRate = fireRate * 1.15f;
+            fireRate *= 0.85f;
         }
 
         public void FrameRateKiller()
         {
-            fireRate = fireRate * 1.3f;
+            fireRate *= 0.7f;
         }
-
         public void AverageBulletEnjoyer()
         {
             bulletPrefab = bulletAverageBulletEnjoyerPrefab;
@@ -149,8 +132,8 @@ namespace Game.Player
 
         public void ApocalypseStream()
         {
-            shotMode = ShotMode.Five;
-            fireRate = fireRate * 1.5f;
+            bulletCount += 5;
+            fireRate *= 0.5f;
         }
     }
 }

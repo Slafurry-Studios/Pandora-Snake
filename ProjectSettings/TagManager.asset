@@ -9,6 +9,7 @@ TagManager:
   - Building
   - Bullet
   - Body
+  - Entity
   layers:
   - Default
   - TransparentFX

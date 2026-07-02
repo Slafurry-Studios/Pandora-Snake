@@ -28,10 +28,10 @@ public class Generator : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GenerateCity();
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     GenerateCity();
+        // }
     }
 
     void GenerateCity()

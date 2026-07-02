@@ -588,7 +588,7 @@ MonoBehaviour:
   textComponent: {fileID: 299572905}
   texts:
   - A massive portal opens in the middle of the street.
-  - A giant serpent and a wizard slowly emerge from the portal.
+  - A giant serpent and a witch slowly emerge from the portal.
   - The portal closes behind them.
   useTypewriter: 1
   charInterval: 0.03
@@ -606,9 +606,9 @@ MonoBehaviour:
   onSequenceEnd:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1306361040}
-        m_TargetAssemblyTypeName: TransitionManager, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 972091419}
+        m_TargetAssemblyTypeName: TMPFadeArray, Assembly-CSharp
+        m_MethodName: ChangeScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -714,17 +714,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1306361040 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 810255293469427772, guid: 84ba1bb5e0377114290be5fd2b9f60a4, type: 3}
-  m_PrefabInstance: {fileID: 1732813013}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ef3b6094537bec4aa79fde28836cb5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1662205212
 PrefabInstance:
   m_ObjectHideFlags: 0
