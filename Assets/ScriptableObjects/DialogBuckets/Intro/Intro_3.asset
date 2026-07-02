@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: intro_3
   dialogs:
-  - faceShotSprite: {fileID: 84243967, guid: 1911d66551321d6f0baeb880397beb20, type: 3}
+  - faceShotSprite: {fileID: 21300000, guid: d164698313e7fd4feaab48b5cf23d453, type: 3}
     name: Pandora
     dialog: Look, Sniki! We just got our very first donation in this world!
-  - faceShotSprite: {fileID: 84243967, guid: 1911d66551321d6f0baeb880397beb20, type: 3}
+  - faceShotSprite: {fileID: 21300000, guid: 573fdd428b2b4b39d986b9607f0a1dff, type: 3}
     name: Jormugandr
     dialog: "Dear gods\u2026 why does every multiverse have people like this\u2026"

@@ -7,6 +7,5 @@ public class ChaosFanChannel : BaseObjectiveChannel
     public override void OnCompleted()
     {
         GameManager.Instance.AddSubs(200);
-        ObjectiveManager.Instance.AddObjective(nextObjective);
     }
 }

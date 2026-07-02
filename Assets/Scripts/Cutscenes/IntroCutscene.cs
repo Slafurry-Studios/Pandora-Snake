@@ -9,8 +9,8 @@ public class IntroCutscene : MonoBehaviour
     [SerializeField] private string secondDialogBucket;
     [SerializeField] private string thirdDialogBucket;
     [SerializeField] private string fourthDialogBucket;
-    [SerializeField] private Objective firstObjective;
-    [SerializeField] private Objective[] mainObjectives;
+    [SerializeField] private ObjectiveScriptableObject firstObjective;
+    [SerializeField] private ObjectiveScriptableObject[] mainObjectives;
 
     private DialogHUD dialogHUD;
     private DialogManager dialogManager;
@@ -33,7 +33,7 @@ public class IntroCutscene : MonoBehaviour
 
     public void NextCutscene()
     {
-        Debug.Log($"CurrentSequence: {CurrentSequence}");
+        // Debug.Log($"CurrentSequence: {CurrentSequence}");
         if (CurrentSequence == 0)
         {
             CurrentSequence++;
@@ -79,9 +79,9 @@ public class IntroCutscene : MonoBehaviour
         }
         else if (CurrentSequence == 8)
         {
-            foreach (Objective objective in mainObjectives)
+            foreach (ObjectiveScriptableObject objective in mainObjectives)
             {
-                ObjectiveManager.Instance.AddObjective(objective);
+                ObjectiveManager.Instance.AddObjective(objective.Objective);
             }
             PlayerManager.Instance.StatHUD.SetActive(true);
             PlayerManager.Instance.PauseHUD.SetActive(true);
@@ -115,7 +115,7 @@ public class IntroCutscene : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1f);
 
-        ObjectiveManager.Instance.AddObjective(firstObjective);
+        ObjectiveManager.Instance.AddObjective(firstObjective.Objective);
 
         yield return new WaitForSecondsRealtime(2f);
         PlayerManager.Instance.ObjectiveHUD.GetComponentInChildren<UIBlink>().Stop();

@@ -8,7 +8,7 @@ namespace Game.Gameplay.Attributes
     {
         public override void Apply(GameObject target, float amount)
         {
-            PlayerHealth health = target.GetComponent<PlayerHealth>();
+            PlayerHealth health = target.GetComponentInChildren<PlayerHealth>();
             if (health != null)
             {
                 health.Heal(amount);

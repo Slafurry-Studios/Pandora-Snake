@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 namespace Game.Player
 {
-    [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
     {
         public event Action<float> OnStaminaPctChanged;
@@ -37,7 +36,7 @@ namespace Game.Player
 
         private void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
+            rb = GetComponentInParent<Rigidbody2D>();
             rb.gravityScale = 0f;
             targetAngle = rb.rotation;
 
@@ -84,28 +83,30 @@ namespace Game.Player
                 }
             }
 
+            // Simpan state sprint SEBELUM diubah oleh HandleSprintingAndStamina,
+            // supaya transisi (mulai/berhenti sprint) bisa terdeteksi dengan benar.
+            bool wasSprinting = isSprinting;
+
             HandleSprintingAndStamina();
 
             if (sprintAction != null)
             {
-                bool pressed = sprintAction.action.IsPressed();
-
-                if (pressed && !isSprinting)
+                // Bandingkan pakai isSprinting (state final, sudah memperhitungkan
+                // exhaustion & sisa stamina), bukan raw input pressed.
+                if (isSprinting && !wasSprinting)
                 {
                     foreach (BaseObjectiveChannel channel in sprintChannel)
                     {
                         channel.Raise(1);
                     }
                 }
-                else if (!pressed && isSprinting)
+                else if (!isSprinting && wasSprinting)
                 {
                     foreach (BaseObjectiveChannel channel in sprintChannel)
                     {
                         channel.Raise(0);
                     }
                 }
-
-                isSprinting = pressed;
             }
         }
 

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4628587d3e6e4baacbcd249d387046cc, type: 3}
+  m_Name: Ticket Victim Objective
+  m_EditorClassIdentifier: 
+  Objective:
+    DisplayName: Eliminate Police
+    Channel: {fileID: 11400000, guid: 2ea80c76512b88df68ddb0b1164b89b8, type: 2}
+    ObjectiveThreshold: 10
+    ObjectiveType: 1
+    IsMainMission: 0

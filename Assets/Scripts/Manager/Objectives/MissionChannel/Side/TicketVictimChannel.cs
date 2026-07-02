@@ -7,6 +7,5 @@ public class TicketVictimChannel : BaseObjectiveChannel
     public override void OnCompleted()
     {
         GameManager.Instance.AddSubs(500);
-        ObjectiveManager.Instance.AddObjective(nextObjective);
     }
 }

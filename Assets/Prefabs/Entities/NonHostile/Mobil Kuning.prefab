@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 458556342034466680}
   - component: {fileID: 2523228756764062900}
   - component: {fileID: 7764156303505347917}
-  m_Layer: 3
+  m_Layer: 14
   m_Name: Mobil Kuning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.009, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.08, y: 4.08, z: 4.08}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,8 +80,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1266888717
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -491772749, guid: 35ce616a425bab140bc62d96658d81ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  destroyChannel: []
   dieAnim: Death
   hitAnim: 
 --- !u!114 &8234110633622533775

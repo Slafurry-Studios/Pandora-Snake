@@ -54,6 +54,7 @@ MonoBehaviour:
   maxHealth: 16
   ThreatPointValue: 100
   SubsPointValue: 0
+  destroyObjectives: {fileID: 11400000, guid: fb7dc82d493ef4892a3945277e8d5c78, type: 2}
   destroyChannel:
   - {fileID: 11400000, guid: b33d7556fdf30298fb4efe9847b34b07, type: 2}
   - {fileID: 11400000, guid: 3ca9f5900133a070ba835504ed431a80, type: 2}

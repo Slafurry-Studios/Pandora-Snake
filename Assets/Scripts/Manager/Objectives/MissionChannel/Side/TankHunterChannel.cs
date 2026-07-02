@@ -7,6 +7,5 @@ public class TankHunterChannel : BaseObjectiveChannel
     public override void OnCompleted()
     {
         GameManager.Instance.AddSubs(1000);
-        ObjectiveManager.Instance.AddObjective(nextObjective);
     }
 }

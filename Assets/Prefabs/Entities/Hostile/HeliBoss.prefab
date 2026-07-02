@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1129639596615729485}
   - component: {fileID: 8334751573877120168}
   - component: {fileID: 2459231381044262577}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: HeliBoss
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -35,8 +35,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9, y: 4.27, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2.9700003, y: 2.9700003, z: 2.9700003}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9012590165886387095}
   - {fileID: 2115911074893607298}
@@ -57,9 +57,10 @@ MonoBehaviour:
   rayDistance: 1.5
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 6208
   rayCount: 8
   rayAngle: 90
+  chaseBool: Chase
 --- !u!114 &2210022688956511991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,6 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
+  aiAnimation: {fileID: 0}
   stateList:
   - {fileID: 7728893559492850159}
   - {fileID: 4826231044227504489}
@@ -267,7 +269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9012590165886387095}
   - component: {fileID: 1420050164183937337}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2115911074893607298}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

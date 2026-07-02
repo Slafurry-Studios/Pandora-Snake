@@ -46,7 +46,7 @@ namespace Game.Manager
             {
                 if (subsPoints >= subsThresholds[i].ThresholdValue)
                 {
-                    level = i;
+                    level = i + 1;   // <-- ubah ini
                 }
             }
 

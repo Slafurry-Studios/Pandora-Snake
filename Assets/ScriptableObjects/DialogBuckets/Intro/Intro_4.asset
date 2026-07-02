@@ -23,24 +23,24 @@ MonoBehaviour:
   - faceShotSprite: {fileID: 0}
     name: Citizen 3
     dialog: Call the guards!
-  - faceShotSprite: {fileID: 0}
+  - faceShotSprite: {fileID: 21300000, guid: d164698313e7fd4feaab48b5cf23d453, type: 3}
     name: Pandora
     dialog: Sniki! They recognize me!
-  - faceShotSprite: {fileID: 0}
+  - faceShotSprite: {fileID: 21300000, guid: 573fdd428b2b4b39d986b9607f0a1dff, type: 3}
     name: Jormugandr
     dialog: "They're terrified\u2026 sigh"
   - faceShotSprite: {fileID: 0}
     name: Guard
     dialog: Good heavens, a dragon! Call every unit!
-  - faceShotSprite: {fileID: 0}
+  - faceShotSprite: {fileID: 21300000, guid: 6ec316fbdc3f040b1aa7b6ec2cb6de29, type: 3}
     name: Jormugandr
     dialog: Are you blind?
-  - faceShotSprite: {fileID: 0}
+  - faceShotSprite: {fileID: 21300000, guid: 41f917c7f178cd12a839643bfac74857, type: 3}
     name: Pandora
     dialog: Looks like they're this world's guardians.
-  - faceShotSprite: {fileID: 0}
+  - faceShotSprite: {fileID: 21300000, guid: 573fdd428b2b4b39d986b9607f0a1dff, type: 3}
     name: Jormugandr
     dialog: ...
-  - faceShotSprite: {fileID: 0}
+  - faceShotSprite: {fileID: 21300000, guid: d164698313e7fd4feaab48b5cf23d453, type: 3}
     name: Pandora
     dialog: Come on, let's make some content and destroy this city!

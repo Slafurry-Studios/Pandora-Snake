@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.6009, y: -20.842785}
-  m_SizeDelta: {x: 149.1448, y: 122.3478}
+  m_AnchoredPosition: {x: 5.5, y: -10.9}
+  m_SizeDelta: {x: 144.4714, y: 122.3478}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8512495072444554219
 CanvasRenderer:
@@ -97,13 +97,16 @@ GameObject:
   - component: {fileID: 4293673733631446383}
   - component: {fileID: 7691132235059302834}
   - component: {fileID: 4419215342162328128}
+  - component: {fileID: 2060344115034873598}
+  - component: {fileID: 4077729845813161486}
+  - component: {fileID: 506106399335967910}
   m_Layer: 5
   m_Name: ChatPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4293673733631446383
 RectTransform:
   m_ObjectHideFlags: 0
@@ -163,6 +166,83 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &2060344115034873598
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8918098167883939260}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &4077729845813161486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8918098167883939260}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2feae928ec57c446c8358c42cb8d2d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 2060344115034873598}
+  minAlpha: 0.3
+  maxAlpha: 1
+  blinkSpeed: 8
+  infinite: 1
+  blinkCount: 3
+  playOnEnable: 1
+  useUnscaledTime: 1
+  disableInteractionWhileDim: 0
+--- !u!114 &506106399335967910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8918098167883939260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac44f817ecc17c90cbbba5cbe4b09158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rectTransform: {fileID: 4293673733631446383}
+  canvasRect: {fileID: 0}
+  fromDirection: 2
+  extraOffset: 100
+  duration: 0.5
+  delay: 0
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  playOnEnable: 1
+  useUnscaledTime: 1
 --- !u!1001 &2371456780047271824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -177,7 +257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1483268674678220491, guid: 0683be5fee48341dbb90740f9bbdf21a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -11.66971
       objectReference: {fileID: 0}
     - target: {fileID: 1483268674678220491, guid: 0683be5fee48341dbb90740f9bbdf21a, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -253,7 +333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3226298890733710464, guid: 0683be5fee48341dbb90740f9bbdf21a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 15.8
+      value: 15.799988
       objectReference: {fileID: 0}
     - target: {fileID: 3226298890733710464, guid: 0683be5fee48341dbb90740f9bbdf21a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

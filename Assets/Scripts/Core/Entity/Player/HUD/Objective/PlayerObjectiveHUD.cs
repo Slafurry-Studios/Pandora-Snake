@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.UI.HUD
 {
@@ -10,6 +11,7 @@ namespace Game.UI.HUD
 
         private readonly List<PlayerObjectiveItem> playerObjectiveItems = new();
         private readonly Dictionary<Objective, PlayerObjectiveItem> itemLookup = new();
+        private readonly Dictionary<PlayerObjectiveItem, Objective> reverseLookup = new();
 
         private System.Collections.IEnumerator Start()
         {
@@ -21,10 +23,13 @@ namespace Game.UI.HUD
 
         private void OnDisable()
         {
+            if (ObjectiveManager.Instance == null) return;
+
             ObjectiveManager.Instance.OnObjectiveAdded -= AddObjectiveItem;
             ObjectiveManager.Instance.OnObjectiveProgress -= HandleProgress;
             ObjectiveManager.Instance.OnObjectiveCompleted -= HandleCompleted;
         }
+
 
         public void AddObjectiveItem(Objective objective)
         {
@@ -33,13 +38,30 @@ namespace Game.UI.HUD
             var item = Instantiate(itemPrefab, itemParent);
             var progress = new ObjectiveProgress(objective);
             item.Setup(progress);
+            item.OnFadeCompleted += HandleItemFadeCompleted;
 
             playerObjectiveItems.Add(item);
             itemLookup[objective] = item;
+            reverseLookup[item] = objective;
 
             SortItems();
         }
 
+        private void HandleItemFadeCompleted(PlayerObjectiveItem item)
+        {
+            item.OnFadeCompleted -= HandleItemFadeCompleted;
+
+            if (reverseLookup.TryGetValue(item, out var objective))
+            {
+                itemLookup.Remove(objective);
+                reverseLookup.Remove(item);
+            }
+
+            playerObjectiveItems.Remove(item);
+            Destroy(item.gameObject);
+
+            SortItems();
+        }
         private void HandleProgress(Objective objective, float currentValue)
         {
             if (!itemLookup.TryGetValue(objective, out var item))
@@ -57,6 +79,7 @@ namespace Game.UI.HUD
             if (itemLookup.TryGetValue(objective, out var item))
             {
                 item.TaskCompleted();
+                SortItems(); // re-urutkan biar item completed naik ke atas
             }
         }
 
@@ -64,6 +87,12 @@ namespace Game.UI.HUD
         {
             playerObjectiveItems.Sort((a, b) =>
             {
+                // completed items didahulukan (paling atas)
+                bool aCompleted = a.IsCompleted;
+                bool bCompleted = b.IsCompleted;
+                if (aCompleted != bCompleted)
+                    return bCompleted.CompareTo(aCompleted);
+
                 bool aMain = a.GetProgress().Data.IsMainMission;
                 bool bMain = b.GetProgress().Data.IsMainMission;
                 return bMain.CompareTo(aMain);
@@ -73,6 +102,7 @@ namespace Game.UI.HUD
             {
                 playerObjectiveItems[i].transform.SetSiblingIndex(i);
             }
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
         }
 
         private void Update()

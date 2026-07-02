@@ -1,4 +1,5 @@
 using System;
+using Game.Core.Effects;
 using Game.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Game.Player
         [SerializeField] private PlayerMovement playerMovement;
 
         [SerializeField] private float collisionDmg = 1f;
+        public IVisualEffect[] visualEffects;
 
         private RigidbodyConstraints2D originalConstraints;
         private bool vipSprint;
@@ -18,11 +20,7 @@ namespace Game.Player
         protected override void Awake()
         {
             base.Awake();
-            if (playerMovement == null)
-            {
-                playerMovement = GetComponent<PlayerMovement>();
-            }
-            
+
             if (playerMovement != null)
             {
                 Rigidbody2D rb = playerMovement.GetComponent<Rigidbody2D>();
@@ -31,6 +29,8 @@ namespace Game.Player
                     originalConstraints = rb.constraints;
                 }
             }
+
+            visualEffects = GetComponentsInChildren<IVisualEffect>();
         }
 
         protected override void Die()
@@ -49,7 +49,7 @@ namespace Game.Player
                 playerMovement.SetStamina(0f);
                 playerMovement.enabled = false;
 
-                Rigidbody2D rb = playerMovement.GetComponent<Rigidbody2D>();
+                Rigidbody2D rb = GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
                     rb.velocity = Vector2.zero;
@@ -57,10 +57,9 @@ namespace Game.Player
                     rb.constraints = RigidbodyConstraints2D.FreezeAll;
                 }
 
-                Animator anim = playerMovement.GetComponent<Animator>();
-                if (anim != null)
+                if (playerDizzyAnimator != null)
                 {
-                    anim.speed = 0f;
+                    playerDizzyAnimator.speed = 0f;
                 }
             }
         }
@@ -123,10 +122,16 @@ namespace Game.Player
 
         public override void TakeDamage(float amount)
         {
-            if (GetComponent<PlayerMovement>().GetSprint() && vipSprint) return;
+            if (GetComponentInChildren<PlayerMovement>().GetSprint() && vipSprint) return;
 
             base.TakeDamage(amount);
             SoundManager.Instance.PlaySound2D("Take_Damage");
+            StreamChatManager.Instance.HandleStreamChat(StreamChatType.TAKE_DAMAGE, 5);
+
+            foreach (var effect in visualEffects)
+            {
+                effect.PlayEffect();
+            }
         }
 
         public void SafetyFirst()

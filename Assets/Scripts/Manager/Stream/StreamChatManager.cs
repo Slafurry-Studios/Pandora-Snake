@@ -13,7 +13,7 @@ public class StreamChatManager : Singleton<StreamChatManager>
     [SerializeField] private int debugChatCount = 3;
 #endif
 
-    private StreamChatRoller chatRoller;
+    public StreamChatRoller chatRoller;
 
     protected override void Awake()
     {
@@ -21,9 +21,9 @@ public class StreamChatManager : Singleton<StreamChatManager>
         chatDatabase?.Initialize();
     }
 
-    void Start()
+    void OnEnable()
     {
-        chatRoller = FindObjectOfType<StreamChatRoller>();
+        chatRoller = FindAnyObjectByType<StreamChatRoller>();
         StartCoroutine(RandomChatLoop());
     }
 
