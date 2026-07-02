@@ -84,9 +84,15 @@ namespace Game.Player
             if (isDead)
                 return;
 
-            if (obj.CompareTag("Building") || obj.CompareTag("Body"))
+            if (obj.CompareTag("Body"))
             {
                 Die();
+            }
+
+            if (obj.CompareTag("Building"))
+            {
+                obj.GetComponent<BuildingHealth>().TakeDamage(999999999f);
+                TakeDamage(collisionDmg);
             }
         }
 

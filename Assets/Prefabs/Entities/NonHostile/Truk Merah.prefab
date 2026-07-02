@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 7448992863181548224}
   - component: {fileID: 5423673665864397377}
   - component: {fileID: 3645856285045756325}
+  - component: {fileID: 8506715515783638161}
+  - component: {fileID: -4991287650618486407}
   m_Layer: 14
   m_Name: Truk Merah
   m_TagString: Untagged
@@ -38,7 +40,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.08, y: 4.08, z: 4.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -187,6 +189,10 @@ MonoBehaviour:
   hitAnim: 
   hitSound: 
   deathSound: 
+  deathLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  deathChatType: 1
 --- !u!114 &6553052677178406065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +212,7 @@ MonoBehaviour:
   rayCount: 9
   rayAngle: 90
   chaseBool: Chase
+  movementSoundName: 
 --- !u!114 &6948711357900546943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +262,7 @@ MonoBehaviour:
   panicRadius: 5
   safeRadius: 8
   speedMultiplier: 0.8
+  panicSoundName: 
 --- !u!114 &4392111298390314370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,3 +340,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   channel: {fileID: 11400000, guid: 1aace1b53127957f6bdef9ed7bb69d07, type: 2}
+--- !u!114 &8506715515783638161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806317975274346652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7429e632178f194098dfc9dc5c143cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkColor: {r: 1, g: 0.82341367, b: 0.5688039, a: 1}
+  blinkDuration: 0.1
+  includeChildren: 1
+--- !u!114 &-4991287650618486407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806317975274346652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ee90fc35fbd5a4eae59f09e9002dec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.2
+  intensity: 0.2
+  dampening: 1
+  shakeX: 1
+  shakeY: 1
+  shakeZ: 0

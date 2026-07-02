@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 2940773824565436538}
   - component: {fileID: 472753563999895838}
   - component: {fileID: 5568848492026446161}
+  - component: {fileID: -1208057956210972541}
+  - component: {fileID: -5067152048756121832}
   m_Layer: 14
   m_Name: Mobil Merah
   m_TagString: Untagged
@@ -37,7 +39,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.009, y: 0, z: 0}
-  m_LocalScale: {x: 4.08, y: 4.08, z: 4.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -180,8 +182,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   destroyChannel: []
+  objective: {fileID: 0}
   dieAnim: Death
   hitAnim: 
+  hitSound: 
+  deathSound: 
+  deathLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  deathChatType: 1
 --- !u!114 &2472791869674081067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +210,7 @@ MonoBehaviour:
   rayCount: 9
   rayAngle: 90
   chaseBool: Chase
+  movementSoundName: 
 --- !u!114 &79736426041878596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +260,7 @@ MonoBehaviour:
   panicRadius: 5
   safeRadius: 8
   speedMultiplier: 0.8
+  panicSoundName: 
 --- !u!114 &2940773824565436538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +276,7 @@ MonoBehaviour:
   attackRadius: 10
   fireRate: 0.5
   attackAnim: Attack
+  attackSound: 
   bulletPrefab: {fileID: 2891568854193911666, guid: 38ef8fdfe9fea02438cc2868250bead0, type: 3}
   firePoint: {fileID: 602550566768233929}
   bulletDamage: 1
@@ -313,3 +325,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-1208057956210972541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798116634462714390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7429e632178f194098dfc9dc5c143cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkColor: {r: 1, g: 0.82341367, b: 0.5688039, a: 1}
+  blinkDuration: 0.1
+  includeChildren: 1
+--- !u!114 &-5067152048756121832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798116634462714390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ee90fc35fbd5a4eae59f09e9002dec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.2
+  intensity: 0.2
+  dampening: 1
+  shakeX: 1
+  shakeY: 1
+  shakeZ: 0
