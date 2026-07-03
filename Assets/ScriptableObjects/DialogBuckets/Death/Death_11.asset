@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 733d0064b3af99f9e8e90499c246c2fa, type: 3}
-  m_Name: Death_5
+  m_Name: Death_11
   m_EditorClassIdentifier: 
-  id: death_5
+  id: death_11
   dialogs:
-  - faceShotSprite: {fileID: -210164756, guid: 434cdf58bef4cd049ba5587c26722b19, type: 3}
-    name: Pandora
-    dialog: Ah yep, i forgot my lunch.
+  - faceShotSprite: {fileID: 21300000, guid: c30cb3959be820340b36f5a0b10c7098, type: 3}
+    name: Slafurry Studios
+    dialog: If your frustration could become an energy source. We could light up
+      entire country.

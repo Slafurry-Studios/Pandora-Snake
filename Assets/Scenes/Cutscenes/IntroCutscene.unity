@@ -586,6 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63f38a60b4563618592eddc66e97a80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sequenceId: intro
   textComponent: {fileID: 299572905}
   texts:
   - A massive portal opens in the middle of the street.

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733d0064b3af99f9e8e90499c246c2fa, type: 3}
   m_Name: Death_4
   m_EditorClassIdentifier: 
-  id: 4
+  id: death_4
   dialogs:
   - faceShotSprite: {fileID: -418998742, guid: 41f917c7f178cd12a839643bfac74857, type: 3}
     name: Pandora

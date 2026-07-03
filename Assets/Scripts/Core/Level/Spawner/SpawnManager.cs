@@ -5,9 +5,11 @@ using UnityEngine.Events;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private Spawner[] spawners;
+    private bool[] activated;
 
     void Start()
     {
+        activated = new bool[spawners.Length];
         GameManager.Instance.threatManager.OnCurrentThreatStateChanged += HandleThreatStateChanged;
     }
 
@@ -20,15 +22,18 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-
     private void HandleThreatStateChanged(int newThreatState)
     {
         Debug.Log($"[SpawnManager] Threat state changed to {newThreatState}. Activating spawners with threat state <= {newThreatState}.");
-        foreach (var spawner in spawners)
+        for (int i = 0; i < spawners.Length; i++)
         {
-            if (spawner.threatState <= newThreatState)
+            var spawner = spawners[i];
+            if (!activated[i] && spawner.threatState <= newThreatState)
+            {
                 spawner.spawner.gameObject.SetActive(true);
                 spawner.onSpawnerActive?.Invoke();
+                activated[i] = true;
+            }
         }
     }
 }

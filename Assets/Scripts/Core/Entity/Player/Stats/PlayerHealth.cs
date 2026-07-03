@@ -20,7 +20,7 @@ namespace Game.Player
 
         private RigidbodyConstraints2D originalConstraints;
         private bool vipSprint;
-
+        public TutorialManager tutorialManager;
         protected override void Awake()
         {
             base.Awake();
@@ -141,6 +141,9 @@ namespace Game.Player
             {
                 effect.PlayEffect();
             }
+
+            tutorialManager.StartTutorial("health_tutorial");
+
         }
 
         public void SafetyFirst()

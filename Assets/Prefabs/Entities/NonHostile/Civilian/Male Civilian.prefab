@@ -209,7 +209,7 @@ MonoBehaviour:
     m_Bits: 6208
   rayCount: 9
   rayAngle: 90
-  chaseBool: Run
+  chaseBool: Chase
   movementSoundName: ' '
 --- !u!114 &2957986954296912947
 MonoBehaviour:

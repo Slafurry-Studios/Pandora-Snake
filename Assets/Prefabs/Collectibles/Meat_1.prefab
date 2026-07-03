@@ -138,6 +138,8 @@ MonoBehaviour:
   attributes:
   - attribute: {fileID: 11400000, guid: 871123eb775517842ae0926cc83c69bc, type: 2}
     amount: 3
+  - attribute: {fileID: 11400000, guid: fde28dab5355a6343b94b160caa40d85, type: 2}
+    amount: 2
   duration: 0.5
   pullDistance: 4
   consumeChannel:

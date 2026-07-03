@@ -49,6 +49,8 @@ namespace Game.Player
 
         private void Shoot()
         {
+            SoundManager.Instance.PlaySound2D("Shotgun_Punchy");
+
             Vector3 currentAimDirection = playerAim.CurrentAimDirection;
             if (currentAimDirection == Vector3.zero)
                 return;
@@ -86,7 +88,6 @@ namespace Game.Player
                 bulletNormalRadius,
                 isExplosive,
                 isRichochet);
-            SoundManager.Instance.PlaySound2D("Shotgun_Punchy");
         }
 
         public void BiggerDakka()
@@ -123,6 +124,7 @@ namespace Game.Player
         public void ExplosiveAmmo()
         {
             isExplosive = true;
+            bulletDamage *= 5;
         }
 
         public void RichochetBullet()

@@ -5,6 +5,9 @@ using TMPro;
 
 public class TMPFadeArray : MonoBehaviour
 {
+    [Header("Identity")]
+    [SerializeField] private string sequenceId;
+
     [Header("Reference")]
     [SerializeField] private TMP_Text textComponent;
 
@@ -41,8 +44,16 @@ public class TMPFadeArray : MonoBehaviour
 
     private void Start()
     {
-        if (playOnStart)
-            Play();
+        if (!playOnStart) return;
+
+        if (HasBeenSeen())
+        {
+            SetAlpha(0f);
+            onSequenceEnd?.Invoke();
+            return;
+        }
+
+        Play();
     }
 
     private void Update()
@@ -60,11 +71,19 @@ public class TMPFadeArray : MonoBehaviour
     {
         Stop();
         SetAlpha(0f);
+        MarkAsSeen();
         onSequenceEnd?.Invoke();
     }
 
     public void Play()
     {
+        if (HasBeenSeen())
+        {
+            SetAlpha(0f);
+            onSequenceEnd?.Invoke();
+            return;
+        }
+
         if (_routine != null)
             StopCoroutine(_routine);
 
@@ -127,6 +146,8 @@ public class TMPFadeArray : MonoBehaviour
 
         } while (loop || index != 0);
 
+        MarkAsSeen();
+
         onSequenceEnd?.Invoke();
         _routine = null;
     }
@@ -182,5 +203,22 @@ public class TMPFadeArray : MonoBehaviour
         Color c = textComponent.color;
         c.a = alpha;
         textComponent.color = c;
+    }
+
+    private bool HasBeenSeen()
+    {
+        if (string.IsNullOrEmpty(sequenceId))
+            return false;
+
+        return PlayerPrefs.GetInt("tmpfade_" + sequenceId, 0) == 1;
+    }
+
+    private void MarkAsSeen()
+    {
+        if (string.IsNullOrEmpty(sequenceId))
+            return;
+
+        PlayerPrefs.SetInt("tmpfade_" + sequenceId, 1);
+        PlayerPrefs.Save();
     }
 }

@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 2459231381044262577}
   - component: {fileID: 6279289346451487011}
   - component: {fileID: 5519580039066096673}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: Helicopter_Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ MonoBehaviour:
   rayDistance: 1.5
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 6208
+    m_Bits: 0
   rayCount: 8
   rayAngle: 90
   chaseBool: Chase
@@ -95,8 +95,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0646b295bead6394ba4c76b006d557cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
+  destroyChannel: []
+  objective: {fileID: 11400000, guid: 0de28f7d55ab9af77a9d5b97867c5585, type: 2}
+  dieAnim: die
+  hitAnim: 
+  hitSound: 
+  deathSound: Explosion
+  deathLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  deathChatType: 3
   shieldHitEffectPrefab: {fileID: 0}
+  bossHealthHUD: {fileID: 0}
 --- !u!114 &7728893559492850159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +161,7 @@ MonoBehaviour:
   requiresLineOfSight: 1
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 6208
+    m_Bits: 0
   rotationSpeed: 180
   spriteFacingOffset: 90
   hpThresholdPhaseX: 0.7
@@ -237,7 +248,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0033776946, y: -0.0051730126}
@@ -312,7 +323,7 @@ GameObject:
   - component: {fileID: 9012590165886387095}
   - component: {fileID: 1420050164183937337}
   - component: {fileID: 1917161275924727246}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2115911074893607298}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
