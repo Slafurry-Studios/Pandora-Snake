@@ -14,6 +14,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: boss_intro
   dialogs:
-  - faceShotSprite: {fileID: 0}
+  - faceShotSprite: {fileID: 2131098688, guid: d164698313e7fd4feaab48b5cf23d453, type: 3}
     name: Pandora
-    dialog: 
+    dialog: Sniki, do you hear that?
+  - faceShotSprite: {fileID: -483550040, guid: 322ac543267fb4206b8a94fd03d7deda, type: 3}
+    name: Jormugandr
+    dialog: A sirens?
+  - faceShotSprite: {fileID: 116919694, guid: f909a701fc2c5b648b049dce5aa38792, type: 3}
+    name: Pilot
+    dialog: Visual confirmed. Target acquired
+  - faceShotSprite: {fileID: 116919694, guid: f909a701fc2c5b648b049dce5aa38792, type: 3}
+    name: Pilot
+    dialog: Permission to engage
+  - faceShotSprite: {fileID: 2131098688, guid: d164698313e7fd4feaab48b5cf23d453, type: 3}
+    name: Pandora
+    dialog: Ooooo! Look, Sniki!
+  - faceShotSprite: {fileID: 2131098688, guid: d164698313e7fd4feaab48b5cf23d453, type: 3}
+    name: Pandora
+    dialog: I Think we've unlocked the boss fight!
+  - faceShotSprite: {fileID: -1528694016, guid: 573fdd428b2b4b39d986b9607f0a1dff, type: 3}
+    name: Pandora
+    dialog: I don't think that's how real life works...
+  - faceShotSprite: {fileID: 116919694, guid: f909a701fc2c5b648b049dce5aa38792, type: 3}
+    name: Pilot
+    dialog: Ugh... Thats dragon looks ugly.
+  - faceShotSprite: {fileID: -1191487637, guid: 6ec316fbdc3f040b1aa7b6ec2cb6de29, type: 3}
+    name: Jormugandr
+    dialog: I AM NOT DRAGON!!
+  - faceShotSprite: {fileID: -1191487637, guid: 6ec316fbdc3f040b1aa7b6ec2cb6de29, type: 3}
+    name: Jormugandr
+    dialog: ' I''M JORMUGANDR, THE GREATEST WORLD SERPENT!'
+  - faceShotSprite: {fileID: -210164756, guid: 434cdf58bef4cd049ba5587c26722b19, type: 3}
+    name: Pandora
+    dialog: It's okay Sniki, you are not that ugly"
+  - faceShotSprite: {fileID: -1191487637, guid: 6ec316fbdc3f040b1aa7b6ec2cb6de29, type: 3}
+    name: Jormugandr
+    dialog: NOW I'M GOING TO DESTROY YOU ALL!

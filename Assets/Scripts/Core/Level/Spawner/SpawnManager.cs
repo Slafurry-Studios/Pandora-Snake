@@ -28,6 +28,7 @@ public class SpawnManager : MonoBehaviour
         {
             if (spawner.threatState <= newThreatState)
                 spawner.spawner.gameObject.SetActive(true);
+                spawner.onSpawnerActive?.Invoke();
         }
     }
 }
@@ -38,5 +39,5 @@ public struct Spawner
     public string spawnerName;
     public int threatState;
     public EntitySpawner spawner;
-    public UnityEvent[] onSpawnerActive;
+    public UnityEvent onSpawnerActive;
 }

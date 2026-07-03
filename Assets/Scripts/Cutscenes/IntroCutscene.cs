@@ -96,18 +96,18 @@ public class IntroCutscene : MonoBehaviour
     private void StartGame()
     {
         PlayerManager.Instance.ObjectiveHUD.SetActive(true);
-        foreach (ObjectiveScriptableObject objective in mainObjectives)
-        {
-            ObjectiveManager.Instance.AddObjective(objective.Objective);
-        }
+        PlayerManager.Instance.ObjectiveHUD.GetComponentInChildren<UIBlink>().Stop();
         PlayerManager.Instance.ChatHUD.SetActive(true);
         PlayerManager.Instance.DonationHUD.SetActive(true);
-        PlayerManager.Instance.ObjectiveHUD.GetComponentInChildren<UIBlink>().Stop();
         PlayerManager.Instance.StatHUD.SetActive(true);
         PlayerManager.Instance.PauseHUD.SetActive(true);
         PlayerManager.Instance.ThreatHUD.SetActive(true);
         Time.timeScale = 1f;
         PlayerManager.Instance.Resume();
+        foreach (ObjectiveScriptableObject objective in mainObjectives)
+        {
+            ObjectiveManager.Instance.AddObjective(objective.Objective);
+        }
     }
 
     private IEnumerator ChatIntroSequence()

@@ -6,6 +6,7 @@ public class Pause : MonoBehaviour
 {
     [Header("Scene")]
     [SerializeField] private string mainMenuSceneName = "MainMenu";
+    [SerializeField] private string gameSceneName = "IntroCutscene";
 
     [Header("UI")]
     [SerializeField] private GameObject pauseMenuUI;
@@ -212,12 +213,11 @@ public class Pause : MonoBehaviour
 
             if (TransitionManager.Instance != null)
             {
-                string currentScene = SceneManager.GetActiveScene().name;
-                TransitionManager.Instance.LoadScene(currentScene);
+                TransitionManager.Instance.LoadScene(gameSceneName);
             }
             else
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene(gameSceneName);
             }
         }
     }

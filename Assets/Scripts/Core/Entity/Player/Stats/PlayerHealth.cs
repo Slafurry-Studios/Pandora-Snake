@@ -9,7 +9,9 @@ namespace Game.Player
     public class PlayerHealth : Health
     {
         [Header("Death Settings")]
-        [SerializeField] private Animator playerDizzyAnimator;
+        [SerializeField] private GameObject playerDizzyAnimator;
+        [SerializeField] private SpriteRenderer headSprite;
+        [SerializeField] private Sprite deathSprite;
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private GameObject gameOverScreen;
         [SerializeField] private float collisionDmg = 1f;
@@ -39,11 +41,12 @@ namespace Game.Player
         {
             currentHealth = 0f;
             base.Die();
+            headSprite.sprite = deathSprite;
+            PlayerManager.Instance.HideHUD();
 
             if (playerDizzyAnimator != null)
             {
                 playerDizzyAnimator.gameObject.SetActive(true);
-                playerDizzyAnimator.SetTrigger("Collide");
             }
 
             if (playerMovement != null)
@@ -57,11 +60,6 @@ namespace Game.Player
                     rb.velocity = Vector2.zero;
                     rb.angularVelocity = 0f;
                     rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                }
-
-                if (playerDizzyAnimator != null)
-                {
-                    playerDizzyAnimator.speed = 0f;
                 }
             }
 

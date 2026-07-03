@@ -87,7 +87,7 @@ namespace Game.UI.HUD
 
             string nearestInfo = nearest != null
                 ? $" | ({Vector3.Distance(Camera.main.transform.position, nearest.position):F0}m)"
-                : " | No target found";
+                : "";
 
             objectiveText.text = $"{progress.Data.DisplayName} ({progress.CurrentValue}/{progress.Data.ObjectiveThreshold}){nearestInfo}";
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
