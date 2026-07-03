@@ -15,7 +15,7 @@ public class EntityHealth : Health
     [SerializeField] private string deathSound;
     [SerializeField] private LayerMask deathLayerMask;
     [SerializeField] private StreamChatType deathChatType = StreamChatType.KILL_HOSTILES;
-    private IVisualEffect[] visualEffects;
+    protected IVisualEffect[] visualEffects;
 
     protected override void Awake()
     {
@@ -45,7 +45,7 @@ public class EntityHealth : Health
         base.Die();
         SoundManager.Instance.PlaySound2D(deathSound);
 
-        Debug.Log("[ExampleEntityHealth] Entity has died!");
+        // Debug.Log("[ExampleEntityHealth] Entity has died!");
         SetLayerRecursively(gameObject, LayerMaskToLayer(deathLayerMask));
 
         foreach (BaseObjectiveChannel channel in destroyChannel)

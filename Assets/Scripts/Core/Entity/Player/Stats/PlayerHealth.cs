@@ -2,6 +2,7 @@ using System;
 using Game.Core.Effects;
 using Game.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Player
 {
@@ -11,8 +12,8 @@ namespace Game.Player
         [SerializeField] private Animator playerDizzyAnimator;
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private GameObject gameOverScreen;
-
         [SerializeField] private float collisionDmg = 1f;
+        [SerializeField] private UnityEvent[] OnDeath;
         public IVisualEffect[] visualEffects;
 
         private RigidbodyConstraints2D originalConstraints;
@@ -63,7 +64,9 @@ namespace Game.Player
                     playerDizzyAnimator.speed = 0f;
                 }
             }
-            
+
+            int randomIndex = UnityEngine.Random.Range(0, OnDeath.Length);
+            OnDeath[randomIndex]?.Invoke();
         }
 
         public void IncreaseMaxHealth(float amount)
@@ -88,7 +91,7 @@ namespace Game.Player
 
             if (obj.CompareTag("Body"))
             {
-                Die();
+                TakeDamage(99999999999f);
             }
 
             if (obj.CompareTag("Building"))

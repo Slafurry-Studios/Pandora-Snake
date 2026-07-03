@@ -23,6 +23,9 @@ namespace Game.UI.HUD
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip typeLoopSfx;
 
+        [Header("Options")]
+        [SerializeField] private bool allowSkip = true;
+
         private DialogManager dialogManager;
 
         private bool isLast;
@@ -35,6 +38,32 @@ namespace Game.UI.HUD
         private void Start()
         {
             dialogManager = FindAnyObjectByType<DialogManager>();
+        }
+
+        private void Update()
+        {
+            if (!allowSkip) return;
+            if (!dialogUIPrefab.activeSelf) return;
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SkipDialog();
+            }
+        }
+
+        public void SkipDialog()
+        {
+            if (typingCoroutine != null)
+            {
+                StopCoroutine(typingCoroutine);
+                typingCoroutine = null;
+            }
+
+            StopTypeSfx();
+            isTyping = false;
+            isLast = false;
+
+            Hide();
         }
 
         public void Show()

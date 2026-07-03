@@ -31,6 +31,7 @@ public class TMPFadeArray : MonoBehaviour
     [Header("Options")]
     [SerializeField] private bool loop = true;
     [SerializeField] private bool playOnStart = true;
+    [SerializeField] private bool allowSkip = true;
 
     [Header("Events")]
     public UnityEvent onTextEnd;
@@ -42,6 +43,24 @@ public class TMPFadeArray : MonoBehaviour
     {
         if (playOnStart)
             Play();
+    }
+
+    private void Update()
+    {
+        if (!allowSkip) return;
+        if (_routine == null) return;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SkipCutscene();
+        }
+    }
+
+    public void SkipCutscene()
+    {
+        Stop();
+        SetAlpha(0f);
+        onSequenceEnd?.Invoke();
     }
 
     public void Play()

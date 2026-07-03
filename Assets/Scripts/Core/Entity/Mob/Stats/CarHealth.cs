@@ -5,6 +5,15 @@ public class CarHealth : EntityHealth
 {
     [SerializeField] private float collisionDmg = 1f;
 
+    public override void TakeDamage(float amount)
+    {
+        base.TakeDamage(amount);
+        foreach (var effect in visualEffects)
+        {
+            effect.PlayEffect();
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         CheckCollision(collision.gameObject);

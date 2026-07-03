@@ -27,8 +27,8 @@ namespace Game.Player
 
         private PlayerAim playerAim;
         private float nextFireTime;
-        private bool isExplosive = false;
-        private bool isRichochet = false;
+        public bool isExplosive = false;
+        public bool isRichochet = false;
 
         private void Awake()
         {
@@ -55,7 +55,7 @@ namespace Game.Player
 
             foreach (float angle in GetShotAngles())
             {
-                Vector3 dir = Quaternion.Euler(0, angle, 0) * currentAimDirection;
+                Vector3 dir = Quaternion.Euler(0, 0, angle) * currentAimDirection;
                 SpawnBullet(dir);
             }
         }

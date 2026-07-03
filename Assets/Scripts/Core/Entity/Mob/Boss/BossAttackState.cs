@@ -48,6 +48,13 @@ namespace Game.AI.Boss
         [Tooltip("Layer mask representing solid obstacles that block line of sight (e.g., Buildings or Walls).")]
         public LayerMask obstacleLayer;
 
+        [Header("Rotation")]
+        [Tooltip("Degrees per second the boss rotates to face the target while attacking. Default: 180.")]
+        public float rotationSpeed = 180f;
+
+        [Tooltip("Angle offset (degrees) to correct for the sprite's default facing direction. Default: 90 (sprite faces down at rotation 0).")]
+        public float spriteFacingOffset = 90f;
+
         [Header("Phase Thresholds (Weapon Switching)")]
         [Tooltip("HP Threshold X (0 to 1). Above X%, boss uses BURST BULLET exclusively. Default: 0.7 (70%).")]
         [Range(0f, 1f)]
@@ -132,6 +139,8 @@ namespace Game.AI.Boss
 
             Vector2 aimDirection = (brain.Target.position - transform.position).normalized;
 
+            RotateTowards(aimDirection);
+
             if (brain.Movement != null)
             {
                 Game.Player.PlayerMovement player = brain.Target.GetComponent<Game.Player.PlayerMovement>();
@@ -180,6 +189,15 @@ namespace Game.AI.Boss
                     SelectNextWeapon(brain);
                 }
             }
+        }
+
+        private void RotateTowards(Vector2 direction)
+        {
+            if (direction.sqrMagnitude < 0.0001f) return;
+
+            float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + spriteFacingOffset;
+            Quaternion targetRotation = Quaternion.Euler(0f, 0f, targetAngle);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
         private void FireProjectile(Vector2 direction)

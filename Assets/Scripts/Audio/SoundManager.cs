@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField]
     private SoundLibrary sfxLibrary;
+    [SerializeField] private AudioMixerGroup sfxMixerGroup;
 
     [Header("Pool Settings")]
     [SerializeField]
@@ -30,15 +32,19 @@ public class SoundManager : MonoBehaviour
     private void InitPool()
     {
         pool = new AudioSource[poolSize];
+
         for (int i = 0; i < poolSize; i++)
         {
             GameObject go = new GameObject($"SFX_Source_{i}");
             go.transform.SetParent(transform);
-            pool[i] = go.AddComponent<AudioSource>();
-            pool[i].playOnAwake = false;
+
+            AudioSource source = go.AddComponent<AudioSource>();
+            source.playOnAwake = false;
+            source.outputAudioMixerGroup = sfxMixerGroup;
+
+            pool[i] = source;
         }
     }
-
     private AudioSource GetAvailableSource()
     {
         // Cari yang idle dulu

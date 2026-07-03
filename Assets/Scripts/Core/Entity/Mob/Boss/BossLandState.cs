@@ -23,6 +23,13 @@ namespace Game.AI.Boss
         [Tooltip("Speed multiplier relative to player speed when retreating toward the support building. Default: 1.5x.")]
         public float retreatSpeedMultiplier = 1.5f;
 
+        [Header("Rotation")]
+        [Tooltip("Degrees per second the boss rotates to face its movement direction while retreating. Default: 180.")]
+        public float rotationSpeed = 180f;
+
+        [Tooltip("Angle offset (degrees) to correct for the sprite's default facing direction. Default: 90 (sprite faces down at rotation 0).")]
+        public float spriteFacingOffset = 90f;
+
         private bool isLanded = false;
         private float landEndTime;
         private float nextLandTime;
@@ -89,6 +96,7 @@ namespace Game.AI.Boss
                     float speed = baseSpeed * retreatSpeedMultiplier;
 
                     if (brain.Movement != null) brain.Movement.SetMovement(direction, speed);
+                    RotateTowards(direction);
                 }
             }
             else
@@ -101,6 +109,15 @@ namespace Game.AI.Boss
                     FinishLandingRoutine(brain);
                 }
             }
+        }
+
+        private void RotateTowards(Vector2 direction)
+        {
+            if (direction.sqrMagnitude < 0.0001f) return;
+
+            float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + spriteFacingOffset;
+            Quaternion targetRotation = Quaternion.Euler(0f, 0f, targetAngle);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
         private BossSupportBuilding GetClosestSupportBuilding(BossHealth health)

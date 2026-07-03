@@ -12,15 +12,18 @@ public class EntitySpawner : MonoBehaviour
     [SerializeField] private int maxEntities = 10;
     [SerializeField] private float spawnInterval = 2f;
     [SerializeField] private int spawnsPerTick = 1;
+    [SerializeField] private bool onlyOnce = false;
 
     [Header("Spawn Area")]
     [SerializeField] private float minSpawnRadius = 6f;
     [SerializeField] private float maxSpawnRadius = 14f;
     [SerializeField] private int maxAttemptsPerSpawn = 10;
+    
 
     private Generator generator;
     private readonly List<GameObject> spawnedEntities = new List<GameObject>();
     private float timer;
+    private bool hasSpawnedOnce = false;
 
     void Awake()
     {
@@ -32,6 +35,10 @@ public class EntitySpawner : MonoBehaviour
         if (player == null || entityPrefabs.Length == 0 || generator == null || generator.Grid == null)
             return;
 
+
+        if (onlyOnce && hasSpawnedOnce)
+            return;
+            
         spawnedEntities.RemoveAll(e => e == null);
 
         timer += Time.deltaTime;
@@ -69,6 +76,7 @@ public class EntitySpawner : MonoBehaviour
             GameObject newEntity = Instantiate(prefab, spawnPos, Quaternion.identity);
             newEntity.transform.parent = transform;
             spawnedEntities.Add(newEntity);
+            hasSpawnedOnce = true;
             return;
         }
     }

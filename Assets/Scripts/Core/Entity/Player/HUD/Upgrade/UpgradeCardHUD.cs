@@ -30,9 +30,7 @@ namespace Game.UI.HUD
         {
             this.upgradeCard = upgradeCard;
             SetUI();
-            SetOnClick();
         }
-
         private void SetUI()
         {
             cardBg.sprite = upgradeCard.UpgradeCardData.UpgradeBg;
@@ -41,6 +39,7 @@ namespace Game.UI.HUD
         private void SetOnClick()
         {
             upgradeCard?.OnSelected();
+            FindAnyObjectByType<PlayerBuffHUD>().AddBuff();
             GetComponentInParent<UpgradeHUD>().Show(false);
         }
     }

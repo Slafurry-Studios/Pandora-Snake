@@ -1,5 +1,6 @@
 using UnityEngine;
 using Game.Manager;
+using UnityEngine.Events;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -37,4 +38,5 @@ public struct Spawner
     public string spawnerName;
     public int threatState;
     public EntitySpawner spawner;
+    public UnityEvent[] onSpawnerActive;
 }

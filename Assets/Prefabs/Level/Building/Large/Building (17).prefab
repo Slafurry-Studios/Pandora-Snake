@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7598562442062953580}
   - component: {fileID: 8582201819912075568}
   - component: {fileID: 3084516943199414155}
+  - component: {fileID: 1123424390864051195}
   m_Layer: 12
   m_Name: Building (17)
   m_TagString: Building
@@ -250,3 +251,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   channel: {fileID: 11400000, guid: b33d7556fdf30298fb4efe9847b34b07, type: 2}
+--- !u!114 &1123424390864051195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7178440261986189834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da1ebe4f2a576154899d2cb2af18d5cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkedBoss: {fileID: 0}
+  providesDefense: 1
+  providesHealing: 1
+  healAmount: 2
+  healInterval: 3

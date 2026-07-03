@@ -8,8 +8,8 @@ namespace Game.Player
         [Header("Growth Settings")]
         [Tooltip("How many grow points are needed to grow one tail segment.")]
         [SerializeField] private int growPointsPerTail = 5;
-        
         [SerializeField] private int currentGrowPoints = 0;
+        private int accumulatedGrowPoint = 0;
 
         private SnakeTailManager tailManager;
 
@@ -21,6 +21,7 @@ namespace Game.Player
         public void AddGrowPoints(int amount)
         {
             currentGrowPoints += amount;
+            accumulatedGrowPoint += amount;
             
             while (currentGrowPoints >= growPointsPerTail)
             {
@@ -29,7 +30,7 @@ namespace Game.Player
             }
         }
         
-        public int GetCurrentGrowPoints() => currentGrowPoints;
+        public int GetCurrentGrowPoints() => accumulatedGrowPoint;
         public int GetGrowPointsPerTail() => growPointsPerTail;
     }
 }

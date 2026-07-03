@@ -18,8 +18,10 @@ GameObject:
   - component: {fileID: 1129639596615729485}
   - component: {fileID: 8334751573877120168}
   - component: {fileID: 2459231381044262577}
+  - component: {fileID: 6279289346451487011}
+  - component: {fileID: 5519580039066096673}
   m_Layer: 14
-  m_Name: HeliBoss
+  m_Name: Helicopter_Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +37,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9, y: 4.27, z: 0}
-  m_LocalScale: {x: 2.9700003, y: 2.9700003, z: 2.9700003}
+  m_LocalScale: {x: 8.31, y: 8.31, z: 8.31}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9012590165886387095}
@@ -61,7 +63,7 @@ MonoBehaviour:
   rayCount: 8
   rayAngle: 90
   chaseBool: Chase
-  movementSoundName: 
+  movementSoundName: Helicopter_Rotor
 --- !u!114 &2210022688956511991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  aiAnimation: {fileID: 0}
+  aiAnimation: {fileID: 1917161275924727246}
   stateList:
   - {fileID: 7728893559492850159}
   - {fileID: 4826231044227504489}
@@ -112,6 +114,8 @@ MonoBehaviour:
   landingCooldown: 10
   landingRadius: 1.5
   retreatSpeedMultiplier: 1.5
+  rotationSpeed: 180
+  spriteFacingOffset: 90
 --- !u!114 &3902733686513751270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +131,8 @@ MonoBehaviour:
   detectionRadius: 25
   maintainDistance: 8
   movementSpeedMultiplier: 1.2
+  rotationSpeed: 180
+  spriteFacingOffset: 90
 --- !u!114 &4826231044227504489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +150,9 @@ MonoBehaviour:
   requiresLineOfSight: 1
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 6208
+  rotationSpeed: 180
+  spriteFacingOffset: 90
   hpThresholdPhaseX: 0.7
   hpThresholdPhaseY: 0.35
   heavyMissileProfile:
@@ -158,7 +166,7 @@ MonoBehaviour:
     range: 30
     targetMask:
       serializedVersion: 2
-      m_Bits: 8
+      m_Bits: 8328
     hitRadius: 0.75
   burstBulletProfile:
     weaponName: BURST BULLET
@@ -171,7 +179,7 @@ MonoBehaviour:
     range: 30
     targetMask:
       serializedVersion: 2
-      m_Bits: 8
+      m_Bits: 16392
     hitRadius: 0.25
 --- !u!50 &1129639596615729485
 Rigidbody2D:
@@ -188,7 +196,7 @@ Rigidbody2D:
   m_Mass: 80
   m_LinearDrag: 0.7
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -229,21 +237,21 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.07466912}
+  m_Offset: {x: -0.0033776946, y: -0.0051730126}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.29, y: 0.36}
+    newSize: {x: 0.31, y: 0.36}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.85066175}
+  m_Size: {x: 0.21061397, y: 0.3635353}
   m_EdgeRadius: 0
 --- !u!114 &2459231381044262577
 MonoBehaviour:
@@ -260,6 +268,39 @@ MonoBehaviour:
   deathDelay: 3
   deathEffectPrefab: {fileID: 0}
   disableCollidersOnDeath: 1
+--- !u!114 &6279289346451487011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331285232013777745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7429e632178f194098dfc9dc5c143cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkColor: {r: 0.990566, g: 0.6961997, b: 0.6961997, a: 1}
+  blinkDuration: 0.1
+  includeChildren: 1
+--- !u!114 &5519580039066096673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331285232013777745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ee90fc35fbd5a4eae59f09e9002dec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.2
+  intensity: 0.2
+  dampening: 1
+  shakeX: 1
+  shakeY: 1
+  shakeZ: 0
 --- !u!1 &4689291240695308687
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,6 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9012590165886387095}
   - component: {fileID: 1420050164183937337}
+  - component: {fileID: 1917161275924727246}
   m_Layer: 14
   m_Name: Sprite
   m_TagString: Untagged
@@ -330,20 +372,41 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1266888717
+  m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 116919694, guid: f909a701fc2c5b648b049dce5aa38792, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.31, y: 0.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1917161275924727246
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689291240695308687}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5941b65b10bd51c4082c820013e96187, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6603441413563816162
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +432,7 @@ Transform:
   m_GameObject: {fileID: 6603441413563816162}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.71, z: 0}
+  m_LocalPosition: {x: -0.024, y: -0.185, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

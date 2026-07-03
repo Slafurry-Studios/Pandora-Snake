@@ -2,6 +2,7 @@ using System.Collections;
 using Game.Dialog;
 using Game.UI.HUD;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class IntroCutscene : MonoBehaviour
 {
@@ -29,6 +30,15 @@ public class IntroCutscene : MonoBehaviour
         dialogManager = FindAnyObjectByType<DialogManager>();
 
         NextCutscene();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CurrentSequence = 9999;
+            StartGame();
+        }
     }
 
     public void NextCutscene()
@@ -79,14 +89,25 @@ public class IntroCutscene : MonoBehaviour
         }
         else if (CurrentSequence == 8)
         {
-            foreach (ObjectiveScriptableObject objective in mainObjectives)
-            {
-                ObjectiveManager.Instance.AddObjective(objective.Objective);
-            }
-            PlayerManager.Instance.StatHUD.SetActive(true);
-            PlayerManager.Instance.PauseHUD.SetActive(true);
-            PlayerManager.Instance.ThreatHUD.SetActive(true);
+            StartGame();
         }
+    }
+
+    private void StartGame()
+    {
+        PlayerManager.Instance.ObjectiveHUD.SetActive(true);
+        foreach (ObjectiveScriptableObject objective in mainObjectives)
+        {
+            ObjectiveManager.Instance.AddObjective(objective.Objective);
+        }
+        PlayerManager.Instance.ChatHUD.SetActive(true);
+        PlayerManager.Instance.DonationHUD.SetActive(true);
+        PlayerManager.Instance.ObjectiveHUD.GetComponentInChildren<UIBlink>().Stop();
+        PlayerManager.Instance.StatHUD.SetActive(true);
+        PlayerManager.Instance.PauseHUD.SetActive(true);
+        PlayerManager.Instance.ThreatHUD.SetActive(true);
+        Time.timeScale = 1f;
+        PlayerManager.Instance.Resume();
     }
 
     private IEnumerator ChatIntroSequence()
@@ -121,6 +142,5 @@ public class IntroCutscene : MonoBehaviour
         PlayerManager.Instance.ObjectiveHUD.GetComponentInChildren<UIBlink>().Stop();
         NextCutscene();
     }
-
 
 }
