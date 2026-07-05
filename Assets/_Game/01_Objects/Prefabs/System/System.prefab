@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6098e7656afbc8e0966bc109d89b759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxData: {fileID: 0}
+  sfxData: {fileID: 11400000, guid: e814bab6cb36541a6b3ea4ef01c6a13b, type: 2}
   sfxMixerGroup: {fileID: 9213905799489823763, guid: c5de01a50bc2c834cadde13a59fb26c3, type: 2}
 --- !u!1 &5818512415311033421
 GameObject:
@@ -331,6 +331,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ace2740ad9c01b3e8dfd2889fe2e10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicData: {fileID: 0}
+  musicData: {fileID: 11400000, guid: 3bd3410f5b6b86e51b91036b0b05a36b, type: 2}
   musicSource: {fileID: 1603872102981061051}
   sceneTracks: []

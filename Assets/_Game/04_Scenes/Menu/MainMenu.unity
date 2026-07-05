@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 15002467}
   - component: {fileID: 15002466}
   - component: {fileID: 15002465}
+  - component: {fileID: 15002468}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -255,6 +256,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15002463}
   m_CullTransparentMesh: 1
+--- !u!114 &15002468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15002463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f2dd41c98d92f1990b1115c32816b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: UI
+  effectName: Click
 --- !u!1 &59534340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1426,6 +1441,7 @@ GameObject:
   - component: {fileID: 589594091}
   - component: {fileID: 589594090}
   - component: {fileID: 589594093}
+  - component: {fileID: 589594094}
   m_Layer: 5
   m_Name: About Us
   m_TagString: Untagged
@@ -1559,6 +1575,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alphaThreshold: 0.1
+--- !u!114 &589594094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589594088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f2dd41c98d92f1990b1115c32816b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: UI
+  effectName: Click
 --- !u!1 &620177337
 GameObject:
   m_ObjectHideFlags: 0
@@ -2812,9 +2842,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465645ae9d1124446a79e2f42a39135a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: c5de01a50bc2c834cadde13a59fb26c3, type: 2}
-  musicSlider: {fileID: 330082413}
-  sfxSlider: {fileID: 1206328698}
 --- !u!114 &1068132309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3318,6 +3345,7 @@ GameObject:
   - component: {fileID: 1343547889}
   - component: {fileID: 1343547888}
   - component: {fileID: 1343547887}
+  - component: {fileID: 1343547890}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -3439,6 +3467,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343547885}
   m_CullTransparentMesh: 1
+--- !u!114 &1343547890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343547885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f2dd41c98d92f1990b1115c32816b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: UI
+  effectName: Click
 --- !u!1 &1379378628
 GameObject:
   m_ObjectHideFlags: 0
@@ -3946,6 +3988,7 @@ GameObject:
   - component: {fileID: 1726281712}
   - component: {fileID: 1726281711}
   - component: {fileID: 1726281714}
+  - component: {fileID: 1726281715}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -4079,6 +4122,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alphaThreshold: 0.1
+--- !u!114 &1726281715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726281709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f2dd41c98d92f1990b1115c32816b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: UI
+  effectName: Click
 --- !u!1 &1736640840
 GameObject:
   m_ObjectHideFlags: 0
@@ -4927,6 +4984,7 @@ GameObject:
   - component: {fileID: 2096718205}
   - component: {fileID: 2096718204}
   - component: {fileID: 2096718207}
+  - component: {fileID: 2096718208}
   m_Layer: 5
   m_Name: Setting
   m_TagString: Untagged
@@ -5060,6 +5118,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alphaThreshold: 0.1
+--- !u!114 &2096718208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096718202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f2dd41c98d92f1990b1115c32816b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: UI
+  effectName: Click
 --- !u!1 &2097132094
 GameObject:
   m_ObjectHideFlags: 0
@@ -5148,6 +5220,7 @@ GameObject:
   - component: {fileID: 2115555669}
   - component: {fileID: 2115555668}
   - component: {fileID: 2115555671}
+  - component: {fileID: 2115555672}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -5281,6 +5354,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alphaThreshold: 0.1
+--- !u!114 &2115555672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115555666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f2dd41c98d92f1990b1115c32816b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: UI
+  effectName: Click
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -8510,14 +8510,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: System
       objectReference: {fileID: 0}
-    - target: {fileID: 7390065485668346112, guid: 7e8b1bc89cf39b1489337a2332175b72, type: 3}
-      propertyPath: sfxData
-      value: 
-      objectReference: {fileID: 11400000, guid: e814bab6cb36541a6b3ea4ef01c6a13b, type: 2}
-    - target: {fileID: 8412652942799516562, guid: 7e8b1bc89cf39b1489337a2332175b72, type: 3}
-      propertyPath: musicData
-      value: 
-      objectReference: {fileID: 11400000, guid: 3bd3410f5b6b86e51b91036b0b05a36b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

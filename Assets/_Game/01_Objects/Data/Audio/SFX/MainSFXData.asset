@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: MainSFXData
   m_EditorClassIdentifier: 
   categories:
-  - categoryName: 
-    effects:
-    - groupID: 
-      clips: []
-      volume: 0
-      maxSimultaneous: 0
-    poolSize: 0
+  - {fileID: 11400000, guid: 16929c2053729105c81104420544cae3, type: 2}
+  - {fileID: 11400000, guid: 37ade2e8541c6301b9a214eab49c328f, type: 2}
+  - {fileID: 11400000, guid: 7c5a7b8021a188e58b82de70d00c8067, type: 2}
+  - {fileID: 11400000, guid: f1d0625c2e48ffda5b310523938f7060, type: 2}
+  - {fileID: 11400000, guid: 7993959b76fe6db9e8c283f32afc75c0, type: 2}
+  - {fileID: 11400000, guid: 106c34b89d4bc5545af58be9877cd692, type: 2}
+  - {fileID: 11400000, guid: 7073bd392142688388ae8c02a24234c1, type: 2}
+  - {fileID: 11400000, guid: 8d08541f935c9428197cd0762db8ec53, type: 2}
+  - {fileID: 11400000, guid: 4cd6b9443816f3a4f9b1a4138d1e3a43, type: 2}
+  - {fileID: 11400000, guid: 9a03fa1f9b57a457095b178d47fbbd04, type: 2}
+  - {fileID: 11400000, guid: 55c766493c267c6bfb6562b28a667495, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categoryName: UI
   effects:
-  - groupID: Button_Press
+  - groupID: Click
     clips:
     - {fileID: 8300000, guid: 8228a3fb31f5c1cde8e5e743c04d39e9, type: 3}
     volume: 2.47

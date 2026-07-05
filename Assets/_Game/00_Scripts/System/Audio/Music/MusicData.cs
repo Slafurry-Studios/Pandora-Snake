@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Slafurry.System.Audio
 {
-    // [CreateAssetMenu(fileName = "MusicData", menuName = "Game/Audio/Music Data")]
-    [GameAssetCreator("Audio", "Music Data", order: 1)]
+    [GameAssetCreator("Audio/Music", "Music Data", order: 1)]
 
     public class MusicData : ScriptableObject
     {

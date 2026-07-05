@@ -11,19 +11,19 @@ using Slafurry.Utils.Attributes;
 namespace Slafurry.Editor.GameAssetCreator
 {
     /// <summary>
-    /// Searchable dropdown listing every ScriptableObject marked with
-    /// [GameAssetCreator]. Category strings support "/" to build nested
-    /// submenus - e.g. Category = "Audio/Music" produces:
+    /// TreeView listing every ScriptableObject marked with [GameAssetCreator].
+    /// Category strings support "/" to build nested folders - e.g.
+    /// Category = "Audio/Music" produces:
     ///   Audio
     ///     Music
     ///       Music Library
     ///
-    /// Ordering is fully explicit via the attribute's Order value,
-    /// completely independent of Unity's native Create menu priority
-    /// system - no bubbling to parent submenus like [CreateAssetMenu] has.
-    /// Search is built into AdvancedDropdown automatically.
+    /// Ordering is fully explicit via the attribute's Order value.
+    /// Search is handled by TreeView's built-in searchString filtering
+    /// (matched against each item's displayName).
+    /// Double-click a leaf item to create an instance of that type.
     /// </summary>
-    public class GameAssetCreatorDropdown : AdvancedDropdown
+    public class GameAssetCreatorTreeView : TreeView
     {
         private class Entry
         {
@@ -33,24 +33,31 @@ namespace Slafurry.Editor.GameAssetCreator
             public int Order;
         }
 
-        private class TypeDropdownItem : AdvancedDropdownItem
+        private class TypeTreeViewItem : TreeViewItem
         {
             public readonly Type Type;
-            public TypeDropdownItem(string displayName, Type type) : base(displayName) => Type = type;
+
+            public TypeTreeViewItem(int id, int depth, string displayName, Type type)
+                : base(id, depth, displayName)
+            {
+                Type = type;
+            }
         }
 
         private readonly List<Entry> _entries;
 
-        public GameAssetCreatorDropdown(AdvancedDropdownState state) : base(state)
+        public GameAssetCreatorTreeView(TreeViewState state) : base(state)
         {
             _entries = ScanEntries();
-            minimumSize = new Vector2(280, 350);
+            showBorder = true;
+            Reload();
         }
 
-        protected override AdvancedDropdownItem BuildRoot()
+        protected override TreeViewItem BuildRoot()
         {
-            var root = new AdvancedDropdownItem("Create Game Asset");
-            var folderCache = new Dictionary<string, AdvancedDropdownItem> { [""] = root };
+            var root = new TreeViewItem { id = 0, depth = -1, displayName = "Root" };
+            var folderCache = new Dictionary<string, TreeViewItem> { [""] = root };
+            int nextId = 1;
 
             // sort by category path first, then by Order within that same
             // category, so siblings render in exactly the order specified
@@ -58,20 +65,28 @@ namespace Slafurry.Editor.GameAssetCreator
 
             foreach (var entry in sorted)
             {
-                var parent = GetOrCreateFolder(root, folderCache, entry.Category);
-                parent.AddChild(new TypeDropdownItem(entry.DisplayName, entry.Type));
+                var parent = GetOrCreateFolder(root, folderCache, entry.Category, ref nextId);
+                var item = new TypeTreeViewItem(nextId++, parent.depth + 1, entry.DisplayName, entry.Type)
+                {
+                    icon = GetTypeIcon(entry.Type)
+                };
+                parent.AddChild(item);
             }
 
+            if (!root.hasChildren)
+                root.AddChild(new TreeViewItem(nextId++, 0, "No [GameAssetCreator] types found"));
+
+            SetupDepthsFromParentsAndChildren(root);
             return root;
         }
 
-        private AdvancedDropdownItem GetOrCreateFolder(AdvancedDropdownItem root, Dictionary<string, AdvancedDropdownItem> cache, string categoryPath)
+        private TreeViewItem GetOrCreateFolder(TreeViewItem root, Dictionary<string, TreeViewItem> cache, string categoryPath, ref int nextId)
         {
             if (string.IsNullOrEmpty(categoryPath)) return root;
             if (cache.TryGetValue(categoryPath, out var existing)) return existing;
 
             var parts = categoryPath.Split('/');
-            AdvancedDropdownItem current = root;
+            TreeViewItem current = root;
             string builtPath = "";
 
             foreach (var part in parts)
@@ -80,7 +95,10 @@ namespace Slafurry.Editor.GameAssetCreator
 
                 if (!cache.TryGetValue(builtPath, out var folder))
                 {
-                    folder = new AdvancedDropdownItem(part);
+                    folder = new TreeViewItem(nextId++, current.depth + 1, part)
+                    {
+                        icon = FolderIcon
+                    };
                     current.AddChild(folder);
                     cache[builtPath] = folder;
                 }
@@ -91,11 +109,20 @@ namespace Slafurry.Editor.GameAssetCreator
             return current;
         }
 
-        protected override void ItemSelected(AdvancedDropdownItem item)
+        protected override void DoubleClickedItem(int id)
         {
-            if (item is TypeDropdownItem typeItem)
-                CreateAsset(typeItem.Type, typeItem.name);
+            var item = FindItem(id, rootItem);
+            if (item is TypeTreeViewItem typeItem)
+                CreateAsset(typeItem.Type, typeItem.displayName);
         }
+
+        protected override bool CanMultiSelect(TreeViewItem item) => false;
+
+        private static Texture2D FolderIcon =>
+            (Texture2D)EditorGUIUtility.IconContent("Folder Icon").image;
+
+        private static Texture2D GetTypeIcon(Type type) =>
+            (Texture2D)EditorGUIUtility.IconContent("ScriptableObject Icon").image;
 
         private static List<Entry> ScanEntries()
         {

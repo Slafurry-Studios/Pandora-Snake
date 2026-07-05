@@ -5,33 +5,47 @@ using UnityEngine;
 namespace Slafurry.Editor.GameAssetCreator
 {
     /// <summary>
-    /// Thin window that just hosts a button - clicking it opens
-    /// GameAssetCreatorDropdown, an AdvancedDropdown that supports nested
-    /// categories (folder within folder) and has search built in.
+    /// Window hosting a searchable TreeView (GameAssetCreatorTreeView) that
+    /// supports nested categories (folder within folder). Double-click a
+    /// leaf item to create that asset type.
     /// </summary>
     public class GameAssetCreatorWindow : EditorWindow
     {
-        [MenuItem("Slafurry/Create Game Asset")]
+        [SerializeField] private TreeViewState _treeViewState;
+
+        private GameAssetCreatorTreeView _treeView;
+        private SearchField _searchField;
+
+        [MenuItem("Slafurry/Game Data")]
         public static void ShowWindow()
         {
-            var window = GetWindow<GameAssetCreatorWindow>("Create Game Asset");
-            window.minSize = new Vector2(280, 70);
+            var window = GetWindow<GameAssetCreatorWindow>();
+            window.titleContent = new GUIContent("Game Data");
+            window.minSize = new Vector2(320, 400);
+        }
+
+        private void OnEnable()
+        {
+            _treeViewState ??= new TreeViewState();
+            _treeView = new GameAssetCreatorTreeView(_treeViewState);
+            _searchField = new SearchField();
+            _searchField.downOrUpArrowKeyPressed += _treeView.SetFocusAndEnsureSelectedItem;
         }
 
         private void OnGUI()
         {
-            EditorGUILayout.Space(10);
+            EditorGUILayout.Space(4);
 
-            Rect buttonRect = EditorGUILayout.GetControlRect(GUILayout.Height(30));
-            if (GUI.Button(buttonRect, "Select Asset Type to Create", EditorStyles.popup))
-            {
-                var dropdown = new GameAssetCreatorDropdown(new AdvancedDropdownState());
-                dropdown.Show(buttonRect);
-            }
+            _treeView.searchString = _searchField.OnGUI(_treeView.searchString);
 
-            EditorGUILayout.Space(10);
+            EditorGUILayout.Space(4);
+
+            Rect treeRect = EditorGUILayout.GetControlRect(GUILayout.ExpandHeight(true));
+            _treeView.OnGUI(treeRect);
+
+            EditorGUILayout.Space(4);
             EditorGUILayout.HelpBox(
-                "New asset is created inside whichever folder is currently selected in the Project window.",
+                "Double-click an asset type to create it inside whichever folder is currently selected in the Project window.",
                 MessageType.Info);
         }
     }

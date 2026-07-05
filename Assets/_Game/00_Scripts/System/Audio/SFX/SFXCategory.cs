@@ -1,3 +1,4 @@
+using Slafurry.Utils.Attributes;
 using UnityEngine;
 
 
@@ -14,7 +15,7 @@ public class SFXEffect
 namespace Slafurry.System.Audio
 {
 
-    [CreateAssetMenu(fileName = "SFX Category", menuName = "Game/Audio/SFX/Category")]
+    [GameAssetCreator("Audio/SFX", "SFX Category", order: 2)]
     public class SFXCategory : ScriptableObject
     {
         public string categoryName;

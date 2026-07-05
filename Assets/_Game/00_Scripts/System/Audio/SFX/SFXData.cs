@@ -1,11 +1,13 @@
 using Slafurry.Core.Interface;
+using Slafurry.Utils.Attributes;
 using UnityEngine;
 
 namespace Slafurry.System.Audio
 {
 
 
-    [CreateAssetMenu(fileName = "SFX Data", menuName = "Game/Audio/SFX Data")]
+    [GameAssetCreator("Audio/SFX", "SFX Data", order: 1)]
+
     public class SFXData : ScriptableObject
     {
         public SFXCategory[] categories;

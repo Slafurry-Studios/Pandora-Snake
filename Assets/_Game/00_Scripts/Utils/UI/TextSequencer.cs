@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using Slafurry.System.Audio;
 
 public class TMPFadeArray : MonoBehaviour
 {
@@ -28,8 +29,7 @@ public class TMPFadeArray : MonoBehaviour
     [SerializeField] private float delayBeforeStart = 0f;
 
     [Header("SFX")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip typeLoopSfx;
+    [SerializeField] private string sfxId = "Type_Effect";
 
     [Header("Options")]
     [SerializeField] private bool loop = true;
@@ -169,20 +169,12 @@ public class TMPFadeArray : MonoBehaviour
 
     private void PlayTypeSfx()
     {
-        if (audioSource == null || typeLoopSfx == null)
-            return;
-
-        audioSource.clip = typeLoopSfx;
-        audioSource.loop = true;
-        audioSource.Play();
+        Audio.PlaySFX2D("UI", sfxId, loop: true);
     }
 
     private void StopTypeSfx()
     {
-        if (audioSource == null)
-            return;
-
-        audioSource.Stop();
+        Audio.StopSFX("UI", sfxId);
     }
 
     private IEnumerator FadeTo(float from, float to, float duration)
