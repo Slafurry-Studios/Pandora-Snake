@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b5b3454719b816593df0cb8c16f82a, type: 3}
+  m_Name: Police
+  m_EditorClassIdentifier: 
+  categoryName: Police
+  effects:
+  - groupID: Shoot
+    clips:
+    - {fileID: 8300000, guid: 3e80b1a4de04d33b7967363b8b76dd7a, type: 3}
+    volume: 2.42
+    maxSimultaneous: 3
+  - groupID: Death
+    clips:
+    - {fileID: 8300000, guid: 90ff7114979d548008ec5f3602de7187, type: 3}
+    volume: 2.42
+    maxSimultaneous: 3
+  - groupID: Report
+    clips:
+    - {fileID: 8300000, guid: c9ab60684353ea0afaa66ed6e94ff5aa, type: 3}
+    - {fileID: 8300000, guid: 3196e391598f8e8c5b247069f2fa9a3c, type: 3}
+    - {fileID: 8300000, guid: 8b035392b594696a693ae2a0ba5a0748, type: 3}
+    - {fileID: 8300000, guid: d65f0440f28b8801bbf91cf65923d9e6, type: 3}
+    volume: 2.42
+    maxSimultaneous: 3
+  poolSize: 8
