@@ -333,4 +333,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicData: {fileID: 11400000, guid: 3bd3410f5b6b86e51b91036b0b05a36b, type: 2}
   musicSource: {fileID: 1603872102981061051}
-  sceneTracks: []
+  sceneTracks:
+  - sceneName: MainMenu
+    trackName: MainMenu
+  - sceneName: IntroCutscene
+    trackName: GameScene
+  - sceneName: GameScene
+    trackName: GameScene

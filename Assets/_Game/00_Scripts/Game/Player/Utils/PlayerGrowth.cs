@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game.Player
 {
-    [RequireComponent(typeof(SnakeTailManager))]
+    [RequireComponent(typeof(PlayerTail))]
     public class PlayerGrowth : MonoBehaviour
     {
         [Header("Growth Settings")]
@@ -11,11 +11,11 @@ namespace Game.Player
         [SerializeField] private int currentGrowPoints = 0;
         private int accumulatedGrowPoint = 0;
 
-        private SnakeTailManager tailManager;
+        private PlayerTail tailManager;
 
-        private void Awake()
+        public void Initialize()
         {
-            tailManager = GetComponent<SnakeTailManager>();
+            tailManager = GetComponent<PlayerTail>();
         }
 
         public void AddGrowPoints(int amount)

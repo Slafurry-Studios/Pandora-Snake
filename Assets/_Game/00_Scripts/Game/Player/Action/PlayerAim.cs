@@ -1,5 +1,8 @@
+using System.Collections;
+using Slafurry.Core.Interface;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 
 namespace Game.Player
 {
@@ -24,16 +27,14 @@ namespace Game.Player
         private Camera mainCamera;
         private Vector3 currentAimDirection;
 
-        /// <summary>Current normalized aim direction, read by PlayerShoot.</summary>
         public Vector3 CurrentAimDirection => currentAimDirection;
 
-        /// <summary>World position of the aim indicator, used as bullet spawn point.</summary>
         public Vector3 AimIndicatorPosition => aimIndicator != null ? aimIndicator.position : transform.position;
 
         public Transform AimIndicator => aimIndicator;
         public Transform OrbitCenter => orbitCenter;
 
-        private void Awake()
+        public void Start()
         {
             mainCamera = Camera.main;
 
@@ -48,7 +49,7 @@ namespace Game.Player
             }
         }
 
-        private void Update()
+        void Update()
         {
             AimAtCursor();
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using Game.Manager;
 using Game.Player;
+using Slafurry.System.Scene;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -101,10 +102,7 @@ public class GameOver : MonoBehaviour
             return;
         }
 
-        if (TransitionManager.Instance != null)
-            TransitionManager.Instance.LoadScene(restartScene);
-        else
-            SceneManager.LoadScene(restartScene);
+        SceneSystem.Load(restartScene);
     }
 
     public void GoToMainMenu()
@@ -117,9 +115,6 @@ public class GameOver : MonoBehaviour
             return;
         }
 
-        if (TransitionManager.Instance != null)
-            TransitionManager.Instance.LoadScene(levelScene);
-        else
-            SceneManager.LoadScene(levelScene);
+        SceneSystem.Load(levelScene);
     }
 }

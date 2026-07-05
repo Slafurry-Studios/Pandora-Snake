@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Player
 {
-    public class SnakeTailManager : MonoBehaviour
+    public class PlayerTail : MonoBehaviour
     {
         [Header("Tail Settings")]
         [SerializeField] private GameObject bodyPrefab;
@@ -38,6 +38,8 @@ namespace Game.Player
         private Marker[] positionHistory;
         private int historyIndex = 0;
         private int historyCount = 0;
+        private Player player;
+        private bool initialized;
 
         private struct Marker
         {
@@ -51,8 +53,9 @@ namespace Game.Player
             }
         }
 
-        private void Start()
+        public void Initialize()
         {
+            player = GetComponentInParent<Player>();
             RecalculateHistoryGap();
 
             tailContainer =
@@ -68,6 +71,7 @@ namespace Game.Player
 
             CreateSaddle();
             CreateTail();
+            initialized = true;
         }
 
         private void Update()
@@ -97,7 +101,7 @@ namespace Game.Player
             Vector3 lastPos = GetMarker(0).position;
             Quaternion lastRot = GetMarker(0).rotation;
 
-            Vector3 delta = transform.position - lastPos;
+            Vector3 delta = player.transform.position - lastPos;
             float dist = delta.magnitude;
 
             if (dist < minRecordDistance)
@@ -121,7 +125,7 @@ namespace Game.Player
                 float t = stepDist / dist;
 
                 Vector3 pos = lastPos + dir * stepDist;
-                Quaternion rot = Quaternion.Slerp(lastRot, transform.rotation, t);
+                Quaternion rot = Quaternion.Slerp(lastRot, player.transform.rotation, t);
 
                 RecordMarkerAt(pos, rot);
             }
@@ -139,7 +143,7 @@ namespace Game.Player
                 Instantiate(
                     saddlePrefab,
                     spawnPos,
-                    transform.rotation,
+                    player.transform.rotation,
                     tailContainer
                 );
 
@@ -178,7 +182,7 @@ namespace Game.Player
                 Instantiate(
                     tailPrefab,
                     spawnPos,
-                    transform.rotation,
+                    player.transform.rotation,
                     tailContainer
                 );
 
@@ -292,7 +296,8 @@ namespace Game.Player
 
         private void RecordMarker()
         {
-            RecordMarkerAt(transform.position, transform.rotation);
+            if (!initialized) return;
+            RecordMarkerAt(player.transform.position, player.transform.rotation);
         }
 
         private void RecordMarkerAt(Vector3 pos, Quaternion rot)
@@ -334,17 +339,17 @@ namespace Game.Player
         private Vector3 GetSpawnBehindHead(int index)
         {
             Vector3 backward =
-                -transform.up * segmentSpacing * (index + 1);
+                -player.transform.up * segmentSpacing * (index + 1);
 
-            return transform.position + backward;
+            return player.transform.position + backward;
         }
 
         private Vector3 GetSpawnBehindHeadFraction(float fraction)
         {
             Vector3 backward =
-                -transform.up * segmentSpacing * fraction;
+                -player.transform.up * segmentSpacing * fraction;
 
-            return transform.position + backward;
+            return player.transform.position + backward;
         }
 
         private void SpawnInitialBody()
@@ -358,7 +363,7 @@ namespace Game.Player
                     Instantiate(
                         bodyPrefab,
                         spawnPos,
-                        transform.rotation,
+                        player.transform.rotation,
                         tailContainer
                     );
                 bodyParts.Add(body.transform);

@@ -26,12 +26,16 @@ namespace Game.Player
         [SerializeField] private int bulletCount = 1;
         [SerializeField] private float angleSpacing = 5f;
 
+        
+        [Header("Audio")]
+        [SerializeField] private string shootSound;
+
         private PlayerAim playerAim;
         private float nextFireTime;
         public bool isExplosive = false;
         public bool isRichochet = false;
 
-        private void Awake()
+        public void Initialize()
         {
             playerAim = GetComponent<PlayerAim>();
         }
@@ -50,7 +54,7 @@ namespace Game.Player
 
         private void Shoot()
         {
-            Audio.PlaySFX2D("Player", "Shotgun_Punchy");
+            Audio.PlaySFX2D("Player", shootSound);
 
             Vector3 currentAimDirection = playerAim.CurrentAimDirection;
             if (currentAimDirection == Vector3.zero)

@@ -9,13 +9,13 @@ namespace Game.UI.HUD
     {
         [SerializeField] private Slider EnergySlider;
 
-        private PlayerMovement playerMovement;
+        private PlayerStamina playerStamina;
 
         void Start()
         {
-            playerMovement = FindAnyObjectByType<PlayerMovement>();
+            playerStamina = FindAnyObjectByType<PlayerStamina>();
 
-            if (playerMovement != null) playerMovement.OnStaminaPctChanged += UpdateBar;
+            if (playerStamina != null) playerStamina.OnStaminaPctChanged += UpdateBar;
         }
 
         private void UpdateBar(float amount)

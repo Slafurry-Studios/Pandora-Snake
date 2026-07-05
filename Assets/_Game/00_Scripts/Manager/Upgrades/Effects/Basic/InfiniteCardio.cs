@@ -9,7 +9,7 @@ namespace Game.Upgrade.Effect
     {
         public override void Apply()
         {
-            FindAnyObjectByType<PlayerMovement>().InfiniteCardio();
+            FindAnyObjectByType<PlayerStamina>().InfiniteCardio();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Game.Upgrade.Effect
     {
         public override void Apply()
         {
-            FindAnyObjectByType<PlayerHealth>().SafetyFirst();
+            FindAnyObjectByType<PlayerCollision>().SafetyFirst();
         }
     }
 }

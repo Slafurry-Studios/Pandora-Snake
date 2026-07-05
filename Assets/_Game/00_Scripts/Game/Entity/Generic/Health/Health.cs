@@ -16,7 +16,7 @@ namespace Game.Generic
 
         protected float currentHealth;
         protected bool isDead;
-
+        
         public float CurrentHealth => currentHealth;
         public float MaxHealth => maxHealth;
         public bool IsDead => isDead;
@@ -86,7 +86,6 @@ namespace Game.Generic
 
             OnDied?.Invoke();
 
-            // Debug.Log($"{gameObject.name} died.");
         }
     }
 }

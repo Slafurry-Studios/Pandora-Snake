@@ -39,15 +39,15 @@ namespace Slafurry.System.InputHub
         {
             base.OnSingletonAwake();
 
-            var map = inputActions.FindActionMap("Gameplay");
-            _jumpAction = map.FindAction("Jump");
-            _moveAction = map.FindAction("Move");
+            // var map = inputActions.FindActionMap("Gameplay");
+            // _jumpAction = map.FindAction("Jump");
+            // _moveAction = map.FindAction("Move");
 
-            _jumpAction.performed += ctx => OnJumpPressed?.Invoke();
-            _moveAction.performed += ctx => OnMoveChanged?.Invoke(ctx.ReadValue<Vector2>());
-            _moveAction.canceled += ctx => OnMoveChanged?.Invoke(Vector2.zero);
+            // _jumpAction.performed += ctx => OnJumpPressed?.Invoke();
+            // _moveAction.performed += ctx => OnMoveChanged?.Invoke(ctx.ReadValue<Vector2>());
+            // _moveAction.canceled += ctx => OnMoveChanged?.Invoke(Vector2.zero);
 
-            map.Enable();
+            // map.Enable();
         }
     }
 }

@@ -1,23 +1,20 @@
 using UnityEngine;
 using System.Collections;
 using Slafurry.System.Scene;
+using Slafurry.Core.Interface;
 
 namespace Slafurry.System.Audio
 {
-    public class MusicPlayer : MonoBehaviour
+    public class MusicPlayer : MonoBehaviour, IInitializable
     {
         [SerializeField] private MusicData musicData;
         [SerializeField] private AudioSource musicSource;
 
         [Header("Scene Music")]
         [SerializeField] private SceneTrack[] sceneTracks;
-
         private Coroutine _currentFadeCoroutine;
 
-        void OnEnable()
-        {
-            SceneLoader.Instance.OnSceneLoadCompleted += HandleSceneLoaded;
-        }
+        public int Priority => 1;
 
         void OnDisable()
         {
@@ -124,6 +121,16 @@ namespace Slafurry.System.Audio
 
             musicSource.volume = targetVolume;
             _currentFadeCoroutine = null;
+        }
+
+        public IEnumerator Initialize()
+        {
+            yield return null;
+        }
+
+        public void PostInitialize()
+        {
+            SceneLoader.Instance.OnSceneLoadCompleted += HandleSceneLoaded;
         }
     }
 }

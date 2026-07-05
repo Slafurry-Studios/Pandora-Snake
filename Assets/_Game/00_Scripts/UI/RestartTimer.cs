@@ -1,4 +1,5 @@
 using System.Collections;
+using Slafurry.System.Scene;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,10 +10,10 @@ public class RestartTimer : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private float timerReset = 3f;
-    
+
     private bool isCounting = false;
     public bool IsCounting => isCounting;
-    
+
     public static bool shouldCountdown = false;
 
     private void Awake()
@@ -40,27 +41,16 @@ public class RestartTimer : MonoBehaviour
         Time.timeScale = 1f;
         shouldCountdown = true;
 
-        if (TransitionManager.Instance != null)
-        {
-            string currentScene = SceneManager.GetActiveScene().name;
-            TransitionManager.Instance.LoadScene(currentScene);
-        }
-        else
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        SceneSystem.Load(currentScene);
     }
 
     private IEnumerator StartCountdown()
     {
-        if (TransitionManager.Instance != null)
-        {
-            yield return new WaitForSecondsRealtime(0.2f);
-        }
-        else
-        {
-            yield return new WaitForSecondsRealtime(0.1f);
-        }
+
+        yield return new WaitForSecondsRealtime(0.2f);
+
 
         isCounting = true;
         Time.timeScale = 0f;

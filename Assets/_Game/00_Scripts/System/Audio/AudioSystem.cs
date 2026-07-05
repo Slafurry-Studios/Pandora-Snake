@@ -57,8 +57,7 @@ namespace Slafurry.System.Audio
         // ======================== VOLUME LOADER ========================
         public void LoadVolume()
         {
-            // dibaca disini, di-apply nyata pas PostInitialize() lewat UpdateMusicVolume/UpdateSFXVolume
-            // biar gak dobel nulis ke PlayerPrefs
+            
         }
 
         // ======================== PUBLIC API ========================

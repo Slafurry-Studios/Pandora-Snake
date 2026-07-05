@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 9012625788964980658}
   - component: {fileID: 1852039860184836932}
   - component: {fileID: 5368762320555165210}
-  - component: {fileID: 5787681477046067542}
+  - component: {fileID: 1595099970912181009}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -329,7 +329,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3874433, y: 0.6120208}
   m_EdgeRadius: 0
---- !u!114 &5787681477046067542
+--- !u!114 &1595099970912181009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -338,157 +338,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2942693537167940922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b49d6b9b8d360c4b8994d9f550bbf4b, type: 3}
+  m_Script: {fileID: 11500000, guid: f152ab5688327eb74b0e7dee53f28c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  playerDizzyAnimator: {fileID: 5575604094500776196}
-  headSprite: {fileID: 3860691582737385186}
-  deathSprite: {fileID: -1801577710, guid: 58bfd4f236568b099a4b28f9a287def8, type: 3}
-  playerMovement: {fileID: 6509561818730051545}
-  gameOverScreen: {fileID: 0}
-  collisionDmg: 2
-  OnDeath:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
-        m_MethodName: StartDialog
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: death_1
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
-        m_MethodName: StartDialog
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: death_2
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
-        m_MethodName: StartDialog
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: death_3
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
-        m_MethodName: StartDialog
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: death_4
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
-        m_MethodName: StartDialog
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: death_5
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
-        m_MethodName: StartDialog
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: death_6
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
-        m_MethodName: StartDialog
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: death_7
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
-        m_MethodName: StartDialog
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: death_8
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
-        m_MethodName: StartDialog
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: death_9
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
-        m_MethodName: StartDialog
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: death_10
-          m_BoolArgument: 0
-        m_CallState: 2
+  PlayerTail: {fileID: 0}
+  PlayerCollision: {fileID: 0}
 --- !u!1 &4429060512440676248
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,6 +438,7 @@ GameObject:
   - component: {fileID: 1496535882481767810}
   - component: {fileID: 7657754871705226539}
   - component: {fileID: 859173902921477478}
+  - component: {fileID: 7034395431423179546}
   m_Layer: 3
   m_Name: Utils
   m_TagString: Untagged
@@ -640,6 +495,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   growPointsPerTail: 5
   currentGrowPoints: 0
+--- !u!114 &7034395431423179546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119804142735820816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e897d6695aaa00e91a093b58683356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionDmg: 1
 --- !u!1 &5575604094500776196
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +626,7 @@ GameObject:
   - component: {fileID: 6509561818730051545}
   - component: {fileID: 6660862487378927628}
   - component: {fileID: 1629668303741475805}
+  - component: {fileID: 1549894892973596171}
   m_Layer: 3
   m_Name: Actions
   m_TagString: Untagged
@@ -795,10 +664,6 @@ MonoBehaviour:
   forwardSpeed: 5
   turnSpeed: 360
   sprintMultiplier: 1.5
-  maxStamina: 100
-  staminaDrainRate: 20
-  staminaRegenRate: 15
-  staminaRegenDelay: 1
   moveAction: {fileID: -1680190386980627800, guid: 487d6f98c21f58d4c8a0d99e91627e36, type: 3}
   sprintAction: {fileID: -7471211009204490832, guid: 487d6f98c21f58d4c8a0d99e91627e36, type: 3}
   sprintChannel:
@@ -827,9 +692,10 @@ MonoBehaviour:
   maxShootDistance: 20
   targetMask:
     serializedVersion: 2
-    m_Bits: 20480
+    m_Bits: 28672
   bulletCount: 1
   angleSpacing: 10
+  shootSound: Shoot
   isExplosive: 0
   isRichochet: 0
 --- !u!114 &1629668303741475805
@@ -849,6 +715,22 @@ MonoBehaviour:
   orbitRadius: 0
   rotateIndicator: 1
   rotationOffset: -90
+--- !u!114 &1549894892973596171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6303137427063149201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f15b5e3d23c7c41b9794fed54996302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStamina: 100
+  staminaDrainRate: 20
+  staminaRegenRate: 15
+  staminaRegenDelay: 1
 --- !u!1 &7363620672987081836
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,8 +740,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4691718733683197068}
-  - component: {fileID: 4843424378424111041}
-  - component: {fileID: 6816408333433523753}
+  - component: {fileID: 4872045987772170429}
+  - component: {fileID: 3557885629480616294}
   m_Layer: 3
   m_Name: Stats
   m_TagString: Untagged
@@ -882,7 +764,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3010827601464262802}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4843424378424111041
+--- !u!114 &4872045987772170429
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -891,11 +773,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7363620672987081836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a74fe8af4c2e2c4186e81b0d799aceb, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b49d6b9b8d360c4b8994d9f550bbf4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbsCollected: 0
---- !u!114 &6816408333433523753
+  maxHealth: 5
+  tutorialManager: {fileID: 0}
+--- !u!114 &3557885629480616294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -904,17 +787,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7363620672987081836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b14b26841ec4d9a478f9a5cae455dd5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d20ad9db00032cf5846f7a649a7c6f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyPrefab: {fileID: 2488826902731729857, guid: deeca6ea89224e440afe02bf3652cc38, type: 3}
-  tailPrefab: {fileID: 3017174187755660583, guid: 144379c316e13924aad82de38ff12ef1, type: 3}
-  saddlePrefab: {fileID: 2488826902731729857, guid: d834381d95cb3f38c9da07f6b91345bf, type: 3}
-  initialBodySize: 3
-  minRecordDistance: 0.02
-  segmentSpacing: 0.5
-  saddlePositionRatio: 1
-  baseSortingOrder: 100
+  playerDizzyAnimator: {fileID: 5575604094500776196}
+  headSprite: {fileID: 3860691582737385186}
+  deathSprite: {fileID: -1801577710, guid: 58bfd4f236568b099a4b28f9a287def8, type: 3}
+  OnDeath: []
 --- !u!1 &8265279299031505708
 GameObject:
   m_ObjectHideFlags: 0

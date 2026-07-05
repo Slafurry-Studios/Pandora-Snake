@@ -3,8 +3,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 using Slafurry.System.Audio;
+using Slafurry.System.Scene;
 
-public class TMPFadeArray : MonoBehaviour
+public class TextSequencer : MonoBehaviour
 {
     [Header("Identity")]
     [SerializeField] private string sequenceId;
@@ -104,7 +105,7 @@ public class TMPFadeArray : MonoBehaviour
     public void ChangeScene(string newScene)
     {
         Stop();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(newScene);
+        SceneSystem.Load(newScene);
     }
 
     private IEnumerator FadeRoutine()

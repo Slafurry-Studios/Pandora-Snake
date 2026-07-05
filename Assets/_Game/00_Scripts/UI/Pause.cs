@@ -1,4 +1,5 @@
 using System.Collections;
+using Slafurry.System.Scene;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -38,7 +39,7 @@ public class Pause : MonoBehaviour
 
         if (buttonPause != null)
             buttonPause.SetActive(false);
-            
+
         if (panelAnimObj != null)
             panelAnimObj.SetActive(false);
 
@@ -87,7 +88,7 @@ public class Pause : MonoBehaviour
 
         if (pauseMenuUI != null)
             pauseMenuUI.SetActive(true);
-            
+
         if (panelAnimObj != null)
             panelAnimObj.SetActive(true);
 
@@ -138,7 +139,7 @@ public class Pause : MonoBehaviour
             panelAnim.Play("Close");
             yield return new WaitForSecondsRealtime(panelAnimDuration);
         }
-        
+
         if (panelAnimObj != null)
             panelAnimObj.SetActive(false);
 
@@ -157,7 +158,7 @@ public class Pause : MonoBehaviour
 
         if (buttonPause != null)
             buttonPause.SetActive(false);
-            
+
         if (panelUI != null)
             panelUI.SetActive(false);
     }
@@ -170,7 +171,7 @@ public class Pause : MonoBehaviour
 
         if (buttonPause != null)
             buttonPause.SetActive(true);
-            
+
         if (panelUI != null)
             panelUI.SetActive(true);
     }
@@ -185,10 +186,7 @@ public class Pause : MonoBehaviour
             return;
         }
 
-        if (TransitionManager.Instance != null)
-            TransitionManager.Instance.LoadScene(mainMenuSceneName);
-        else
-            SceneManager.LoadScene(mainMenuSceneName);
+        SceneSystem.Load(mainMenuSceneName);
     }
 
     public void RestartGame()
@@ -202,14 +200,7 @@ public class Pause : MonoBehaviour
             Debug.LogWarning("RestartTimer Instance not found!");
             Time.timeScale = 1f;
 
-            if (TransitionManager.Instance != null)
-            {
-                TransitionManager.Instance.LoadScene(gameSceneName);
-            }
-            else
-            {
-                SceneManager.LoadScene(gameSceneName);
-            }
+            SceneSystem.Load(gameSceneName);
         }
     }
 }

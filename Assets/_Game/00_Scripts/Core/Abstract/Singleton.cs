@@ -24,6 +24,10 @@ namespace Slafurry.Core.Abstract
 
             Instance = this as T;
             OnSingletonAwake();
+        }
+
+        private void Start()
+        {
             LoadingSystem.Instance.Register(this);
         }
 
