@@ -25,11 +25,13 @@ public class Audio : MonoBehaviour
     public void UpdateMusicVolume(float volume)
     {
         audioMixer.SetFloat("MusicVolume", volume);
+        SaveVolume();
     }
 
     public void UpdateSoundVolume(float volume)
     {
         audioMixer.SetFloat("SFXVolume", volume);
+        SaveVolume();
     }
 
     public void SaveVolume()

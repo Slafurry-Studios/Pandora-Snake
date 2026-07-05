@@ -388,5 +388,10 @@ namespace Game.Player
                 childSr.sortingOrder = order;
             }
         }
+    
+
+    
     }
+
+    
 }

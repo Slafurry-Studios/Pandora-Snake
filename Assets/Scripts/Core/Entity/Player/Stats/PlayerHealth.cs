@@ -2,22 +2,25 @@ using System;
 using Game.Core.Effects;
 using Game.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Player
 {
     public class PlayerHealth : Health
     {
         [Header("Death Settings")]
-        [SerializeField] private Animator playerDizzyAnimator;
+        [SerializeField] private GameObject playerDizzyAnimator;
+        [SerializeField] private SpriteRenderer headSprite;
+        [SerializeField] private Sprite deathSprite;
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private GameObject gameOverScreen;
-
         [SerializeField] private float collisionDmg = 1f;
+        [SerializeField] private UnityEvent[] OnDeath;
         public IVisualEffect[] visualEffects;
 
         private RigidbodyConstraints2D originalConstraints;
         private bool vipSprint;
-
+        public TutorialManager tutorialManager;
         protected override void Awake()
         {
             base.Awake();
@@ -38,11 +41,12 @@ namespace Game.Player
         {
             currentHealth = 0f;
             base.Die();
+            headSprite.sprite = deathSprite;
+            PlayerManager.Instance.HideHUD();
 
             if (playerDizzyAnimator != null)
             {
                 playerDizzyAnimator.gameObject.SetActive(true);
-                playerDizzyAnimator.SetTrigger("Collide");
             }
 
             if (playerMovement != null)
@@ -57,13 +61,10 @@ namespace Game.Player
                     rb.angularVelocity = 0f;
                     rb.constraints = RigidbodyConstraints2D.FreezeAll;
                 }
-
-                if (playerDizzyAnimator != null)
-                {
-                    playerDizzyAnimator.speed = 0f;
-                }
             }
-            
+
+            int randomIndex = UnityEngine.Random.Range(0, OnDeath.Length);
+            OnDeath[randomIndex]?.Invoke();
         }
 
         public void IncreaseMaxHealth(float amount)
@@ -88,7 +89,7 @@ namespace Game.Player
 
             if (obj.CompareTag("Body"))
             {
-                Die();
+                TakeDamage(99999999999f);
             }
 
             if (obj.CompareTag("Building"))
@@ -140,6 +141,9 @@ namespace Game.Player
             {
                 effect.PlayEffect();
             }
+
+            tutorialManager.StartTutorial("health_tutorial");
+
         }
 
         public void SafetyFirst()

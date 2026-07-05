@@ -15,6 +15,13 @@ namespace Game.AI.Boss
         [Tooltip("Speed multiplier relative to the player's current speed. For example, 1.2 moves 20% faster than the player. Default: 1.2x.")]
         public float movementSpeedMultiplier = 1.2f;
 
+        [Header("Rotation")]
+        [Tooltip("Degrees per second the boss rotates to face its movement direction. Default: 180.")]
+        public float rotationSpeed = 180f;
+
+        [Tooltip("Angle offset (degrees) to correct for the sprite's default facing direction. Default: 90 (sprite faces down at rotation 0).")]
+        public float spriteFacingOffset = 90f;
+
         public override bool CheckConditions(EntityBrain brain)
         {
             if (brain.Target == null) return false;
@@ -51,15 +58,27 @@ namespace Game.AI.Boss
             if (distance > maintainDistance + 0.5f)
             {
                 brain.Movement.SetMovement(directionToTarget, chaseSpeed);
+                RotateTowards(directionToTarget);
             }
             else if (distance < maintainDistance - 0.5f)
             {
                 brain.Movement.SetMovement(-directionToTarget, chaseSpeed);
+                RotateTowards(-directionToTarget);
             }
             else
             {
                 brain.Movement.SetMovement(Vector2.zero, 0f);
+                RotateTowards(directionToTarget);
             }
+        }
+
+        private void RotateTowards(Vector2 direction)
+        {
+            if (direction.sqrMagnitude < 0.0001f) return;
+
+            float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + spriteFacingOffset;
+            Quaternion targetRotation = Quaternion.Euler(0f, 0f, targetAngle);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
         public override void ExitState(EntityBrain brain)

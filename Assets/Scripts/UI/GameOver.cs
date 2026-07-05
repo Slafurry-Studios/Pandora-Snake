@@ -65,6 +65,7 @@ public class GameOver : MonoBehaviour
 
     private IEnumerator GameOverSequence()
     {
+        PlayerManager.Instance.Pause();
         yield return new WaitForSeconds(freezeDuration);
 
         if (threatPoint != null && playerThreath != null)

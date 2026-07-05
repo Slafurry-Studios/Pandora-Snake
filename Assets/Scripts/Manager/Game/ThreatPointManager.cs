@@ -21,7 +21,7 @@ namespace Game.Manager
 
         public void IncreasePoints(int amount)
         {
-            Debug.Log($"[ThreatPointManager] IncreasePoints called with {amount}");
+            // Debug.Log($"[ThreatPointManager] IncreasePoints called with {amount}");
             threatPoints += amount;
 
             int newThreshold = GetCurrentThreshold();

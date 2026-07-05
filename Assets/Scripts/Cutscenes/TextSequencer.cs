@@ -5,6 +5,9 @@ using TMPro;
 
 public class TMPFadeArray : MonoBehaviour
 {
+    [Header("Identity")]
+    [SerializeField] private string sequenceId;
+
     [Header("Reference")]
     [SerializeField] private TMP_Text textComponent;
 
@@ -31,6 +34,7 @@ public class TMPFadeArray : MonoBehaviour
     [Header("Options")]
     [SerializeField] private bool loop = true;
     [SerializeField] private bool playOnStart = true;
+    [SerializeField] private bool allowSkip = true;
 
     [Header("Events")]
     public UnityEvent onTextEnd;
@@ -40,12 +44,46 @@ public class TMPFadeArray : MonoBehaviour
 
     private void Start()
     {
-        if (playOnStart)
-            Play();
+        if (!playOnStart) return;
+
+        if (HasBeenSeen())
+        {
+            SetAlpha(0f);
+            onSequenceEnd?.Invoke();
+            return;
+        }
+
+        Play();
+    }
+
+    private void Update()
+    {
+        if (!allowSkip) return;
+        if (_routine == null) return;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SkipCutscene();
+        }
+    }
+
+    public void SkipCutscene()
+    {
+        Stop();
+        SetAlpha(0f);
+        MarkAsSeen();
+        onSequenceEnd?.Invoke();
     }
 
     public void Play()
     {
+        if (HasBeenSeen())
+        {
+            SetAlpha(0f);
+            onSequenceEnd?.Invoke();
+            return;
+        }
+
         if (_routine != null)
             StopCoroutine(_routine);
 
@@ -108,6 +146,8 @@ public class TMPFadeArray : MonoBehaviour
 
         } while (loop || index != 0);
 
+        MarkAsSeen();
+
         onSequenceEnd?.Invoke();
         _routine = null;
     }
@@ -163,5 +203,22 @@ public class TMPFadeArray : MonoBehaviour
         Color c = textComponent.color;
         c.a = alpha;
         textComponent.color = c;
+    }
+
+    private bool HasBeenSeen()
+    {
+        if (string.IsNullOrEmpty(sequenceId))
+            return false;
+
+        return PlayerPrefs.GetInt("tmpfade_" + sequenceId, 0) == 1;
+    }
+
+    private void MarkAsSeen()
+    {
+        if (string.IsNullOrEmpty(sequenceId))
+            return;
+
+        PlayerPrefs.SetInt("tmpfade_" + sequenceId, 1);
+        PlayerPrefs.Save();
     }
 }

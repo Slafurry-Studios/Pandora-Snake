@@ -27,8 +27,8 @@ namespace Game.Player
 
         private PlayerAim playerAim;
         private float nextFireTime;
-        private bool isExplosive = false;
-        private bool isRichochet = false;
+        public bool isExplosive = false;
+        public bool isRichochet = false;
 
         private void Awake()
         {
@@ -49,13 +49,15 @@ namespace Game.Player
 
         private void Shoot()
         {
+            SoundManager.Instance.PlaySound2D("Shotgun_Punchy");
+
             Vector3 currentAimDirection = playerAim.CurrentAimDirection;
             if (currentAimDirection == Vector3.zero)
                 return;
 
             foreach (float angle in GetShotAngles())
             {
-                Vector3 dir = Quaternion.Euler(0, angle, 0) * currentAimDirection;
+                Vector3 dir = Quaternion.Euler(0, 0, angle) * currentAimDirection;
                 SpawnBullet(dir);
             }
         }
@@ -86,7 +88,6 @@ namespace Game.Player
                 bulletNormalRadius,
                 isExplosive,
                 isRichochet);
-            SoundManager.Instance.PlaySound2D("Shotgun_Punchy");
         }
 
         public void BiggerDakka()
@@ -123,6 +124,7 @@ namespace Game.Player
         public void ExplosiveAmmo()
         {
             isExplosive = true;
+            bulletDamage *= 5;
         }
 
         public void RichochetBullet()

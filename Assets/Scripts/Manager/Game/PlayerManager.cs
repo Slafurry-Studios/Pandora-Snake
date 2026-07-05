@@ -15,6 +15,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject ThreatHUD;
     public GameObject PauseHUD;
     public GameObject DonationHUD;
+    public GameObject PlayerHUD;
+    public GameObject UpgradeHUD;
 
     private void Awake()
     {
@@ -35,5 +37,11 @@ public class PlayerManager : MonoBehaviour
         playerPrefab.GetComponentInChildren<PlayerShoot>().enabled = true;
         playerPrefab.GetComponentInChildren<PlayerAim>().enabled = true;
 
+    }
+
+    public void HideHUD()
+    {
+        // PlayerHUD.SetActive(false);
+        UpgradeHUD.SetActive(false);
     }
 }

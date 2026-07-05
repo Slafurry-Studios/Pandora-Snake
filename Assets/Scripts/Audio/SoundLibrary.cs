@@ -1,12 +1,13 @@
 using UnityEngine;
 
 [System.Serializable]
-public struct SoundEffect
+public class SoundEffect
 {
     public string groupID;
     public AudioClip[] clips;
-    [Range(0f, 10f)]
-    public float volume;
+    [Range(0f, 1f)]
+    public float volume = 1f;
+    public int maxSimultaneous = 3;
 }
 
 public class SoundLibrary : MonoBehaviour

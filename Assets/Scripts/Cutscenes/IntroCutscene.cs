@@ -2,6 +2,7 @@ using System.Collections;
 using Game.Dialog;
 using Game.UI.HUD;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class IntroCutscene : MonoBehaviour
 {
@@ -12,14 +13,26 @@ public class IntroCutscene : MonoBehaviour
     [SerializeField] private ObjectiveScriptableObject firstObjective;
     [SerializeField] private ObjectiveScriptableObject[] mainObjectives;
 
+    private const string IntroCompletedKey = "intro_cutscene_completed";
+
     private DialogHUD dialogHUD;
     private DialogManager dialogManager;
-    public int CurrentSequence = 3;
+    public TutorialManager tutorialManager;
+    public int CurrentSequence = 0;
+
+    private bool introFinished = false;
 
     private IEnumerator Start()
     {
-        Time.timeScale = 0f;
         yield return new WaitUntil(() => PlayerManager.Instance != null);
+
+        if (HasCompletedIntro())
+        {
+            StartGame();
+            yield break;
+        }
+
+        Time.timeScale = 0f;
 
         yield return new WaitUntil(() => FindAnyObjectByType<DialogHUD>() != null);
         dialogHUD = FindAnyObjectByType<DialogHUD>();
@@ -31,9 +44,19 @@ public class IntroCutscene : MonoBehaviour
         NextCutscene();
     }
 
+    void Update()
+    {
+        if (introFinished) return;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CurrentSequence = 9999;
+            StartGame();
+        }
+    }
+
     public void NextCutscene()
     {
-        // Debug.Log($"CurrentSequence: {CurrentSequence}");
         if (CurrentSequence == 0)
         {
             CurrentSequence++;
@@ -66,12 +89,13 @@ public class IntroCutscene : MonoBehaviour
         else if (CurrentSequence == 5)
         {
             CurrentSequence++;
+            PlayerManager.Instance.StatHUD.SetActive(true);
+            tutorialManager.StartTutorial("controls_tutorial");
         }
         else if (CurrentSequence == 6)
         {
             CurrentSequence++;
             dialogManager.StartDialog(fourthDialogBucket);
-
         }
         else if (CurrentSequence == 7)
         {
@@ -79,14 +103,32 @@ public class IntroCutscene : MonoBehaviour
         }
         else if (CurrentSequence == 8)
         {
-            foreach (ObjectiveScriptableObject objective in mainObjectives)
-            {
-                ObjectiveManager.Instance.AddObjective(objective.Objective);
-            }
-            PlayerManager.Instance.StatHUD.SetActive(true);
-            PlayerManager.Instance.PauseHUD.SetActive(true);
-            PlayerManager.Instance.ThreatHUD.SetActive(true);
+            StartGame();
         }
+    }
+
+    private void StartGame()
+    {
+        introFinished = true;
+
+        PlayerManager.Instance.ObjectiveHUD.SetActive(true);
+        PlayerManager.Instance.ObjectiveHUD.GetComponentInChildren<UIBlink>().Stop();
+        PlayerManager.Instance.ChatHUD.SetActive(true);
+        PlayerManager.Instance.DonationHUD.SetActive(true);
+        PlayerManager.Instance.StatHUD.SetActive(true);
+        PlayerManager.Instance.PauseHUD.SetActive(true);
+        PlayerManager.Instance.ThreatHUD.SetActive(true);
+        Time.timeScale = 1f;
+        PlayerManager.Instance.Resume();
+
+        foreach (ObjectiveScriptableObject objective in mainObjectives)
+        {
+            ObjectiveManager.Instance.AddObjective(objective.Objective);
+        }
+
+        tutorialManager.StartTutorial("streaming_tutorial");
+
+        MarkIntroCompleted();
     }
 
     private IEnumerator ChatIntroSequence()
@@ -122,5 +164,11 @@ public class IntroCutscene : MonoBehaviour
         NextCutscene();
     }
 
+    private bool HasCompletedIntro() => PlayerPrefs.GetInt(IntroCompletedKey, 0) == 1;
 
+    private void MarkIntroCompleted()
+    {
+        PlayerPrefs.SetInt(IntroCompletedKey, 1);
+        PlayerPrefs.Save();
+    }
 }

@@ -259,6 +259,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70bafd4abfc5d994a9ba4f37ec16470f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitVFXPrefab: {fileID: 0}
+  explosionPrefab: {fileID: 0}
+  explosionRadius: 3
+  explosionForce: 10
+  maxBounces: 3
 --- !u!4 &514197996
 Transform:
   m_ObjectHideFlags: 0
@@ -467,6 +472,8 @@ MonoBehaviour:
   maxHealth: 10
   ThreatPointValue: 0
   SubsPointValue: 0
+  destroyObjectives: {fileID: 0}
+  destroyChannel: []
 --- !u!114 &984862374 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 599493099235066254, guid: fa835c208e272b141b3f942d73b321ab, type: 3}
@@ -628,6 +635,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1659285357859450783, guid: fa835c208e272b141b3f942d73b321ab, type: 3}
+      propertyPath: obstacleLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2210022688956511991, guid: fa835c208e272b141b3f942d73b321ab, type: 3}
       propertyPath: Target
       value: 

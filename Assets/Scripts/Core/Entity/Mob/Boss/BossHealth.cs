@@ -1,23 +1,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Generic;
+using Game.Core.Effects;
+using System.Collections;
 
 namespace Game.AI.Boss
 {
-    public class BossHealth : Health
+    public class BossHealth : EntityHealth
     {
         [Header("Shield Visual Feedback")]
-        [Tooltip("Optional visual effect prefab spawned whenever damage is blocked by an active Support Building shield.")]
-        public GameObject shieldHitEffectPrefab;
+        [Tooltip("Animator yang akan memainkan animasi saat damage diblokir oleh shield Support Building.")]
+        [SerializeField] private Animator shieldAnimator;
+
+        [Tooltip("Nama parameter Trigger di Animator untuk animasi shield hit.")]
+        [SerializeField] private string shieldHitTrigger = "ShieldHit";
 
         private List<BossSupportBuilding> activeSupportBuildings = new List<BossSupportBuilding>();
 
         public bool IsShielded => HasActiveDefense();
         public IReadOnlyList<BossSupportBuilding> ActiveSupportBuildings => activeSupportBuildings;
 
+        [SerializeField] private BossHealthHUD bossHealthHUD;
+
         protected override void Awake()
         {
             base.Awake();
+        }
+
+        protected void OnEnable()
+        {
+            FindAnyObjectByType<BossHealthHUD>().FollowEvent(maxHealth);
         }
 
         public void RegisterSupportBuilding(BossSupportBuilding building)
@@ -69,6 +81,11 @@ namespace Game.AI.Boss
             }
 
             base.TakeDamage(amount);
+
+            foreach (IVisualEffect visualEffect in visualEffects)
+            {
+                visualEffect.PlayEffect();
+            }
         }
 
         /// <summary>
@@ -85,17 +102,27 @@ namespace Game.AI.Boss
 
         private void PlayShieldHitEffect()
         {
-            if (shieldHitEffectPrefab != null)
+            if (shieldAnimator != null && !string.IsNullOrEmpty(shieldHitTrigger))
             {
-                GameObject effect = Instantiate(shieldHitEffectPrefab, transform.position, Quaternion.identity);
-                Destroy(effect, 2f);
+                shieldAnimator.SetTrigger(shieldHitTrigger);
+            }
+            else
+            {
+                Debug.LogWarning("[BossHealth] shieldAnimator belum di-assign atau trigger name kosong.");
             }
         }
 
         protected override void Die()
         {
             base.Die();
+            StartCoroutine(DieCoroutine());
             Debug.Log($"[BossHealth] Heli Boss has been defeated!");
+        }
+
+        private IEnumerator DieCoroutine()
+        {
+            yield return new WaitForSeconds(2f);
+            bossHealthHUD.gameObject.SetActive(false);
         }
     }
 }

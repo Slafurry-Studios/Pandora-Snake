@@ -97,12 +97,14 @@ namespace Game.Gameplay
                         continue;
                     }
 
+                    // Kasih damage dulu kalau targetnya valid
                     if (health != null && !health.IsDead)
                     {
                         health.TakeDamage(b.damage);
-                        ReturnBullet(data, i);
                     }
-                    else if (b.isRichochet && data.bouncesLeft > 0)
+
+                    // Baru cek apakah bullet ini bisa ricochet, terlepas dari damage tadi
+                    if (b.isRichochet && data.bouncesLeft > 0)
                     {
                         Ricochet(data, hitCollider);
                     }
@@ -110,6 +112,7 @@ namespace Game.Gameplay
                     {
                         ReturnBullet(data, i);
                     }
+
                     continue;
                 }
 
@@ -141,6 +144,10 @@ namespace Game.Gameplay
 
             b.transform.position += (Vector3)(normal * 0.05f);
             b.startPosition = b.transform.position;
+
+            // Rotate bullet supaya menghadap arah barunya
+            float angle = Mathf.Atan2(reflected.y, reflected.x) * Mathf.Rad2Deg;
+            b.transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
         private void SpawnHitObject(Bullet b, Collider2D hitCollider)
