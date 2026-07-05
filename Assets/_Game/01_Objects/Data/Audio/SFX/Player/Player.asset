@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b5b3454719b816593df0cb8c16f82a, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  categoryName: Player
+  effects:
+  - groupID: Shoot
+    clips:
+    - {fileID: 8300000, guid: 0f890c3d4b93425589bc27f208ff3f85, type: 3}
+    volume: 3.11
+    maxSimultaneous: 3
+  - groupID: Take_Damage
+    clips:
+    - {fileID: 8300000, guid: a88a302dd907b33c9a2759034dc94d48, type: 3}
+    volume: 3.78
+    maxSimultaneous: 3
+  - groupID: Collection_Point
+    clips:
+    - {fileID: 8300000, guid: ede59832d10f933b3af2939c815933e6, type: 3}
+    volume: 3.57
+    maxSimultaneous: 3
+  - groupID: Eating
+    clips:
+    - {fileID: 8300000, guid: 67be32f8fba8ebbfb94bd2241ec45e58, type: 3}
+    volume: 3.57
+    maxSimultaneous: 3
+  - groupID: Concussion
+    clips:
+    - {fileID: 8300000, guid: ea945270f48e0eb77a292ab7e535bc98, type: 3}
+    volume: 3.57
+    maxSimultaneous: 3
+  poolSize: 8

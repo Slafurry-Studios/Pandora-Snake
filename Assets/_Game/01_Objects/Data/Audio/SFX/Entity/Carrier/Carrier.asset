@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b5b3454719b816593df0cb8c16f82a, type: 3}
+  m_Name: Carrier
+  m_EditorClassIdentifier: 
+  categoryName: Carrier
+  effects:
+  - groupID: Shoot
+    clips:
+    - {fileID: 8300000, guid: 3e80b1a4de04d33b7967363b8b76dd7a, type: 3}
+    volume: 2.37
+    maxSimultaneous: 3
+  - groupID: Explode
+    clips:
+    - {fileID: 8300000, guid: 0f31e84aeb53058d9b5be07b5615c846, type: 3}
+    volume: 2.37
+    maxSimultaneous: 3
+  poolSize: 8

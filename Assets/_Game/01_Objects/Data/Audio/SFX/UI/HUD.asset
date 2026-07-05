@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b5b3454719b816593df0cb8c16f82a, type: 3}
+  m_Name: HUD
+  m_EditorClassIdentifier: 
+  categoryName: HUD
+  effects:
+  - groupID: Chat
+    clips:
+    - {fileID: 8300000, guid: 285720b683a417a1aa3e765425e9f5b5, type: 3}
+    volume: 2.47
+    maxSimultaneous: 1
+  - groupID: Objective_Complete
+    clips:
+    - {fileID: 8300000, guid: 79fd940b5e1fde9ec943a8b21bf4b8d2, type: 3}
+    volume: 2.47
+    maxSimultaneous: 1
+  - groupID: Subs
+    clips:
+    - {fileID: 8300000, guid: 07f7d051c14e9ea16b00d453af0c06a9, type: 3}
+    volume: 2.47
+    maxSimultaneous: 1
+  - groupID: Superchat
+    clips:
+    - {fileID: 8300000, guid: 93ad8e4ecbb0471b497e36ce2bd88907, type: 3}
+    volume: 2.47
+    maxSimultaneous: 1
+  - groupID: Upgrade
+    clips:
+    - {fileID: 8300000, guid: 9ed6f03f1f04699cfa0ce20016d8caec, type: 3}
+    volume: 2.47
+    maxSimultaneous: 1
+  - groupID: Warning
+    clips:
+    - {fileID: 8300000, guid: c333c5b425d1bf35ebb2668ca9c3478e, type: 3}
+    volume: 2.47
+    maxSimultaneous: 1
+  poolSize: 8
