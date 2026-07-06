@@ -2,47 +2,61 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Game.Gameplay;
 using Slafurry.System.Audio;
+using Game.Managerd;
 
 namespace Game.Player
 {
     [RequireComponent(typeof(PlayerAim))]
     public class PlayerShoot : MonoBehaviour
     {
-        [Header("Shooting Settings")]
-        [SerializeField] private Bullet bulletPrefab;
-        [SerializeField] private float bulletNormalRadius = 0.2f;
-        [SerializeField] private Bullet bulletBiggerDakkaPrefab;
-        [SerializeField] private float bulletBiggerDakkaRadius = 0.5f;
-        [SerializeField] private Bullet bulletAverageBulletEnjoyerPrefab;
-        [SerializeField] private float bulletAverageBulletEnjoyerPrefabRadius = 1f;
-        [SerializeField] private float fireRate = 0.5f;
-        [SerializeField] private float bulletDamage = 10f;
-        [SerializeField] private float bulletSpeed = 20f;
-        [SerializeField] private float maxShootDistance = 10f;
-        [SerializeField] private LayerMask targetMask;
+        private Bullet bulletPrefab;
+        private float bulletBaseRadius = 0.2f;
+        private float bulletScale = 1f;
 
-        [Header("Multi-Shot Settings")]
-        [Tooltip("Jarak antar sudul tembakan (kelipatan 5).")]
-        [SerializeField] private int bulletCount = 1;
-        [SerializeField] private float angleSpacing = 5f;
+        private float fireRate = 0.5f;
+        private float bulletDamage = 10f;
+        private float bulletSpeed = 20f;
+        private float maxShootDistance = 10f;
+        private LayerMask targetMask;
+        private int bulletCount = 1;
+        private float angleSpacing = 5f;
 
-        
-        [Header("Audio")]
-        [SerializeField] private string shootSound;
+        private string shootSound;
+
 
         private PlayerAim playerAim;
         private float nextFireTime;
-        public bool isExplosive = false;
-        public bool isRichochet = false;
+        private bool isExplosive = false;
+        private bool isRichochet = false;
 
         public void Initialize()
         {
+            Player player = GetComponentInParent<Player>();
+            PlayerCombatData playerCombatData = player.PlayerData.CombatData;
+
+            bulletPrefab = playerCombatData.BulletPrefab;
+            bulletBaseRadius = playerCombatData.BulletRadius;
+            bulletScale = playerCombatData.BulletScale;
+            
+            bulletDamage = playerCombatData.BulletDamage;
+            bulletSpeed = playerCombatData.BulletSpeed;
+
+            fireRate = playerCombatData.FireRate;
+            maxShootDistance = playerCombatData.ShootDistance;
+
+            targetMask = playerCombatData.TargetMask;
+
+            bulletCount = playerCombatData.BulletCount;
+            angleSpacing = playerCombatData.AngleSpacing;
+
+            shootSound = player.PlayerData.ShootSFX;
+
             playerAim = GetComponent<PlayerAim>();
         }
 
         private void Update()
         {
-            if (bulletPrefab == null || BulletManager.Instance == null)
+            if (bulletPrefab == null || GameManager.Bullet == null)
                 return;
 
             if (Mouse.current.leftButton.isPressed && Time.time >= nextFireTime)
@@ -66,10 +80,10 @@ namespace Game.Player
                 SpawnBullet(dir);
             }
         }
+
         private float[] GetShotAngles()
         {
             float[] angles = new float[bulletCount];
-
             float startAngle = -(bulletCount - 1) * angleSpacing * 0.5f;
 
             for (int i = 0; i < bulletCount; i++)
@@ -82,49 +96,30 @@ namespace Game.Player
 
         private void SpawnBullet(Vector3 dir)
         {
-            BulletManager.Instance.FireBullet(
-                bulletPrefab,
-                playerAim.AimIndicatorPosition,
-                dir,
-                bulletDamage,
-                bulletSpeed,
-                maxShootDistance,
-                targetMask,
-                bulletNormalRadius,
-                isExplosive,
-                isRichochet);
+            BulletFireData bulletFireData = new()
+            {
+                prefab = bulletPrefab,
+                startPos = playerAim.AimIndicatorPosition,
+                direction = dir,
+                damage = bulletDamage,
+                speed = bulletSpeed,
+                maxDistance = maxShootDistance,
+                targetMask = targetMask,
+                hitRadius = bulletBaseRadius * bulletScale,
+                isExplosive = isExplosive,
+                isRichochet = isRichochet,
+                scale = bulletScale
+            };
+            GameManager.Bullet.FireBullet(bulletFireData);
         }
 
-        public void BiggerDakka()
-        {
-            bulletPrefab = bulletBiggerDakkaPrefab;
-            bulletNormalRadius = bulletBiggerDakkaRadius;
-        }
+        public void BiggerDakka() => bulletScale = 2.5f;
+        public void AverageBulletEnjoyer() => bulletScale = 5f;
 
-        public void MoreDakka()
-        {
-            bulletCount += 1;
-        }
-
-        public void DakkaEverywhere()
-        {
-            bulletCount += 2;
-        }
-
-        public void MoreEspresso()
-        {
-            fireRate *= 0.85f;
-        }
-
-        public void FrameRateKiller()
-        {
-            fireRate *= 0.7f;
-        }
-        public void AverageBulletEnjoyer()
-        {
-            bulletPrefab = bulletAverageBulletEnjoyerPrefab;
-            bulletNormalRadius = bulletAverageBulletEnjoyerPrefabRadius;
-        }
+        public void MoreDakka() => bulletCount += 1;
+        public void DakkaEverywhere() => bulletCount += 2;
+        public void MoreEspresso() => fireRate *= 0.85f;
+        public void FrameRateKiller() => fireRate *= 0.7f;
 
         public void ExplosiveAmmo()
         {
@@ -132,10 +127,7 @@ namespace Game.Player
             bulletDamage *= 5;
         }
 
-        public void RichochetBullet()
-        {
-            isRichochet = true;
-        }
+        public void RichochetBullet() => isRichochet = true;
 
         public void ApocalypseStream()
         {

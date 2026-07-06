@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using Game.Manager;
+using Game.Managerd;
 
 namespace Game.UI.HUD
 {

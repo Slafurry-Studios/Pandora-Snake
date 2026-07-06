@@ -2,7 +2,7 @@ using UnityEngine;
 using Game.Utils;
 using System;
 
-namespace Game.Manager
+namespace Game.Managerd
 {
 
     public class ThreatPointManager : MonoBehaviour

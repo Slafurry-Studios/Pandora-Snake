@@ -1,26 +1,28 @@
 using Game.Core.Effects;
 using Game.Generic;
 using Slafurry.System.Audio;
-using UnityEngine;
-using UnityEngine.Events;
 
 namespace Game.Player
 {
     public class PlayerHealth : Health
     {
-        public IVisualEffect[] visualEffects;
-
-        private bool vipSprint;
         public TutorialManager tutorialManager;
+
+        private IVisualEffect[] visualEffects;
+
         private PlayerMovement playerMovement;
         private PlayerDeath playerDeath;
+
+        private bool vipSprint;
+
         public void Initialize()
         {
-            visualEffects = GetComponentsInChildren<IVisualEffect>();
-
             Player player = GetComponentInParent<Player>();
+            visualEffects = player.GetComponentsInChildren<IVisualEffect>();
             playerMovement = player.PlayerMovement;
             playerDeath = player.PlayerDeath;
+
+            SetMaxHealth(player.PlayerData.PlayerHealth);
         }
 
         protected override void Die()

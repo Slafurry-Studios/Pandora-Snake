@@ -1,4 +1,4 @@
-using Game.Manager;
+using Game.Managerd;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Channels/OrdinaryKidChannel")]

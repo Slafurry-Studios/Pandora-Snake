@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using Game.Manager;
+using Game.Managerd;
 
 namespace Game.UI.HUD
 {

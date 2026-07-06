@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Game.Gameplay;
+using Game.Managerd;
 
 namespace Game.Gameplay
 {
@@ -42,7 +43,7 @@ namespace Game.Gameplay
 
         private void SpawnBulletRing()
         {
-            if (finisherBulletPrefab == null || BulletManager.Instance == null || player == null)
+            if (finisherBulletPrefab == null || GameManager.Bullet == null || player == null)
                 return;
 
             Vector2 playerPos = player.position;
@@ -58,18 +59,20 @@ namespace Game.Gameplay
                 Vector2 spawnPos = playerPos + offset;
                 Vector2 dirToPlayer = (playerPos - spawnPos).normalized;
 
-                BulletManager.Instance.FireBullet(
-                    finisherBulletPrefab,
-                    spawnPos,
-                    dirToPlayer,
-                    bulletDamage,
-                    bulletSpeed,
-                    maxShootDistance,
-                    playerMask,
-                    bulletHitRadius,
-                    false,  // isExplosive
-                    false   // isRichochet
-                );
+
+                BulletFireData bulletFireData = new BulletFireData
+                {
+                    prefab = finisherBulletPrefab,
+                    startPos = spawnPos,
+                    direction = dirToPlayer,
+                    damage = bulletDamage,
+                    speed = bulletSpeed,
+                    targetMask = playerMask,
+                    maxDistance = maxShootDistance,
+                    hitRadius = bulletHitRadius,
+                };
+
+                GameManager.Bullet.FireBullet(bulletFireData);
             }
         }
     }

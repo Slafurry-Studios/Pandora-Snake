@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Manager;
+using Game.Managerd;
 
 namespace Game.Upgrade
 {
@@ -19,15 +19,15 @@ namespace Game.Upgrade
 
         private void Start()
         {
-            GameManager.Instance.subsManager.OnCurrentSubsStateChanged += SetNewUpgrades;
+            GameManagerOld.Instance.subsManager.OnCurrentSubsStateChanged += SetNewUpgrades;
         }
 
         private void OnDisable()
         {
-            if (GameManager.Instance != null &&
-                GameManager.Instance.subsManager != null)
+            if (GameManagerOld.Instance != null &&
+                GameManagerOld.Instance.subsManager != null)
             {
-                GameManager.Instance.subsManager.OnCurrentSubsStateChanged -= SetNewUpgrades;
+                GameManagerOld.Instance.subsManager.OnCurrentSubsStateChanged -= SetNewUpgrades;
             }
         }
 

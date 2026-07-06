@@ -1,5 +1,5 @@
 using System.Collections;
-using Game.Manager;
+using Game.Managerd;
 using Game.Player;
 using Slafurry.System.Scene;
 using TMPro;

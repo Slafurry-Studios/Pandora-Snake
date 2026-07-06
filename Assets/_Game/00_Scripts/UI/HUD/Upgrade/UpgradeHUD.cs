@@ -1,4 +1,4 @@
-using Game.Manager;
+using Game.Managerd;
 using Game.Upgrade;
 using TMPro;
 using UnityEngine;
@@ -15,10 +15,10 @@ namespace Game.UI.HUD
 
         void Start()
         {
-            GameManager.Instance.upgradeManager.OnUpgrade += Show;
-            GameManager.Instance.upgradeManager.SetCard1 += SetCard1;
-            GameManager.Instance.upgradeManager.SetCard2 += SetCard2;
-            GameManager.Instance.upgradeManager.SetCard3 += SetCard3;
+            GameManagerOld.Instance.upgradeManager.OnUpgrade += Show;
+            GameManagerOld.Instance.upgradeManager.SetCard1 += SetCard1;
+            GameManagerOld.Instance.upgradeManager.SetCard2 += SetCard2;
+            GameManagerOld.Instance.upgradeManager.SetCard3 += SetCard3;
 
         }
 

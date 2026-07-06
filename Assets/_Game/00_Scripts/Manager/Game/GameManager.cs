@@ -1,31 +1,35 @@
+using System.Collections;
+using Slafurry.Core.Abstract;
+using Slafurry.Core.Interface;
 using UnityEngine;
-using Game.Upgrade;
 
-namespace Game.Manager
+namespace Game
 {
 
-    public class GameManager : Singleton<GameManager>
+    public class GameManager : GameSystem<GameManager>
     {
-        public ThreatPointManager threatManager { get; private set; }
-        public SubscriptionPointManager subsManager { get; private set; }
-        public UpgradeManager upgradeManager { get; private set; }
+        private BulletManager bulletManager;
+        public static BulletManager Bullet => Instance.bulletManager;
 
-        protected override void Awake()
+        protected override void OnSingletonAwake()
         {
-            base.Awake();
-            threatManager = FindAnyObjectByType<ThreatPointManager>();
-            subsManager = FindAnyObjectByType<SubscriptionPointManager>();
-            upgradeManager = FindAnyObjectByType<UpgradeManager>();
+            base.OnSingletonAwake();
         }
 
-        public void AddThreat(int amount)
-        {
-            threatManager.IncreasePoints(amount);
-        }
+        public override IEnumerator Initialize() { yield return null; }
+        public override void PostInitialize() { }
 
-        public void AddSubs(int amount)
+
+        public void RegisterBulletManager(BulletManager b) => bulletManager = b;
+        public void UnregisterBulletManager(BulletManager b) { if (bulletManager == b) bulletManager = null; }
+
+
+        public void ResetSession()
         {
-            subsManager.IncreasePoints(amount);
+            foreach (var resettable in FindObjectsOfType<MonoBehaviour>())
+            {
+                if (resettable is IResettable r) r.ResetState();
+            }
         }
     }
 }

@@ -3,22 +3,18 @@ using UnityEngine.InputSystem;
 
 namespace Game.Player
 {
-    [RequireComponent(typeof(PlayerStamina))]
     public class PlayerMovement : MonoBehaviour
     {
-        [Header("Movement Settings")]
-        [SerializeField] private float forwardSpeed = 5f;
-        [SerializeField] private float turnSpeed = 360f;
-
-        [Header("Sprint Settings")]
-        [SerializeField] private float sprintMultiplier = 1.5f;
-
         [Header("Input")]
         [SerializeField] private InputActionReference moveAction;
         [SerializeField] private InputActionReference sprintAction;
 
         [Header("Objective")]
         [SerializeField] private BaseObjectiveChannel[] sprintChannel;
+
+        private float forwardSpeed;
+        private float turnSpeed = 1000f;
+        private float sprintMultiplier;
 
         private Rigidbody2D rb;
         private PlayerStamina stamina;
@@ -30,9 +26,13 @@ namespace Game.Player
         {
             Player player = GetComponentInParent<Player>();
             stamina = player.PlayerStamina;
+
             rb = player.RigidBody2D;
             rb.gravityScale = 0f;
             targetAngle = rb.rotation;
+
+            forwardSpeed = player.PlayerData.PlayerSpeed;
+            sprintMultiplier = player.PlayerData.PlayerMovementData.PlayerSpeedMultiplier;
 
             initialized = true;
         }

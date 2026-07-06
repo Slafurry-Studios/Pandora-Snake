@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4294685335324441590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 678025974337939109}
+  - component: {fileID: 8162433536785713115}
+  - component: {fileID: 7590349455777597084}
+  - component: {fileID: 2298420476561365702}
+  m_Layer: 0
+  m_Name: BulletManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &678025974337939109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4294685335324441590}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2907966027946246481}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8162433536785713115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4294685335324441590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bafd4abfc5d994a9ba4f37ec16470f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitVFXKey: 
+--- !u!114 &7590349455777597084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4294685335324441590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b051cbb9a7a05cd68bd463e0749d386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionVFXKey: 
+  explosionRadius: 3
+  explosionForce: 10
+--- !u!114 &2298420476561365702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4294685335324441590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1508c9d16c9cf0839dd385478f5991c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxBounces: 4
 --- !u!1 &4747456712980624973
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,9 +91,11 @@ GameObject:
   - component: {fileID: 3641634936374996148}
   - component: {fileID: 937571056604835971}
   - component: {fileID: 1732273435638356492}
-  - component: {fileID: 8065942031380492402}
   - component: {fileID: 3863220329364332668}
   - component: {fileID: 713522624482060045}
+  - component: {fileID: 8355418735403005122}
+  - component: {fileID: 4254148661263086257}
+  - component: {fileID: 5775434771828603249}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -38,7 +115,8 @@ Transform:
   m_LocalPosition: {x: 380.83978, y: 257.57086, z: -4.4688306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 678025974337939109}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5892815206215686878
@@ -53,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6acb2b91299f0efa85b3b007c9224b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
 --- !u!114 &3366780398479834264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,11 +235,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7dee62794f7c41d790bb7a8f4ac37f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
   chatDatabase: {fileID: 11400000, guid: a7be1be7151a36e08bf143a2f72d4600, type: 2}
   minChatInterval: 0.2
   maxChatInterval: 5
   burstInterval: 0.3
-  enableDebugKeys: 1
+  enableDebugKeys: 0
   debugChatCount: 3
   chatRoller: {fileID: 0}
 --- !u!114 &937571056604835971
@@ -175,6 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1bcd30a1b6db488ad9c438ecb658b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
 --- !u!114 &1732273435638356492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,23 +273,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e3210e3a9b37b31eea6f7f47412d724c, type: 2}
   - {fileID: 11400000, guid: f284328001b82bd3c875d6b5ef0c94d4, type: 2}
   - {fileID: 11400000, guid: c51bb3d2aeb37f252aac1a71025008ea, type: 2}
---- !u!114 &8065942031380492402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4747456712980624973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70bafd4abfc5d994a9ba4f37ec16470f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitVFXPrefab: {fileID: 5033423947735385122, guid: 36073411dd58d3d409696e1a44db0642, type: 3}
-  explosionPrefab: {fileID: 5033423947735385122, guid: 36073411dd58d3d409696e1a44db0642, type: 3}
-  explosionRadius: 3
-  explosionForce: 10
-  maxBounces: 3
+  - {fileID: 11400000, guid: 29e1732f80374a4bfb08381ba1fde499, type: 2}
+  - {fileID: 11400000, guid: 9ed4c5729fe9ddbaf8179aaf8e5f142d, type: 2}
+  - {fileID: 11400000, guid: 3e1cce798148050639dc0c5d0e00b71a, type: 2}
+  - {fileID: 11400000, guid: 0cbae64b68aba29c3bdc84095dce854d, type: 2}
+  - {fileID: 11400000, guid: f55cbab075f395dd9b08669194f17342, type: 2}
+  - {fileID: 11400000, guid: a94ebadb2a1f26f3bbafde3b47359e65, type: 2}
+  - {fileID: 11400000, guid: b2b625722740aa3d1af2df4764012fc2, type: 2}
+  - {fileID: 11400000, guid: a798c5bb724ad61828ec3e1064697f2b, type: 2}
+  - {fileID: 11400000, guid: 089934e9c6ae8bd80879b139fbb2dba8, type: 2}
+  - {fileID: 11400000, guid: a4978ebf71aa6efab9fb65d0544822fb, type: 2}
+  - {fileID: 11400000, guid: 849c98a0b6a106b66ac00da6465a9e2f, type: 2}
+  - {fileID: 11400000, guid: 9553ef9b0ecbc2e43af9ea8dd98df3e6, type: 2}
+  - {fileID: 11400000, guid: fb6186903f795fc2f937d1d27c0b810d, type: 2}
 --- !u!114 &3863220329364332668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +304,8 @@ MonoBehaviour:
   ThreatHUD: {fileID: 0}
   PauseHUD: {fileID: 0}
   DonationHUD: {fileID: 0}
+  PlayerHUD: {fileID: 0}
+  UpgradeHUD: {fileID: 0}
 --- !u!114 &713522624482060045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,9 +319,322 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawners:
+  - spawnerName: Car Spawner
+    threatState: 1
+    spawner: {fileID: 0}
+    onSpawnerActive:
+      m_PersistentCalls:
+        m_Calls: []
   - spawnerName: Police Spawner
     threatState: 1
     spawner: {fileID: 0}
+    onSpawnerActive:
+      m_PersistentCalls:
+        m_Calls: []
   - spawnerName: Army Spawner
     threatState: 2
     spawner: {fileID: 0}
+    onSpawnerActive:
+      m_PersistentCalls:
+        m_Calls: []
+  - spawnerName: Carrier Spawner
+    threatState: 3
+    spawner: {fileID: 0}
+    onSpawnerActive:
+      m_PersistentCalls:
+        m_Calls: []
+  - spawnerName: HeliSpawner
+    threatState: 4
+    spawner: {fileID: 0}
+    onSpawnerActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1732273435638356492}
+          m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
+          m_MethodName: StartDialog
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: boss_intro
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &8355418735403005122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4747456712980624973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8950fbf896f69c43923e3c2c869b53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelScene: MainMenu
+  restartScene: IntroCutscene
+  gameOverCanvas: {fileID: 0}
+  respawnPos: {fileID: 0}
+  threatPoint: {fileID: 0}
+  growthPoint: {fileID: 0}
+  SubscriberPoint: {fileID: 0}
+  playerHealth: {fileID: 0}
+  playerGrowth: {fileID: 0}
+  playerThreath: {fileID: 7101958945764350957}
+  playerSubs: {fileID: 1474413651686578673}
+  freezeDuration: 1
+--- !u!114 &4254148661263086257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4747456712980624973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c260fd0e13a3db73903f7a73a9a39aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorials:
+  - tutorialId: controls_tutorial
+    parent: {fileID: 0}
+    tutorialPages:
+    - page: {fileID: 0}
+      OnShown:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Stop
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Stop
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Play
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      OnHide:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Stop
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+    - page: {fileID: 0}
+      OnShown:
+        m_PersistentCalls:
+          m_Calls: []
+      OnHide:
+        m_PersistentCalls:
+          m_Calls: []
+    - page: {fileID: 0}
+      OnShown:
+        m_PersistentCalls:
+          m_Calls: []
+      OnHide:
+        m_PersistentCalls:
+          m_Calls: []
+  - tutorialId: health_tutorial
+    parent: {fileID: 0}
+    tutorialPages:
+    - page: {fileID: 0}
+      OnShown:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Play
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Play
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Stop
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      OnHide:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Stop
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Stop
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+    - page: {fileID: 0}
+      OnShown:
+        m_PersistentCalls:
+          m_Calls: []
+      OnHide:
+        m_PersistentCalls:
+          m_Calls: []
+    - page: {fileID: 0}
+      OnShown:
+        m_PersistentCalls:
+          m_Calls: []
+      OnHide:
+        m_PersistentCalls:
+          m_Calls: []
+    - page: {fileID: 0}
+      OnShown:
+        m_PersistentCalls:
+          m_Calls: []
+      OnHide:
+        m_PersistentCalls:
+          m_Calls: []
+  - tutorialId: streaming_tutorial
+    parent: {fileID: 0}
+    tutorialPages:
+    - page: {fileID: 0}
+      OnShown:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Play
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      OnHide:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Stop
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+    - page: {fileID: 0}
+      OnShown:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Play
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      OnHide:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: Game.UI.HUD.UIBlink, Assembly-CSharp
+            m_MethodName: Stop
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+--- !u!114 &5775434771828603249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4747456712980624973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 138fab3f5f13f0609b95922d340a8099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

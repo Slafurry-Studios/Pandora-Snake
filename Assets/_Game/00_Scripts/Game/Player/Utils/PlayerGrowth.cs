@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Game.Player
 {
-    [RequireComponent(typeof(PlayerTail))]
     public class PlayerGrowth : MonoBehaviour
     {
         [Header("Growth Settings")]
@@ -11,11 +10,12 @@ namespace Game.Player
         [SerializeField] private int currentGrowPoints = 0;
         private int accumulatedGrowPoint = 0;
 
-        private PlayerTail tailManager;
+        private SnakeTailManager playerTail;
 
         public void Initialize()
         {
-            tailManager = GetComponent<PlayerTail>();
+            Player player = GetComponentInParent<Player>();
+            playerTail = player.PlayerTail;
         }
 
         public void AddGrowPoints(int amount)
@@ -26,7 +26,7 @@ namespace Game.Player
             while (currentGrowPoints >= growPointsPerTail)
             {
                 currentGrowPoints -= growPointsPerTail;
-                tailManager.Grow(1);
+                playerTail.Grow(1);
             }
         }
         

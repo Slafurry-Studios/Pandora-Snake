@@ -1,5 +1,5 @@
 using System;
-using Game.Manager;
+using Game.Managerd;
 using Game.Upgrade;
 using TMPro;
 using UnityEngine;

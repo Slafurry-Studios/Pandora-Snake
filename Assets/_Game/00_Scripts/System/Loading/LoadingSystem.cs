@@ -11,18 +11,42 @@ namespace Slafurry.System
     /// <summary>
     /// Pure logic loading sequence. Fires events for progress/status,
     /// does not know about any UI implementation.
+    ///
+    /// IMPORTANT: the initial boot sequence (LoadSequence) only runs once.
+    /// Any object that registers AFTER that has already finished (e.g. a
+    /// Player prefab that only exists in GameScene, spawned after boot
+    /// already completed back in an earlier scene like IntroCutscene) is
+    /// caught here and processed as its own "late batch" - one frame
+    /// later, so Initialize()-before-PostInitialize() ordering is still
+    /// honored among objects that arrive together in the same scene load.
     /// </summary>
     public class LoadingSystem : GameSystem<LoadingSystem>
     {
         [SerializeField] private float perObjectTimeoutSeconds = 10f;
 
         private readonly List<IInitializable> _registered = new();
+        private readonly List<IInitializable> _pendingLate = new();
+        private bool _bootCompleted;
+        private Coroutine _lateBatchRoutine;
 
         public event Action<float> OnProgressChanged;
         public event Action<string> OnStatusChanged;
         public event Action OnLoadingComplete;
 
-        public void Register(IInitializable obj) => _registered.Add(obj);
+        public void Register(IInitializable obj)
+        {
+            _registered.Add(obj);
+
+            if (_bootCompleted)
+            {
+                // arrived after the initial boot wave already finished -
+                // queue it into a late batch instead of leaving it stuck
+                // in _registered forever with nobody left to process it.
+                _pendingLate.Add(obj);
+                if (_lateBatchRoutine == null)
+                    _lateBatchRoutine = StartCoroutine(ProcessLateBatch());
+            }
+        }
 
         void Start() => StartCoroutine(LoadSequence());
 
@@ -55,6 +79,54 @@ namespace Slafurry.System
             OnProgressChanged?.Invoke(1f);
             OnStatusChanged?.Invoke("Ready!");
             OnLoadingComplete?.Invoke();
+
+            _bootCompleted = true;
+        }
+
+        /// <summary>
+        /// Handles objects that register after the initial boot has
+        /// completed. Waits one frame first, so every object Awake()-ing
+        /// as part of the same scene load gets a chance to register
+        /// before this batch is processed together.
+        /// </summary>
+        private IEnumerator ProcessLateBatch()
+        {
+            while (true)
+            {
+                yield return null; // give objects Awake()-ing this frame a chance to register
+
+                if (_pendingLate.Count == 0)
+                    break;
+
+                var batch = _pendingLate.OrderBy(o => o.Priority).ToList();
+                _pendingLate.Clear();
+                int total = Mathf.Max(batch.Count, 1);
+
+                for (int i = 0; i < batch.Count; i++)
+                {
+                    var obj = batch[i];
+                    OnStatusChanged?.Invoke($"Initializing {obj.GetType().Name}...");
+
+                    yield return StartCoroutine(SafeInit(obj));
+
+                    OnProgressChanged?.Invoke((float)(i + 1) / total * 0.8f);
+                    yield return null;
+                }
+
+                OnStatusChanged?.Invoke("Finalizing...");
+                foreach (var obj in batch)
+                {
+                    try { obj.PostInitialize(); }
+                    catch (Exception e) { Debug.LogError($"PostInitialize failed on {obj.GetType().Name}: {e}"); }
+                    yield return null;
+                }
+
+                OnProgressChanged?.Invoke(1f);
+                OnStatusChanged?.Invoke("Ready!");
+                OnLoadingComplete?.Invoke();
+            }
+
+            _lateBatchRoutine = null;
         }
 
         private IEnumerator SafeInit(IInitializable obj)

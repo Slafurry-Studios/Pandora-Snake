@@ -1,6 +1,6 @@
 using UnityEngine;
 using Game.Upgrade;
-using Game.Manager;
+using Game.Managerd;
 
 namespace Game.Upgrade.Effect
 {

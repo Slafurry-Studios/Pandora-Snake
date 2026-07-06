@@ -7,6 +7,9 @@ namespace Game.Player
 {
     public class Player : MonoBehaviour, IInitializable
     {
+        [SerializeField] private PlayerData playerData;
+        public PlayerData PlayerData => playerData;
+        
         public Rigidbody2D RigidBody2D { get; private set; }
 
         public PlayerHealth PlayerHealth { get; private set; }
@@ -18,7 +21,7 @@ namespace Game.Player
         public PlayerMovement PlayerMovement { get; private set; }
         public PlayerShoot PlayerShoot { get; private set; }
 
-        public PlayerTail PlayerTail { get; private set; }
+        public SnakeTailManager PlayerTail { get; private set; }
         public PlayerCollision PlayerCollision { get; private set; }
         public int Priority => 2;
 
@@ -45,8 +48,8 @@ namespace Game.Player
             PlayerMovement = GetComponentInChildren<PlayerMovement>();
             PlayerShoot = GetComponentInChildren<PlayerShoot>();
 
-            PlayerTail = GetComponentInChildren<PlayerTail>();
             PlayerCollision = GetComponentInChildren<PlayerCollision>();
+            PlayerTail = GetComponentInChildren<SnakeTailManager>();
 
             PlayerHealth.Initialize();
             PlayerStamina.Initialize();
@@ -57,7 +60,7 @@ namespace Game.Player
             PlayerMovement.Initialize();
             PlayerShoot.Initialize();
 
-            PlayerTail.Initialize();
+            // PlayerTail.Initialize();
             PlayerCollision.Initialize();
         }
 

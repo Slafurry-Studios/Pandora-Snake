@@ -109,12 +109,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281813789711911343}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3010827601464262802}
+  m_Father: {fileID: 1496535882481767810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1279991665809585797
 MonoBehaviour:
@@ -162,6 +162,7 @@ Transform:
   - {fileID: 7748659725532356106}
   - {fileID: 5121607882258503389}
   - {fileID: 4236434970009435774}
+  - {fileID: 2531112475483819585}
   m_Father: {fileID: 3010827601464262802}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2942693537167940922
@@ -174,9 +175,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3010827601464262802}
   - component: {fileID: 9012625788964980658}
+  - component: {fileID: 1595099970912181009}
   - component: {fileID: 1852039860184836932}
   - component: {fileID: 5368762320555165210}
-  - component: {fileID: 1595099970912181009}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -200,9 +201,7 @@ Transform:
   - {fileID: 4691718733683197068}
   - {fileID: 3848416761240904229}
   - {fileID: 1496535882481767810}
-  - {fileID: 6381265049541072296}
   - {fileID: 5258567916847381324}
-  - {fileID: 2531112475483819585}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9012625788964980658
@@ -257,6 +256,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1595099970912181009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942693537167940922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f152ab5688327eb74b0e7dee53f28c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 831c949f4dd9dd3d083234467225e080, type: 2}
 --- !u!50 &1852039860184836932
 Rigidbody2D:
   serializedVersion: 4
@@ -329,20 +341,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3874433, y: 0.6120208}
   m_EdgeRadius: 0
---- !u!114 &1595099970912181009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2942693537167940922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f152ab5688327eb74b0e7dee53f28c1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerTail: {fileID: 0}
-  PlayerCollision: {fileID: 0}
 --- !u!1 &4429060512440676248
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +434,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1496535882481767810}
-  - component: {fileID: 7657754871705226539}
   - component: {fileID: 859173902921477478}
   - component: {fileID: 7034395431423179546}
   m_Layer: 3
@@ -458,29 +455,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6381265049541072296}
+  - {fileID: 6884555546691115098}
   m_Father: {fileID: 3010827601464262802}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7657754871705226539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5119804142735820816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b14b26841ec4d9a478f9a5cae455dd5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bodyPrefab: {fileID: 2488826902731729857, guid: deeca6ea89224e440afe02bf3652cc38, type: 3}
-  tailPrefab: {fileID: 3017174187755660583, guid: 144379c316e13924aad82de38ff12ef1, type: 3}
-  saddlePrefab: {fileID: 2488826902731729857, guid: d834381d95cb3f38c9da07f6b91345bf, type: 3}
-  initialBodySize: 3
-  minRecordDistance: 0.02
-  segmentSpacing: 0.5
-  saddlePositionRatio: 1
-  baseSortingOrder: 100
 --- !u!114 &859173902921477478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,12 +513,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5575604094500776196}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.15, y: 4.15, z: 4.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 3010827601464262802}
+  m_Father: {fileID: 5258567916847381324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1900257142013181195
 Animator:
@@ -614,6 +593,58 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5764984882114460087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6884555546691115098}
+  - component: {fileID: 7933742783009144115}
+  m_Layer: 3
+  m_Name: Tail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6884555546691115098
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5764984882114460087}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1496535882481767810}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7933742783009144115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5764984882114460087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14b26841ec4d9a478f9a5cae455dd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPrefab: {fileID: 2488826902731729857, guid: deeca6ea89224e440afe02bf3652cc38, type: 3}
+  tailPrefab: {fileID: 3017174187755660583, guid: 144379c316e13924aad82de38ff12ef1, type: 3}
+  saddlePrefab: {fileID: 2488826902731729857, guid: d834381d95cb3f38c9da07f6b91345bf, type: 3}
+  initialBodySize: 3
+  minRecordDistance: 0.02
+  segmentSpacing: 0.5
+  saddlePositionRatio: 1
+  baseSortingOrder: 100
 --- !u!1 &6303137427063149201
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +657,6 @@ GameObject:
   - component: {fileID: 6509561818730051545}
   - component: {fileID: 6660862487378927628}
   - component: {fileID: 1629668303741475805}
-  - component: {fileID: 1549894892973596171}
   m_Layer: 3
   m_Name: Actions
   m_TagString: Untagged
@@ -661,9 +691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763f5cf43e3806f48bf661cde43b53f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 5
-  turnSpeed: 360
-  sprintMultiplier: 1.5
   moveAction: {fileID: -1680190386980627800, guid: 487d6f98c21f58d4c8a0d99e91627e36, type: 3}
   sprintAction: {fileID: -7471211009204490832, guid: 487d6f98c21f58d4c8a0d99e91627e36, type: 3}
   sprintChannel:
@@ -680,24 +707,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55313ea9c15837cb08d3477084c32351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1338399822672591885, guid: d0db26803bb1d2a4a802f8857098a4be, type: 3}
-  bulletNormalRadius: 0.2
-  bulletBiggerDakkaPrefab: {fileID: 1338399822672591885, guid: 1d8dd80b3dcc433f993e82d5007fb973, type: 3}
-  bulletBiggerDakkaRadius: 0.5
-  bulletAverageBulletEnjoyerPrefab: {fileID: 1338399822672591885, guid: e487876fa4565be2a94ddc49cb57d005, type: 3}
-  bulletAverageBulletEnjoyerPrefabRadius: 1
-  fireRate: 0.5
-  bulletDamage: 1
-  bulletSpeed: 20
-  maxShootDistance: 20
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 28672
-  bulletCount: 1
-  angleSpacing: 10
-  shootSound: Shoot
-  isExplosive: 0
-  isRichochet: 0
 --- !u!114 &1629668303741475805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,22 +724,6 @@ MonoBehaviour:
   orbitRadius: 0
   rotateIndicator: 1
   rotationOffset: -90
---- !u!114 &1549894892973596171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6303137427063149201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f15b5e3d23c7c41b9794fed54996302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxStamina: 100
-  staminaDrainRate: 20
-  staminaRegenRate: 15
-  staminaRegenDelay: 1
 --- !u!1 &7363620672987081836
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +735,7 @@ GameObject:
   - component: {fileID: 4691718733683197068}
   - component: {fileID: 4872045987772170429}
   - component: {fileID: 3557885629480616294}
+  - component: {fileID: 2772516800721595736}
   m_Layer: 3
   m_Name: Stats
   m_TagString: Untagged
@@ -793,7 +787,173 @@ MonoBehaviour:
   playerDizzyAnimator: {fileID: 5575604094500776196}
   headSprite: {fileID: 3860691582737385186}
   deathSprite: {fileID: -1801577710, guid: 58bfd4f236568b099a4b28f9a287def8, type: 3}
-  OnDeath: []
+  OnDeath:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death_1
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death_2
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death_3
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death_4
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death_5
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death_6
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death_7
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death_8
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death_9
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death_10
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death_11
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2772516800721595736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363620672987081836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f15b5e3d23c7c41b9794fed54996302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8265279299031505708
 GameObject:
   m_ObjectHideFlags: 0

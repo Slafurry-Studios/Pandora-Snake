@@ -1,5 +1,5 @@
 using UnityEngine;
-using Game.Manager;
+using Game.Managerd;
 using UnityEngine.Events;
 
 public class SpawnManager : MonoBehaviour
@@ -10,15 +10,15 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         activated = new bool[spawners.Length];
-        GameManager.Instance.threatManager.OnCurrentThreatStateChanged += HandleThreatStateChanged;
+        GameManagerOld.Instance.threatManager.OnCurrentThreatStateChanged += HandleThreatStateChanged;
     }
 
     private void OnDisable()
     {
-        if (GameManager.Instance != null &&
-            GameManager.Instance.threatManager != null)
+        if (GameManagerOld.Instance != null &&
+            GameManagerOld.Instance.threatManager != null)
         {
-            GameManager.Instance.threatManager.OnCurrentThreatStateChanged -= HandleThreatStateChanged;
+            GameManagerOld.Instance.threatManager.OnCurrentThreatStateChanged -= HandleThreatStateChanged;
         }
     }
 

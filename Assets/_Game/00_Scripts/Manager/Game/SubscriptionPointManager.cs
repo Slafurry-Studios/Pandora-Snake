@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using Game.Utils;
 
-namespace Game.Manager
+namespace Game.Managerd
 {
 
     public class SubscriptionPointManager : MonoBehaviour

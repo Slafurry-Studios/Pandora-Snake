@@ -5,13 +5,15 @@ namespace Game.Player
 {
     public class PlayerStamina : MonoBehaviour
     {
+        private Player player;
+
         public event Action<float> OnStaminaPctChanged;
 
-        [Header("Stamina Settings")]
-        [SerializeField] private float maxStamina = 100f;
-        [SerializeField] private float staminaDrainRate = 20f;
-        [SerializeField] private float staminaRegenRate = 15f;
-        [SerializeField] private float staminaRegenDelay = 1f;
+        private float maxStamina;
+        private float staminaDrainRate;
+        private float staminaRegenRate;
+        private float staminaRegenDelay;
+
 
         private float currentStamina;
         private float regenTimer;
@@ -21,11 +23,17 @@ namespace Game.Player
 
         public void Initialize()
         {
-            currentStamina = maxStamina;
-        }
+            player = GetComponentInParent<Player>();
+            maxStamina = player.PlayerData.PlayerStamina;
+            
+            PlayerMovementData playerSprintData = player.PlayerData.PlayerMovementData;
 
-        private void Start()
-        {
+            staminaDrainRate = playerSprintData.StaminaDrainRate;
+            staminaRegenRate = playerSprintData.StaminaRegenRate;
+            staminaRegenDelay = playerSprintData.StaminaRegenDelay;
+
+            currentStamina = maxStamina;
+
             OnStaminaPctChanged?.Invoke(currentStamina / maxStamina);
         }
 
@@ -75,7 +83,6 @@ namespace Game.Player
             if (currentStamina != previous)
                 OnStaminaPctChanged?.Invoke(currentStamina / maxStamina);
         }
-
         public void InfiniteCardio()
         {
             maxStamina *= 1.1f;
