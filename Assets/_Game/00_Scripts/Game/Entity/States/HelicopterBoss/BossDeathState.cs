@@ -1,7 +1,7 @@
 using UnityEngine;
-using Game.AI;
+using Game.Entities;
 
-namespace Game.AI.Boss
+namespace Game.Entities.Boss
 {
     /// <summary>
     /// AI state activated when BossHealth reaches 0 HP.
@@ -36,9 +36,9 @@ namespace Game.AI.Boss
             Debug.Log($"[BossDeathState] Boss has died! Halting all movement and combat.");
 
             // Stop all movement immediately
-            if (brain.Movement != null)
+            if (brain.EntityMovement != null)
             {
-                brain.Movement.SetMovement(Vector2.zero, 0f);
+                brain.EntityMovement.SetMovement(Vector2.zero, 0f);
             }
 
             // Disable colliders so dead boss doesn't block player or take extra hits
@@ -65,9 +65,9 @@ namespace Game.AI.Boss
         public override void UpdateState(EntityBrain brain)
         {
             // Ensure boss stays completely frozen while dying
-            if (brain.Movement != null)
+            if (brain.EntityMovement != null)
             {
-                brain.Movement.SetMovement(Vector2.zero, 0f);
+                brain.EntityMovement.SetMovement(Vector2.zero, 0f);
             }
         }
 

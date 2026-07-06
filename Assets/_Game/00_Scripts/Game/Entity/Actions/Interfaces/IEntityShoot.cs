@@ -1,7 +1,11 @@
-namespace Game.Entity
+using UnityEngine;
+
+namespace Game.Entities
 {
     public interface IEntityShoot
     {
-        void Shoot();
+        void Initialize(EntityBrain entityBrain, BulletData bulletFireData, Animator animator);
+        void InitKeys(string sfxCategory, string shootSFX);
+        void Shoot(Vector3 direction);
     }
 }

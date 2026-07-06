@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.AI
+namespace Game.Entities
 {
     /// <summary>
     /// Non-hostile flee behavior: the car steers away from the target once it gets too
@@ -47,13 +47,13 @@ namespace Game.AI
             float fleeSpeed = playerSpeed * speedMultiplier;
 
             Vector2 fleeDirection = ((Vector2)transform.position - (Vector2)brain.Target.position).normalized;
-            brain.Movement.SetMovement(fleeDirection, fleeSpeed);
+            brain.EntityMovement.SetMovement(fleeDirection, fleeSpeed);
         }
 
         public override void ExitState(EntityBrain brain)
         {
             isPanicking = false;
-            brain.Movement.SetMovement(Vector2.zero, 0f);
+            brain.EntityMovement.SetMovement(Vector2.zero, 0f);
         }
     }
 }

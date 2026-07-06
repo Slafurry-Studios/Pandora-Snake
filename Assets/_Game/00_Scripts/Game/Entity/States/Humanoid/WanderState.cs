@@ -1,6 +1,7 @@
+using Game.Entities;
 using UnityEngine;
 
-namespace Game.AI
+namespace Game.Entities
 {
     public class WanderState : EntityState
     {
@@ -29,7 +30,7 @@ namespace Game.AI
 
         public override void ExitState(EntityBrain brain)
         {
-            brain.Movement.SetMovement(Vector2.zero, 0f);
+            brain.EntityMovement.SetMovement(Vector2.zero, 0f);
         }
 
         private void PickNewWanderDirection(EntityBrain brain)
@@ -41,7 +42,7 @@ namespace Game.AI
             float walkSpeed = playerSpeed * speedMultiplier; 
 
             Vector2 moveDirection = Random.value > 0.5f ? Random.insideUnitCircle.normalized : Vector2.zero;
-            brain.Movement.SetMovement(moveDirection, walkSpeed);
+            brain.EntityMovement.SetMovement(moveDirection, walkSpeed);
             stateTimer = Random.Range(minWanderTime, maxWanderTime);
         }
     }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.AI
+namespace Game.Entities
 {
     /// <summary>
     /// Hostile car chasing the target. The car continuously steers toward the target's
@@ -29,12 +29,12 @@ namespace Game.AI
             float chaseSpeed = playerSpeed * speedMultiplier;
 
             Vector2 moveDirection = (brain.Target.position - transform.position).normalized;
-            brain.Movement.SetMovement(moveDirection, chaseSpeed);
+            brain.EntityMovement.SetMovement(moveDirection, chaseSpeed);
         }
 
         public override void ExitState(EntityBrain brain)
         {
-            brain.Movement.SetMovement(Vector2.zero, 0f);
+            brain.EntityMovement.SetMovement(Vector2.zero, 0f);
         }
     }
 }

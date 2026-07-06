@@ -5,6 +5,10 @@ namespace Game.Player
     [System.Serializable]
     public struct PlayerMovementData
     {
+        [SerializeField] private float playerStamina;
+        public float PlayerStamina => playerStamina;
+        [SerializeField] private float playerSpeed;
+        public float PlayerSpeed => playerSpeed;
         [SerializeField] private float playerSprintMultiplier;
         public float PlayerSpeedMultiplier => playerSprintMultiplier;
 

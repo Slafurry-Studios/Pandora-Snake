@@ -1,4 +1,5 @@
 using System.Collections;
+using Game.Core.Effects;
 using Slafurry.Core.Interface;
 using Slafurry.System;
 using UnityEngine;
@@ -9,20 +10,22 @@ namespace Game.Player
     {
         [SerializeField] private PlayerData playerData;
         public PlayerData PlayerData => playerData;
-        
+
         public Rigidbody2D RigidBody2D { get; private set; }
 
         public PlayerHealth PlayerHealth { get; private set; }
         public PlayerStamina PlayerStamina { get; private set; }
-        
+
         public PlayerDeath PlayerDeath { get; private set; }
         public PlayerGrowth PlayerGrowth { get; private set; }
-        
+
         public PlayerMovement PlayerMovement { get; private set; }
         public PlayerShoot PlayerShoot { get; private set; }
 
         public SnakeTailManager PlayerTail { get; private set; }
         public PlayerCollision PlayerCollision { get; private set; }
+        public IVisualEffect[] visualEffects { get; private set; }
+
         public int Priority => 2;
 
         void Awake()
@@ -51,17 +54,18 @@ namespace Game.Player
             PlayerCollision = GetComponentInChildren<PlayerCollision>();
             PlayerTail = GetComponentInChildren<SnakeTailManager>();
 
-            PlayerHealth.Initialize();
-            PlayerStamina.Initialize();
+            visualEffects = GetComponentsInChildren<IVisualEffect>();
 
-            PlayerGrowth.Initialize();
-            PlayerDeath.Initialize();
+            PlayerHealth.Initialize(PlayerMovement, PlayerDeath, playerData.PlayerHealth, visualEffects);
+            PlayerStamina.Initialize(playerData.PlayerMovementData);
 
-            PlayerMovement.Initialize();
-            PlayerShoot.Initialize();
+            PlayerGrowth.Initialize(PlayerTail);
+            PlayerDeath.Initialize(PlayerHealth, PlayerStamina, PlayerMovement, RigidBody2D);
 
-            // PlayerTail.Initialize();
-            PlayerCollision.Initialize();
+            PlayerMovement.Initialize(PlayerStamina, RigidBody2D, playerData.PlayerMovementData);
+            PlayerShoot.Initialize(playerData.CombatData);
+
+            PlayerCollision.Initialize(PlayerHealth, PlayerDeath, playerData.CollisionDamage);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

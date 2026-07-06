@@ -26,7 +26,7 @@ namespace Slafurry.System
 
         private readonly List<IInitializable> _registered = new();
         private readonly List<IInitializable> _pendingLate = new();
-        private bool _bootCompleted;
+        private bool _snapshotTaken;
         private Coroutine _lateBatchRoutine;
 
         public event Action<float> OnProgressChanged;
@@ -37,11 +37,8 @@ namespace Slafurry.System
         {
             _registered.Add(obj);
 
-            if (_bootCompleted)
+            if (_snapshotTaken)
             {
-                // arrived after the initial boot wave already finished -
-                // queue it into a late batch instead of leaving it stuck
-                // in _registered forever with nobody left to process it.
                 _pendingLate.Add(obj);
                 if (_lateBatchRoutine == null)
                     _lateBatchRoutine = StartCoroutine(ProcessLateBatch());
@@ -52,22 +49,19 @@ namespace Slafurry.System
 
         private IEnumerator LoadSequence()
         {
+            _snapshotTaken = true; 
             var ordered = _registered.OrderBy(o => o.Priority).ToList();
             int total = Mathf.Max(ordered.Count, 1);
 
-            // ---- PHASE 1: Initialize each object ----
             for (int i = 0; i < ordered.Count; i++)
             {
                 var obj = ordered[i];
                 OnStatusChanged?.Invoke($"Initializing {obj.GetType().Name}...");
-
                 yield return StartCoroutine(SafeInit(obj));
-
-                OnProgressChanged?.Invoke((float)(i + 1) / total * 0.8f); // 80% budget for phase 1
+                OnProgressChanged?.Invoke((float)(i + 1) / total * 0.8f);
                 yield return null;
             }
 
-            // ---- PHASE 2: PostInitialize, everything is ready ----
             OnStatusChanged?.Invoke("Finalizing...");
             foreach (var obj in ordered)
             {
@@ -80,20 +74,13 @@ namespace Slafurry.System
             OnStatusChanged?.Invoke("Ready!");
             OnLoadingComplete?.Invoke();
 
-            _bootCompleted = true;
         }
 
-        /// <summary>
-        /// Handles objects that register after the initial boot has
-        /// completed. Waits one frame first, so every object Awake()-ing
-        /// as part of the same scene load gets a chance to register
-        /// before this batch is processed together.
-        /// </summary>
         private IEnumerator ProcessLateBatch()
         {
             while (true)
             {
-                yield return null; // give objects Awake()-ing this frame a chance to register
+                yield return null;
 
                 if (_pendingLate.Count == 0)
                     break;
@@ -106,9 +93,7 @@ namespace Slafurry.System
                 {
                     var obj = batch[i];
                     OnStatusChanged?.Invoke($"Initializing {obj.GetType().Name}...");
-
                     yield return StartCoroutine(SafeInit(obj));
-
                     OnProgressChanged?.Invoke((float)(i + 1) / total * 0.8f);
                     yield return null;
                 }

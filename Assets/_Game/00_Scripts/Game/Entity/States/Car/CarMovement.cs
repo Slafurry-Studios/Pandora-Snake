@@ -1,4 +1,4 @@
-using Game.AI;
+using Game.Entities;
 using UnityEngine;
 
 /// <summary>
@@ -139,9 +139,9 @@ public class CarMovement : MonoBehaviour, IEntityMovement
     {
         IsReversing = reversing;
 
-        if (brain != null && brain.aiAnimation != null && !string.IsNullOrEmpty(reversingBool))
+        if (brain != null && brain.Animator != null && !string.IsNullOrEmpty(reversingBool))
         {
-            brain.aiAnimation.SetBool(reversingBool, reversing);
+            brain.Animator.SetBool(reversingBool, reversing);
         }
     }
 
@@ -182,5 +182,10 @@ public class CarMovement : MonoBehaviour, IEntityMovement
     {
         if (direction == Vector2.zero) return false;
         return Vector2.Angle(Forward, direction) <= forwardFireConeAngle * 0.5f;
+    }
+
+    public void Initialize(EntityBrain brain, SpriteRenderer spriteRenderer, Rigidbody2D rb)
+    {
+        throw new System.NotImplementedException();
     }
 }

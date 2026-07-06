@@ -442,14 +442,15 @@ MonoBehaviour:
   maxHealth: 1
   destroyChannel: []
   objective: {fileID: 0}
-  dieAnim: Death
-  hitAnim: Hit
-  hitSound: Bullet_HIt_Human
-  deathSound: Civilian_Death
   deathLayerMask:
     serializedVersion: 2
     m_Bits: 1024
   deathChatType: 2
+  dieAnim: Death
+  hitAnim: Hit
+  sfxCategory: Civilian
+  hitSound: Hit
+  deathSound: Death
 --- !u!1 &6276144232059890693
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,11 +496,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b2a3c25b80a7a4dbec83b520cf2829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  aiAnimation: {fileID: 4618029272802789866}
-  stateList:
-  - {fileID: 7658466032701671098}
-  - {fileID: 5128660728349575620}
 --- !u!1 &6939054085313125157
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 446527138349461555}
+  - component: {fileID: 5911289908732323685}
   - component: {fileID: 9012994225865180231}
   - component: {fileID: 7744372314148729011}
   m_Layer: 14
@@ -571,6 +568,24 @@ Transform:
   - {fileID: 5496871936746245064}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5911289908732323685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7315821036877757477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503da2797ea3e9226a6028a7d218b5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityData: {fileID: 11400000, guid: 8e044e6439befb4ccb559fe9d55da293, type: 2}
+  animator: {fileID: 4618029272802789866}
+  spriteRenderer: {fileID: 5725040591917129299}
+  entityStates:
+  - {fileID: 5128660728349575620}
+  - {fileID: 7658466032701671098}
 --- !u!61 &9012994225865180231
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -690,8 +705,8 @@ MonoBehaviour:
   panicRadius: 10
   safeRadius: 20
   speedMultiplier: 0.8
-  soundCategory: 
-  panicSoundName: ' '
+  soundCategory: Civilian
+  panicSoundName: 
 --- !u!1 &8811298063905046646
 GameObject:
   m_ObjectHideFlags: 0

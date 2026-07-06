@@ -1,7 +1,7 @@
 using Slafurry.System.Audio;
 using UnityEngine;
 
-namespace Game.AI
+namespace Game.Entities
 {
     public class PanicState : EntityState
     {
@@ -53,13 +53,13 @@ namespace Game.AI
             float runSpeed = playerSpeed * speedMultiplier;
 
             Vector2 runDirection = ((Vector2)transform.position - (Vector2)brain.Target.position).normalized;
-            brain.Movement.SetMovement(runDirection, runSpeed);
+            brain.EntityMovement.SetMovement(runDirection, runSpeed);
         }
 
         public override void ExitState(EntityBrain brain)
         {
             isPanicking = false;
-            brain.Movement.SetMovement(Vector2.zero, 0f);
+            brain.EntityMovement.SetMovement(Vector2.zero, 0f);
         }
     }
 }

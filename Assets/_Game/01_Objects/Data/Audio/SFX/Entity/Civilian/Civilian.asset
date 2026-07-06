@@ -24,6 +24,11 @@ MonoBehaviour:
     - {fileID: 8300000, guid: ff292fc6e8179bbe58f8d38da5337734, type: 3}
     volume: 2.87
     maxSimultaneous: 2
+  - groupID: Hit
+    clips:
+    - {fileID: 8300000, guid: 3d164f52ae0650a5fbb109fd70b6e7de, type: 3}
+    volume: 2.87
+    maxSimultaneous: 3
   - groupID: Death
     clips:
     - {fileID: 8300000, guid: 737f34b1dd7833d68b19363aea30d8e9, type: 3}

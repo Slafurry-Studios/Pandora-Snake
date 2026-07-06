@@ -22,17 +22,15 @@ namespace Game.Player
         private bool isSprinting;
         private bool initialized;
 
-        public void Initialize()
+        public void Initialize(PlayerStamina stamina, Rigidbody2D rb, PlayerMovementData playerMovementData)
         {
-            Player player = GetComponentInParent<Player>();
-            stamina = player.PlayerStamina;
+            this.stamina = stamina;
+            this.rb = rb;
+            this.rb.gravityScale = 0f;
+            targetAngle = this.rb.rotation;
 
-            rb = player.RigidBody2D;
-            rb.gravityScale = 0f;
-            targetAngle = rb.rotation;
-
-            forwardSpeed = player.PlayerData.PlayerSpeed;
-            sprintMultiplier = player.PlayerData.PlayerMovementData.PlayerSpeedMultiplier;
+            forwardSpeed = playerMovementData.PlayerSpeed;
+            sprintMultiplier = playerMovementData.PlayerSpeedMultiplier;
 
             initialized = true;
         }

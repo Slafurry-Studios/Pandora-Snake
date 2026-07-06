@@ -1,7 +1,7 @@
 using UnityEngine;
 using Game.Gameplay;
 
-namespace Game.AI.Boss
+namespace Game.Entities.Boss
 {
     public class BossBullet : Bullet
     {

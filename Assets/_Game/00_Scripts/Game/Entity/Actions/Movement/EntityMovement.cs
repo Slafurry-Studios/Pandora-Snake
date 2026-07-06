@@ -1,128 +1,132 @@
-using Game.AI;
+using Game.Entities;
 using Slafurry.System.Audio;
 using UnityEngine;
 
-public class EntityMovement : MonoBehaviour, IEntityMovement
+namespace Game.Entities
 {
-    [Header("Steering Settings")]
-    public float rayDistance = 1.5f;
-    public LayerMask obstacleLayer;
-    public int rayCount = 8;
-    public float rayAngle = 90f;
 
 
-    [Header("Animation")]
-    [SerializeField] private string chaseBool = "Chase";
-
-    [Header("Audio")]
-    public string SFXCategory;
-    public string movementSoundName;
-
-    private Rigidbody2D rb;
-    private EntityBrain brain;
-    private SpriteRenderer spriteRenderer;
-
-
-    private void Awake()
+    public class EntityMovement : MonoBehaviour, IEntityMovement
     {
-        rb = GetComponent<Rigidbody2D>();
-        brain = GetComponent<EntityBrain>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-    }
+        [Header("Steering Settings")]
+        public float rayDistance = 1.5f;
+        public LayerMask obstacleLayer;
+        public int rayCount = 8;
+        public float rayAngle = 90f;
 
-    public void FaceDirection(Vector2 direction)
-    {
-        if (spriteRenderer != null)
+        [Header("Animation")]
+        [SerializeField] private string chaseBool = "Chase";
+
+        [Header("Audio")]
+        public string SFXCategory;
+        public string movementSoundName;
+
+        private Rigidbody2D rb;
+        private EntityBrain brain;
+        private SpriteRenderer spriteRenderer;
+
+
+        public void Initialize(EntityBrain brain, SpriteRenderer spriteRenderer, Rigidbody2D rb)
         {
-            if (direction.x > 0)
-                spriteRenderer.flipX = false;
-            else if (direction.x < 0)
-                spriteRenderer.flipX = true;
-        }
-    }
-
-    bool wasMoving = false;
-
-
-    public void SetMovement(Vector2 desiredDirection, float speed)
-    {
-        bool isMoving = desiredDirection != Vector2.zero && speed > 0f;
-
-        if (isMoving)
-        {
-            FaceDirection(desiredDirection);
+            this.rb = rb;
+            this.brain = brain;
+            this.spriteRenderer = spriteRenderer;
         }
 
-
-        if (brain != null && brain.aiAnimation != null && !string.IsNullOrEmpty(chaseBool))
+        public void FaceDirection(Vector2 direction)
         {
-            brain.aiAnimation.SetBool(chaseBool, isMoving);
-
-            if (isMoving && !wasMoving)
+            if (spriteRenderer != null)
             {
-                Audio.PlaySFX2D(SFXCategory, movementSoundName);
+                if (direction.x > 0)
+                    spriteRenderer.flipX = false;
+                else if (direction.x < 0)
+                    spriteRenderer.flipX = true;
             }
         }
 
-        wasMoving = isMoving;
+        bool wasMoving = false;
 
 
-        if (!isMoving)
+        public void SetMovement(Vector2 desiredDirection, float speed)
         {
-            rb.velocity = Vector2.zero;
-            return;
+            bool isMoving = desiredDirection != Vector2.zero && speed > 0f;
+
+            if (isMoving)
+            {
+                FaceDirection(desiredDirection);
+            }
+
+
+            if (brain != null && brain.Animator != null && !string.IsNullOrEmpty(chaseBool))
+            {
+                brain.Animator.SetBool(chaseBool, isMoving);
+
+                if (isMoving && !wasMoving)
+                {
+                    Audio.PlaySFX2D(SFXCategory, movementSoundName);
+                }
+            }
+
+            wasMoving = isMoving;
+
+
+            if (!isMoving)
+            {
+                rb.velocity = Vector2.zero;
+                return;
+            }
+
+
+            Vector2 finalDirection = Steer(desiredDirection);
+
+            rb.velocity = finalDirection * speed;
         }
 
 
-        Vector2 finalDirection = Steer(desiredDirection);
-
-        rb.velocity = finalDirection * speed;
-    }
-
-
-    private Vector2 Steer(Vector2 desired)
-    {
-        Vector2 final = desired;
-
-
-        for (int i = 0; i < rayCount; i++)
+        private Vector2 Steer(Vector2 desired)
         {
-            float angle =
-                Mathf.Lerp(
-                    -rayAngle / 2,
-                    rayAngle / 2,
-                    (float)i / (rayCount - 1)
-                );
+            Vector2 final = desired;
 
 
-            Vector2 dir =
-                Quaternion.Euler(0, 0, angle)
-                * desired;
-
-
-            RaycastHit2D hit =
-                Physics2D.Raycast(
-                    transform.position,
-                    dir,
-                    rayDistance,
-                    obstacleLayer
-                );
-
-
-            if (hit.collider != null)
+            for (int i = 0; i < rayCount; i++)
             {
-                Vector2 awayFromWall =
-                    Vector2.Reflect(
-                        desired,
-                        hit.normal
+                float angle =
+                    Mathf.Lerp(
+                        -rayAngle / 2,
+                        rayAngle / 2,
+                        (float)i / (rayCount - 1)
                     );
 
 
-                final += awayFromWall * 0.5f;
+                Vector2 dir =
+                    Quaternion.Euler(0, 0, angle)
+                    * desired;
+
+
+                RaycastHit2D hit =
+                    Physics2D.Raycast(
+                        transform.position,
+                        dir,
+                        rayDistance,
+                        obstacleLayer
+                    );
+
+
+                if (hit.collider != null)
+                {
+                    Vector2 awayFromWall =
+                        Vector2.Reflect(
+                            desired,
+                            hit.normal
+                        );
+
+
+                    final += awayFromWall * 0.5f;
+                }
             }
+
+
+            return final.normalized;
         }
-
-
-        return final.normalized;
     }
 }

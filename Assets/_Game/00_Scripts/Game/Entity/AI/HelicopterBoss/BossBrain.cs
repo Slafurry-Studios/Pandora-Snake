@@ -1,7 +1,7 @@
 using UnityEngine;
-using Game.AI;
+using Game.Entities;
 
-namespace Game.AI.Boss
+namespace Game.Entities.Boss
 {
     /// <summary>
     /// Specialized EntityBrain controller for Boss entities.

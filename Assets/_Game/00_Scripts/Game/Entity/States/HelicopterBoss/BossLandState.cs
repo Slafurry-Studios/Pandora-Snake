@@ -1,7 +1,7 @@
 using UnityEngine;
-using Game.AI;
+using Game.Entities;
 
-namespace Game.AI.Boss
+namespace Game.Entities.Boss
 {
     public class BossLandState : EntityState
     {
@@ -82,7 +82,7 @@ namespace Game.AI.Boss
                 if (distance <= landingRadius)
                 {
                     isLanded = true;
-                    if (brain.Movement != null) brain.Movement.SetMovement(Vector2.zero, 0f);
+                    if (brain.EntityMovement != null) brain.EntityMovement.SetMovement(Vector2.zero, 0f);
 
                     landEndTime = Time.time + landingDuration;
                     Debug.Log($"[BossLandState] Landed on {targetBuilding.name} for {landingDuration} seconds!");
@@ -95,13 +95,13 @@ namespace Game.AI.Boss
                         : 5f;
                     float speed = baseSpeed * retreatSpeedMultiplier;
 
-                    if (brain.Movement != null) brain.Movement.SetMovement(direction, speed);
+                    if (brain.EntityMovement != null) brain.EntityMovement.SetMovement(direction, speed);
                     RotateTowards(direction);
                 }
             }
             else
             {
-                if (brain.Movement != null) brain.Movement.SetMovement(Vector2.zero, 0f);
+                if (brain.EntityMovement != null) brain.EntityMovement.SetMovement(Vector2.zero, 0f);
 
                 if (Time.time >= landEndTime)
                 {
@@ -149,9 +149,9 @@ namespace Game.AI.Boss
         {
             isExecutingLanding = false;
             isLanded = false;
-            if (brain.Movement != null)
+            if (brain.EntityMovement != null)
             {
-                brain.Movement.SetMovement(Vector2.zero, 0f);
+                brain.EntityMovement.SetMovement(Vector2.zero, 0f);
             }
         }
     }

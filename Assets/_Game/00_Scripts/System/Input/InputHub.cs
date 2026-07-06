@@ -29,9 +29,6 @@ namespace Slafurry.System.InputHub
         public event Action OnJumpPressed;
         public event Action<Vector2> OnMoveChanged;
 
-        private InputAction _jumpAction;
-        private InputAction _moveAction;
-
         public override IEnumerator Initialize() { yield return null; }
         public override void PostInitialize() { }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Game.Generic;
 
-namespace Game.AI.Boss
+namespace Game.Entities.Boss
 {
     public class BossSupportBuilding : MonoBehaviour
     {

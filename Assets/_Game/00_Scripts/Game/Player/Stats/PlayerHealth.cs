@@ -14,15 +14,16 @@ namespace Game.Player
         private PlayerDeath playerDeath;
 
         private bool vipSprint;
-
-        public void Initialize()
+        private bool initialized;
+        public void Initialize(PlayerMovement playerMovement, PlayerDeath playerDeath, float healthValue, IVisualEffect[] visualEffects)
         {
-            Player player = GetComponentInParent<Player>();
-            visualEffects = player.GetComponentsInChildren<IVisualEffect>();
-            playerMovement = player.PlayerMovement;
-            playerDeath = player.PlayerDeath;
+            this.playerMovement = playerMovement;
+            this.playerDeath = playerDeath;
 
-            SetMaxHealth(player.PlayerData.PlayerHealth);
+            this.visualEffects = visualEffects;
+
+            SetMaxHealth(healthValue);
+            initialized = true;
         }
 
         protected override void Die()
@@ -32,6 +33,8 @@ namespace Game.Player
         }
         public override void TakeDamage(float amount)
         {
+            if (!initialized) return;
+
             if (playerMovement.GetSprint() && vipSprint) return;
 
             base.TakeDamage(amount);

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.AI
+namespace Game.Entities
 {
     /// <summary>
     /// Common movement contract implemented by any entity's movement handler
@@ -16,6 +16,7 @@ namespace Game.AI
         /// Implementations decide HOW that becomes physical movement
         /// (free 2D velocity for humanoids, steer + throttle for cars, etc).
         /// </summary>
+        void Initialize(EntityBrain brain, SpriteRenderer spriteRenderer, Rigidbody2D rb);
         void SetMovement(Vector2 desiredDirection, float speed);
 
         /// <summary>

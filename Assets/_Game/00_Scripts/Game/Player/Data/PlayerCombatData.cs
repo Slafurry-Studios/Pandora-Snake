@@ -36,5 +36,9 @@ namespace Game.Player
 
         [SerializeField] private float angleSpacing;
         public readonly float AngleSpacing => angleSpacing;
+
+        [Header("Audio")]
+        [SerializeField] private string shootSFX;
+        public string ShootSFX => shootSFX;
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.AI
+namespace Game.Entities
 {
     /// <summary>
     /// Non-hostile "traffic" driving: the car picks a random heading periodically and
@@ -34,12 +34,12 @@ namespace Game.AI
             stateTimer -= Time.deltaTime;
             if (stateTimer <= 0f) PickNewWanderDirection(brain);
 
-            brain.Movement.SetMovement(wanderDirection, wanderSpeed);
+            brain.EntityMovement.SetMovement(wanderDirection, wanderSpeed);
         }
 
         public override void ExitState(EntityBrain brain)
         {
-            brain.Movement.SetMovement(Vector2.zero, 0f);
+            brain.EntityMovement.SetMovement(Vector2.zero, 0f);
         }
 
         private void PickNewWanderDirection(EntityBrain brain)

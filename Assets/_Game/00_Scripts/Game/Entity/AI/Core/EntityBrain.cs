@@ -1,39 +1,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.AI
+namespace Game.Entities
 {
     public class EntityBrain : MonoBehaviour
     {
-        [Header("Universal References")]
-        public Transform Target;
-        public Animator aiAnimation;
+        public Transform Target { get; private set; }
+        public Animator Animator { get; private set; }
+        public IEntityMovement EntityMovement { get; private set; }
+        public IEntityShoot EntityShoot { get; private set; }
 
-        [Header("State Priority List (Top = Highest)")]
-        [Tooltip("The brain checks this list from top to bottom. The first state whose conditions are met will run!")]
-        public List<EntityState> stateList = new List<EntityState>();
-
-        /// <summary>
-        /// Any component implementing IEntityMovement works here - NPCMovement (Humanoid)
-        /// or CarMovement (Cars) are both valid, and more can be added later without
-        /// touching EntityBrain again.
-        /// </summary>
-        public IEntityMovement Movement { get; private set; }
+        private List<EntityState> states;
         private EntityState currentState;
+        private bool initialized;
 
-        private void Awake()
+        public void Initialize(List<EntityState> states, IEntityMovement entityMovement, IEntityShoot entityShoot, Animator animator)
         {
-            Movement = GetComponentInChildren<IEntityMovement>();
-            if (Movement == null)
+            EntityMovement = entityMovement;
+            EntityShoot = entityShoot;
+
+            this.states = states;
+
+            if (EntityMovement == null)
             {
                 Debug.LogError($"{gameObject.name}: EntityBrain requires a component implementing IEntityMovement (e.g. NPCMovement or CarMovement).");
             }
 
-            if (aiAnimation == null) aiAnimation = GetComponentInChildren<Animator>();
+            if (Animator == null) Animator = animator;
+
+            if (Target == null && PlayerManager.PlayerTransform != null)
+            {
+                Target = PlayerManager.PlayerTransform;
+            }
+
+            if (Target == null)
+            {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                if (player != null) Target = player.transform;
+            }
+
+            initialized = true;
         }
 
         private void Update()
         {
+            if (!initialized) return;
+
             EvaluateStates();
 
             if (currentState != null)
@@ -42,24 +54,9 @@ namespace Game.AI
             }
         }
 
-        private void Start() // Move logic here
-        {
-            if (Target == null && PlayerManager.PlayerTransform != null)
-            {
-                Target = PlayerManager.PlayerTransform;
-            }
-
-            // Safety fallback if PlayerManager wasn't ready
-            if (Target == null)
-            {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                if (player != null) Target = player.transform;
-            }
-        }
-
         private void EvaluateStates()
         {
-            foreach (EntityState state in stateList)
+            foreach (EntityState state in states)
             {
                 if (state.CheckConditions(this))
                 {

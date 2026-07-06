@@ -15,18 +15,22 @@ namespace Game.Player
         private PlayerStamina playerStamina;
         private PlayerMovement playerMovement;
         private Rigidbody2D rb;
+        private bool initialized;
 
-        public void Initialize()
+        public void Initialize(PlayerHealth playerHealth, PlayerStamina playerStamina, PlayerMovement playerMovement, Rigidbody2D rb)
         {
-            Player player = GetComponentInParent<Player>();
-            playerHealth = player.PlayerHealth;
-            playerStamina = player.PlayerStamina;
-            playerMovement = player.PlayerMovement;
-            rb = player.RigidBody2D;
+            this.playerHealth = playerHealth;
+            this.playerStamina = playerStamina;
+            this.playerMovement = playerMovement;
+            this.rb = rb;
+
+            initialized = true;
         }
 
         public void Death()
         {
+            if (!initialized) return;
+
             playerHealth.SetHealth(0f);
             headSprite.sprite = deathSprite;
             PlayerManager.Instance.HideHUD();

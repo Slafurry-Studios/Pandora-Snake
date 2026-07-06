@@ -73,6 +73,7 @@ public class EntitySpawner : MonoBehaviour
             Vector3 spawnPos = map.GetCellCenterWorld(cell);
             GameObject prefab = entityPrefabs[Random.Range(0, entityPrefabs.Length)];
 
+            if (prefab == null) return;
             GameObject newEntity = Instantiate(prefab, spawnPos, Quaternion.identity);
             newEntity.transform.parent = transform;
             spawnedEntities.Add(newEntity);

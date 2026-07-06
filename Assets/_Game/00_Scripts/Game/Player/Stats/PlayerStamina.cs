@@ -5,8 +5,6 @@ namespace Game.Player
 {
     public class PlayerStamina : MonoBehaviour
     {
-        private Player player;
-
         public event Action<float> OnStaminaPctChanged;
 
         private float maxStamina;
@@ -21,17 +19,13 @@ namespace Game.Player
 
         public bool CanSprint => !isExhausted && currentStamina > 0f;
 
-        public void Initialize()
+        public void Initialize(PlayerMovementData movementData)
         {
-            player = GetComponentInParent<Player>();
-            maxStamina = player.PlayerData.PlayerStamina;
+            maxStamina = movementData.PlayerStamina;
+            staminaDrainRate = movementData.StaminaDrainRate;
+            staminaRegenRate = movementData.StaminaRegenRate;
+            staminaRegenDelay = movementData.StaminaRegenDelay;
             
-            PlayerMovementData playerSprintData = player.PlayerData.PlayerMovementData;
-
-            staminaDrainRate = playerSprintData.StaminaDrainRate;
-            staminaRegenRate = playerSprintData.StaminaRegenRate;
-            staminaRegenDelay = playerSprintData.StaminaRegenDelay;
-
             currentStamina = maxStamina;
 
             OnStaminaPctChanged?.Invoke(currentStamina / maxStamina);

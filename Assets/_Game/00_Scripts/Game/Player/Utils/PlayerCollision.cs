@@ -4,21 +4,23 @@ namespace Game.Player
 {
     public class PlayerCollision : MonoBehaviour
     {
-        [SerializeField] private float collisionDmg = 1f;
-        private Player player;
-
+        private float collisionDmg;
         private PlayerHealth playerHealth;
         private PlayerDeath playerDeath;
-
-        public void Initialize()
+        private bool initialized;
+        public void Initialize(PlayerHealth playerHealth, PlayerDeath playerDeath, float collisionDmg)
         {
-            player = GetComponentInParent<Player>();
-            playerDeath = player.PlayerDeath;
-            playerHealth = player.PlayerHealth;
+            this.playerDeath = playerDeath;
+            this.playerHealth = playerHealth;
+            this.collisionDmg = collisionDmg;
+            
+            initialized = true;
         }
         
         public void CheckCollision(GameObject obj)
         {
+            if (!initialized) return;
+
             if (playerHealth.IsDead)
                 return;
 

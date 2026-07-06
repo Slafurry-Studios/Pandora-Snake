@@ -1,6 +1,6 @@
 using UnityEngine;
-using Game.AI;
-using Game.AI.Boss;
+using Game.Entities;
+using Game.Entities.Boss;
 
 namespace Game.Temp
 {

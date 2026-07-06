@@ -60,7 +60,7 @@ namespace Game.Gameplay
                 Vector2 dirToPlayer = (playerPos - spawnPos).normalized;
 
 
-                BulletFireData bulletFireData = new BulletFireData
+                BulletData bulletFireData = new BulletData
                 {
                     prefab = finisherBulletPrefab,
                     startPos = spawnPos,

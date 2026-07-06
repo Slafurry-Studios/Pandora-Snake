@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.AI
+namespace Game.Entities
 {
     /// <summary>
     /// Base component script for any AI state or behavior (e.g. Chase, Attack, Land).

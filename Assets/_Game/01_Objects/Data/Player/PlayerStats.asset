@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   playerHealth: 5
-  playerStamina: 100
-  playerSpeed: 5
   playerMovementData:
+    playerStamina: 100
+    playerSpeed: 5
     playerSprintMultiplier: 1.5
     staminaDrainRate: 10
     staminaRegenRate: 30
@@ -33,5 +33,7 @@ MonoBehaviour:
       m_Bits: 30720
     bulletCount: 1
     angleSpacing: 10
+    shootSFX: Shoot
+  collisionDamage: 1
   takeDamageSFX: Take_Damage
   shootSFX: Shoot

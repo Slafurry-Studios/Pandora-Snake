@@ -1,7 +1,7 @@
 using UnityEngine;
 using Game.Player;
 
-namespace Game.AI.Boss
+namespace Game.Entities.Boss
 {
     public class BossChaseState : EntityState
     {
@@ -39,12 +39,12 @@ namespace Game.AI.Boss
 
         public override void UpdateState(EntityBrain brain)
         {
-            if (brain.Target == null || brain.Movement == null) return;
+            if (brain.Target == null || brain.EntityMovement == null) return;
 
             BossHealth health = brain.GetComponent<BossHealth>();
             if (health != null && health.IsDead)
             {
-                brain.Movement.SetMovement(Vector2.zero, 0f);
+                brain.EntityMovement.SetMovement(Vector2.zero, 0f);
                 return;
             }
 
@@ -57,17 +57,17 @@ namespace Game.AI.Boss
 
             if (distance > maintainDistance + 0.5f)
             {
-                brain.Movement.SetMovement(directionToTarget, chaseSpeed);
+                brain.EntityMovement.SetMovement(directionToTarget, chaseSpeed);
                 RotateTowards(directionToTarget);
             }
             else if (distance < maintainDistance - 0.5f)
             {
-                brain.Movement.SetMovement(-directionToTarget, chaseSpeed);
+                brain.EntityMovement.SetMovement(-directionToTarget, chaseSpeed);
                 RotateTowards(-directionToTarget);
             }
             else
             {
-                brain.Movement.SetMovement(Vector2.zero, 0f);
+                brain.EntityMovement.SetMovement(Vector2.zero, 0f);
                 RotateTowards(directionToTarget);
             }
         }
@@ -83,9 +83,9 @@ namespace Game.AI.Boss
 
         public override void ExitState(EntityBrain brain)
         {
-            if (brain.Movement != null)
+            if (brain.EntityMovement != null)
             {
-                brain.Movement.SetMovement(Vector2.zero, 0f);
+                brain.EntityMovement.SetMovement(Vector2.zero, 0f);
             }
         }
     }

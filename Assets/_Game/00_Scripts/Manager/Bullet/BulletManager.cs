@@ -28,6 +28,7 @@ namespace Game
 
         protected override void UnregisterFromGameManager()
         {
+            if (GameManager.Instance == null) return;
             GameManager.Instance.UnregisterBulletManager(this);
         }
 
@@ -42,7 +43,7 @@ namespace Game
             bulletRichochetHelper = GetComponentInChildren<BulletRichochetHelper>();
         }
 
-        public void FireBullet(BulletFireData data)
+        public void FireBullet(BulletData data)
         {
             if (data.prefab == null) return;
 
@@ -79,7 +80,7 @@ namespace Game
                 if (hits > 0)
                 {
                     Collider2D hitCollider = hitResults[0];
-                    Health health = hitCollider.GetComponent<Health>();
+                    Health health = hitCollider.GetComponentInChildren<Health>();
 
                     SpawnHitObject(b, hitCollider);
 

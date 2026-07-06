@@ -47,7 +47,7 @@ namespace Game.Gameplay
 
         public void Consume(GameObject player, Vector2 direction)
         {
-            eatableCollider.enabled = false; // Disable the collider to prevent further interactions
+            eatableCollider.enabled = false;
             if (isConsumed) return;
             isConsumed = true;
 
@@ -65,7 +65,6 @@ namespace Game.Gameplay
 
         private IEnumerator ConsumeRoutine(GameObject player, Vector2 dir)
         {
-            // 1. Apply attributes immediately
             foreach (var modifier in attributes)
             {
                 if (modifier.attribute != null)
@@ -74,7 +73,6 @@ namespace Game.Gameplay
                 }
             }
 
-            // 2. Animation setup
             Vector3 startPosition = transform.position;
             Vector3 targetPosition = startPosition + (Vector3)(dir * pullDistance);
 
@@ -83,7 +81,6 @@ namespace Game.Gameplay
 
             float elapsedTime = 0f;
 
-            // 3. Consume animation (pull + shrink + fade)
             while (elapsedTime < duration)
             {
                 elapsedTime += Time.deltaTime;

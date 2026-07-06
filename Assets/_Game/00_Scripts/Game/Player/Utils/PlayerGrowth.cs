@@ -9,17 +9,19 @@ namespace Game.Player
         [SerializeField] private int growPointsPerTail = 5;
         [SerializeField] private int currentGrowPoints = 0;
         private int accumulatedGrowPoint = 0;
-
         private SnakeTailManager playerTail;
+        private bool initialized;
 
-        public void Initialize()
+        public void Initialize(SnakeTailManager playerTail)
         {
-            Player player = GetComponentInParent<Player>();
-            playerTail = player.PlayerTail;
+            this.playerTail = playerTail;
+            initialized = true;
         }
 
         public void AddGrowPoints(int amount)
         {
+            if (!initialized) return;
+            
             currentGrowPoints += amount;
             accumulatedGrowPoint += amount;
             

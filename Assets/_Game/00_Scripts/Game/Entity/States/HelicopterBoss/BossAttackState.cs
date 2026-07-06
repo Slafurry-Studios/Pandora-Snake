@@ -2,7 +2,7 @@ using UnityEngine;
 using Game.Gameplay;
 using Game.Managerd;
 
-namespace Game.AI.Boss
+namespace Game.Entities.Boss
 {
     [System.Serializable]
     public class BossWeaponProfile
@@ -134,7 +134,7 @@ namespace Game.AI.Boss
             BossHealth health = brain.GetComponent<BossHealth>();
             if (health != null && health.IsDead)
             {
-                if (brain.Movement != null) brain.Movement.SetMovement(Vector2.zero, 0f);
+                if (brain.EntityMovement != null) brain.EntityMovement.SetMovement(Vector2.zero, 0f);
                 return;
             }
 
@@ -142,7 +142,7 @@ namespace Game.AI.Boss
 
             RotateTowards(aimDirection);
 
-            if (brain.Movement != null)
+            if (brain.EntityMovement != null)
             {
                 Game.Player.PlayerMovement player = brain.Target.GetComponent<Game.Player.PlayerMovement>();
                 float playerSpeed = (player != null) ? player.CurrentSpeed : 5f;
@@ -159,15 +159,15 @@ namespace Game.AI.Boss
                 float currentDist = Vector2.Distance(transform.position, brain.Target.position);
                 if (currentDist > targetDistance + 0.5f)
                 {
-                    brain.Movement.SetMovement(aimDirection, moveSpeed);
+                    brain.EntityMovement.SetMovement(aimDirection, moveSpeed);
                 }
                 else if (currentDist < targetDistance - 0.5f)
                 {
-                    brain.Movement.SetMovement(-aimDirection, moveSpeed);
+                    brain.EntityMovement.SetMovement(-aimDirection, moveSpeed);
                 }
                 else
                 {
-                    brain.Movement.SetMovement(Vector2.zero, 0f);
+                    brain.EntityMovement.SetMovement(Vector2.zero, 0f);
                 }
             }
 
@@ -232,7 +232,7 @@ namespace Game.AI.Boss
             }
 
 
-            BulletFireData bulletFireData = new BulletFireData
+            BulletData bulletFireData = new BulletData
             {
                 prefab = activeProfile.bulletPrefab,
                 startPos = firePoint.position,

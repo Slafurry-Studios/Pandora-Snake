@@ -3,7 +3,7 @@ using Game.Managerd;
 using Slafurry.System.Audio;
 using UnityEngine;
 
-namespace Game.AI
+namespace Game.Entities
 {
     /// <summary>
     /// Optional hostile car attack. Same plug-and-play Bullet/BulletManager pipeline as
@@ -63,7 +63,7 @@ namespace Game.AI
 
         public override void EnterState(EntityBrain brain)
         {
-            carMovement = brain.Movement as CarMovement;
+            carMovement = brain.EntityMovement as CarMovement;
             if (carMovement == null)
             {
                 Debug.LogWarning($"{gameObject.name}: CarAttackState works best with a CarMovement component (needed to know the forward-fire cone). Falling back to raw direction-to-target.");
@@ -81,7 +81,7 @@ namespace Game.AI
 
             // Keep steering toward the target so the car lines its own nose up for a shot,
             // instead of snap-aiming like Humanoid's AttackState does.
-            brain.Movement.SetMovement(directionToTarget, playerSpeed * pursuitSpeedMultiplier);
+            brain.EntityMovement.SetMovement(directionToTarget, playerSpeed * pursuitSpeedMultiplier);
 
             bool isLinedUp = carMovement != null
                 ? carMovement.IsAlignedWithDirection(directionToTarget)
@@ -100,9 +100,9 @@ namespace Game.AI
 
         private void SetShootingAnim(EntityBrain brain, bool isShooting)
         {
-            if (brain.aiAnimation != null && !string.IsNullOrEmpty(shootingBool))
+            if (brain.Animator != null && !string.IsNullOrEmpty(shootingBool))
             {
-                brain.aiAnimation.SetBool(shootingBool, isShooting);
+                brain.Animator.SetBool(shootingBool, isShooting);
             }
         }
 
@@ -117,7 +117,7 @@ namespace Game.AI
 
             // Bullet always leaves along the car's actual nose - it can only shoot forward.
             Vector2 fireDirection = carMovement != null ? carMovement.Forward : fallbackDirection;
-            BulletFireData bulletFireData = new BulletFireData
+            BulletData bulletFireData = new BulletData
             {
                 prefab = bulletPrefab,
                 startPos = firePoint.position,

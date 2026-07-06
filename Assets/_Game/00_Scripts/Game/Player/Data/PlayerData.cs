@@ -13,23 +13,20 @@ namespace Game.Player
 
 
         [Header("Movement")]
-        [SerializeField] private float playerStamina;
-        public float PlayerStamina => playerStamina;
-        [SerializeField] private float playerSpeed;
-        public float PlayerSpeed => playerSpeed;
         [SerializeField] private PlayerMovementData playerMovementData;
         public PlayerMovementData PlayerMovementData => playerMovementData;
-
 
         [Header("Combat")]
         [SerializeField] private PlayerCombatData combatData;
         public PlayerCombatData CombatData => combatData;
 
+        [Header("Collision")]
+        [SerializeField] private float collisionDamage;
+        public float CollisionDamage => collisionDamage;
+
         [Header("Audio")]
         [SerializeField] private string takeDamageSFX;
         public string TakeDamageSFX => takeDamageSFX;
 
-        [SerializeField] private string shootSFX;
-        public string ShootSFX => shootSFX;
     }
 }

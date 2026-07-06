@@ -29,33 +29,34 @@ namespace Game.Player
         private bool isExplosive = false;
         private bool isRichochet = false;
 
-        public void Initialize()
+        private bool initialized;
+        public void Initialize(PlayerCombatData combatData)
         {
-            Player player = GetComponentInParent<Player>();
-            PlayerCombatData playerCombatData = player.PlayerData.CombatData;
-
-            bulletPrefab = playerCombatData.BulletPrefab;
-            bulletBaseRadius = playerCombatData.BulletRadius;
-            bulletScale = playerCombatData.BulletScale;
+            bulletPrefab = combatData.BulletPrefab;
+            bulletBaseRadius = combatData.BulletRadius;
+            bulletScale = combatData.BulletScale;
             
-            bulletDamage = playerCombatData.BulletDamage;
-            bulletSpeed = playerCombatData.BulletSpeed;
+            bulletDamage = combatData.BulletDamage;
+            bulletSpeed = combatData.BulletSpeed;
 
-            fireRate = playerCombatData.FireRate;
-            maxShootDistance = playerCombatData.ShootDistance;
+            fireRate = combatData.FireRate;
+            maxShootDistance = combatData.ShootDistance;
 
-            targetMask = playerCombatData.TargetMask;
+            targetMask = combatData.TargetMask;
 
-            bulletCount = playerCombatData.BulletCount;
-            angleSpacing = playerCombatData.AngleSpacing;
+            bulletCount = combatData.BulletCount;
+            angleSpacing = combatData.AngleSpacing;
 
-            shootSound = player.PlayerData.ShootSFX;
+            shootSound = combatData.ShootSFX;
 
             playerAim = GetComponent<PlayerAim>();
+            initialized = true;
         }
 
         private void Update()
         {
+            if (!initialized) return;
+
             if (bulletPrefab == null || GameManager.Bullet == null)
                 return;
 
@@ -96,7 +97,7 @@ namespace Game.Player
 
         private void SpawnBullet(Vector3 dir)
         {
-            BulletFireData bulletFireData = new()
+            BulletData bulletFireData = new()
             {
                 prefab = bulletPrefab,
                 startPos = playerAim.AimIndicatorPosition,

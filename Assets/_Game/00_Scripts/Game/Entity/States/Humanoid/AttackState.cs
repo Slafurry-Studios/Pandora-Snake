@@ -3,7 +3,7 @@ using Game.Managerd;
 using Slafurry.System.Audio;
 using UnityEngine;
 
-namespace Game.AI
+namespace Game.Entities
 {
     public class AttackState : EntityState
     {
@@ -54,62 +54,36 @@ namespace Game.AI
 
         public override void EnterState(EntityBrain brain)
         {
-            brain.Movement.SetMovement(Vector2.zero, 0f);
+            brain.EntityMovement.SetMovement(Vector2.zero, 0f);
         }
 
         public override void UpdateState(EntityBrain brain)
         {
-            brain.Movement.SetMovement(Vector2.zero, 0f);
+            brain.EntityMovement.SetMovement(Vector2.zero, 0f);
 
             Vector2 aimDirection = (brain.Target.position - transform.position).normalized;
-            brain.Movement.FaceDirection(aimDirection);
+            brain.EntityMovement.FaceDirection(aimDirection);
 
             if (Time.time >= lastFireTime + fireRate)
             {
-                if (bulletPrefab != null && firePoint != null)
-                {
-
-                    BulletFireData bulletFireData = new BulletFireData
-                    {
-                        prefab = bulletPrefab,
-                        startPos = firePoint.position,
-                        direction = aimDirection,
-                        damage = bulletDamage,
-                        speed = bulletSpeed,
-                        targetMask = targetMask,
-                        hitRadius = bulletHitRadius,
-                        isExplosive = false,
-                        isRichochet = false,
-                        scale = 1f
-                    };
-
-                    GameManager.Bullet.FireBullet(bulletFireData);
-
-                    Audio.PlaySFX2D(attackCategory, attackSound);
-
-
-                    if (brain.aiAnimation != null && !string.IsNullOrEmpty(attackAnim))
-                    {
-                        brain.aiAnimation.ResetTrigger(attackAnim);
-                        brain.aiAnimation.SetTrigger(attackAnim);
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning(
-                        $"{gameObject.name} missing Bullet Prefab or Fire Point!"
-                    );
-                }
-
-
-                lastFireTime = Time.time;
+                brain.EntityShoot.Shoot(aimDirection);
             }
+            else
+            {
+                Debug.LogWarning(
+                    $"{gameObject.name} missing Bullet Prefab or Fire Point!"
+                );
+            }
+
+
+            lastFireTime = Time.time;
         }
+
         public override void ExitState(EntityBrain brain)
         {
-            if (brain.aiAnimation != null && !string.IsNullOrEmpty(attackAnim))
+            if (brain.Animator != null && !string.IsNullOrEmpty(attackAnim))
             {
-                brain.aiAnimation.ResetTrigger(attackAnim);
+                brain.Animator.ResetTrigger(attackAnim);
             }
         }
     }

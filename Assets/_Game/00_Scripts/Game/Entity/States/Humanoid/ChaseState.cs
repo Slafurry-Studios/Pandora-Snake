@@ -1,6 +1,7 @@
+using Game.Entities;
 using UnityEngine;
 
-namespace Game.AI
+namespace Game.Entities
 {
     public class ChaseState : EntityState
     {
@@ -28,12 +29,12 @@ namespace Game.AI
 
             Vector2 moveDirection = (brain.Target.position - transform.position).normalized;
 
-            brain.Movement.SetMovement(moveDirection, chaseSpeed);
+            brain.EntityMovement.SetMovement(moveDirection, chaseSpeed);
         }
 
         public override void ExitState(EntityBrain brain)
         {
-            brain.Movement.SetMovement(Vector2.zero, 0f);
+            brain.EntityMovement.SetMovement(Vector2.zero, 0f);
         }
     }
 }

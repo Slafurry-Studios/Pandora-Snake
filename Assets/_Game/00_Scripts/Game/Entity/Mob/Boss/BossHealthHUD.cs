@@ -1,4 +1,4 @@
-using Game.AI.Boss;
+using Game.Entities.Boss;
 using UnityEngine;
 using UnityEngine.UI;
 

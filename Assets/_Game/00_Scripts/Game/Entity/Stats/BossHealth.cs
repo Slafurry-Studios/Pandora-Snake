@@ -4,7 +4,7 @@ using Game.Generic;
 using Game.Core.Effects;
 using System.Collections;
 
-namespace Game.AI.Boss
+namespace Game.Entities.Boss
 {
     public class BossHealth : EntityHealth
     {

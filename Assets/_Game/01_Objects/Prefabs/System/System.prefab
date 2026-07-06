@@ -629,7 +629,7 @@ MonoBehaviour:
     prefab: {fileID: 3703858434123489310, guid: c86d1abfd6c44d0dd88a6661fb95b542, type: 3}
     defaultCapacity: 10
     maxSize: 100
-  - key: Bullet_Collide
+  - key: Bullet_Hit
     prefab: {fileID: 5574153403410969532, guid: 36073411dd58d3d409696e1a44db0642, type: 3}
     defaultCapacity: 10
     maxSize: 100
