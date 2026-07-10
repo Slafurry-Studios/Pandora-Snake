@@ -13,6 +13,7 @@ namespace Game.Core.Effects
 
         [Tooltip("If true, it will find and blink all SpriteRenderers on this object and its children.")]
         [SerializeField] private bool includeChildren = true;
+        [SerializeField] private GameObject blinkObject;
 
         private SpriteRenderer[] spriteRenderers;
         private Color[] originalColors;
@@ -23,11 +24,11 @@ namespace Game.Core.Effects
         {
             if (includeChildren)
             {
-                spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+                spriteRenderers = blinkObject.GetComponentsInChildren<SpriteRenderer>(true);
             }
             else
             {
-                SpriteRenderer sr = GetComponent<SpriteRenderer>();
+                SpriteRenderer sr = blinkObject.GetComponent<SpriteRenderer>();
                 if (sr != null)
                 {
                     spriteRenderers = new SpriteRenderer[] { sr };

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7f76162702e611baa4d63d0736f763, type: 3}
+  m_Name: Car
+  m_EditorClassIdentifier: 
+  health: 10
+  moveSpeed: 5
+  bulletFireData:
+    prefab: {fileID: 0}
+    damage: 0
+    speed: 0
+    hitRadius: 0
+    targetMask:
+      serializedVersion: 2
+      m_Bits: 0
+    maxDistance: 0
+    scale: 0
+    isExplosive: 0
+    isRichochet: 0
+    startPos: {x: 0, y: 0}
+    direction: {x: 0, y: 0}
+  deathChatType: 1
+  audioCategory: Car
+  shootSFX: Explode
+  turnSpeed: 360
+  turnSpeedPenalty: 10
+  brakeDeceleration: 30
+  reverseAngleThreshold: 10
+  reverseSpeedMultiplier: 0.6

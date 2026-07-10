@@ -1,18 +1,8 @@
 using Game.Gameplay;
-using Game.Managerd;
-using Slafurry.System.Audio;
 using UnityEngine;
 
 namespace Game.Entities
 {
-    /// <summary>
-    /// Optional hostile car attack. Same plug-and-play Bullet/BulletManager pipeline as
-    /// Humanoid's AttackState, but a car can't instantly snap-aim: it can only fire
-    /// straight along its own nose. This state keeps steering the car toward the target
-    /// (so it drives itself into alignment like a real vehicle) and only fires once
-    /// CarMovement reports the target is inside the forward-fire cone.
-    /// Leave this state off a car's stateList entirely for a non-hostile car.
-    /// </summary>
     public class CarAttackState : EntityState
     {
         [Header("Engagement Settings")]
@@ -23,20 +13,9 @@ namespace Game.Entities
         [Header("Animation")]
         [Tooltip("Animator bool set to true for the whole time this state is active. Combined with CarMovement's IsReversing, this drives the animator between Foward_shoot and Backward_shoot.")]
         [SerializeField] private string shootingBool = "IsShooting";
-        [SerializeField] private string attackSound;
-
-        [Header("Bullet Settings")]
-        [Tooltip("Drag the Bullet prefab here (it must have the Bullet script attached)")]
-        public Bullet bulletPrefab;
-        public Transform firePoint;
-        public float bulletDamage = 1f;
-        public float bulletSpeed = 12f;
-        public float bulletMaxDistance = 20f;
-        public float bulletHitRadius = 0.2f;
-        [Tooltip("What should this bullet hit? (Set to 'Player')")]
-        public LayerMask targetMask;
 
         [Header("Line of Sight (LoS)")]
+        [SerializeField] private Transform firePoint;
         public bool requiresLineOfSight = true;
         public LayerMask obstacleLayer;
 
@@ -74,19 +53,13 @@ namespace Game.Entities
 
         public override void UpdateState(EntityBrain brain)
         {
-            var player = brain.Target.GetComponent<Game.Player.PlayerMovement>();
-            float playerSpeed = (player != null) ? player.CurrentSpeed : 5f;
-
             Vector2 directionToTarget = (brain.Target.position - transform.position).normalized;
 
-            // Keep steering toward the target so the car lines its own nose up for a shot,
-            // instead of snap-aiming like Humanoid's AttackState does.
-            brain.EntityMovement.SetMovement(directionToTarget, playerSpeed * pursuitSpeedMultiplier);
+            brain.EntityMovement.SetMovement(directionToTarget, entityData.MoveSpeed);
 
             bool isLinedUp = carMovement != null
                 ? carMovement.IsAlignedWithDirection(directionToTarget)
-                : true; // no CarMovement to check against - fall back to always allowed
-
+                : true;
             if (isLinedUp && Time.time >= lastFireTime + fireRate)
             {
                 Fire(brain, directionToTarget);
@@ -108,32 +81,16 @@ namespace Game.Entities
 
         private void Fire(EntityBrain brain, Vector2 fallbackDirection)
         {
-            if (bulletPrefab == null || firePoint == null)
+            if (firePoint == null)
             {
                 Debug.LogWarning($"{gameObject.name} missing Bullet Prefab or Fire Point!");
                 lastFireTime = Time.time;
                 return;
             }
 
-            // Bullet always leaves along the car's actual nose - it can only shoot forward.
-            Vector2 fireDirection = carMovement != null ? carMovement.Forward : fallbackDirection;
-            BulletData bulletFireData = new BulletData
-            {
-                prefab = bulletPrefab,
-                startPos = firePoint.position,
-                direction = fireDirection,
-                damage = bulletDamage,
-                speed = bulletSpeed,
-                targetMask = targetMask,
-                hitRadius = bulletHitRadius,
-                isExplosive = false,
-                isRichochet = false,
-                scale = 1f
-            };
+            Vector2 aimDirection = carMovement != null ? carMovement.Forward : fallbackDirection;
 
-            GameManager.Bullet.FireBullet(bulletFireData);
-
-            Audio.PlaySFX2D("Car", attackSound);
+            brain.EntityShoot.Shoot(aimDirection);
 
             lastFireTime = Time.time;
         }

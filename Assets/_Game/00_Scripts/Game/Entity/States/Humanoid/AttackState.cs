@@ -1,6 +1,3 @@
-using Game.Gameplay;
-using Game.Managerd;
-using Slafurry.System.Audio;
 using UnityEngine;
 
 namespace Game.Entities
@@ -13,23 +10,10 @@ namespace Game.Entities
 
         [Header("Animation")]
         [SerializeField] private string attackAnim;
-        public string attackCategory;
-        [SerializeField] private string attackSound;
-
-        [Header("Bullet Settings")]
-        [Tooltip("Drag the Bullet prefab here (it must have the Bullet script attached)")]
-        public Bullet bulletPrefab;
-        public Transform firePoint;
-        public float bulletDamage = 1f;
-        public float bulletSpeed = 10f;
-        public float bulletMaxDistance = 20f;
-        public float bulletHitRadius = 0.2f;
-        [Tooltip("What should this bullet hit? (Set to 'Player')")]
-        public LayerMask targetMask;
 
         [Header("Line of Sight (LoS)")]
-        public bool requiresLineOfSight = true;
-        public LayerMask obstacleLayer;
+        [SerializeField] private bool requiresLineOfSight = true;
+        [SerializeField] LayerMask obstacleLayer;
 
         private float lastFireTime;
 

@@ -8,12 +8,13 @@ namespace Game.Core.Effects
         [SerializeField] private float squashX = 1.3f;
         [SerializeField] private float squashY = 0.7f;
         [SerializeField] private float duration = 0.15f;
+        [SerializeField] private GameObject squashObject;
 
         private Vector3 _originalScale;
 
         private void Awake()
         {
-            _originalScale = transform.localScale;
+            _originalScale = squashObject.transform.localScale;
         }
 
         public void PlayEffect()
@@ -25,7 +26,7 @@ namespace Game.Core.Effects
         public void StopEffect()
         {
             StopAllCoroutines();
-            transform.localScale = _originalScale;
+            squashObject.transform.localScale = _originalScale;
         }
 
         private IEnumerator SquashRoutine()
@@ -37,7 +38,7 @@ namespace Game.Core.Effects
             {
                 elapsed += Time.deltaTime;
                 float t = elapsed / half;
-                transform.localScale = Vector3.Lerp(_originalScale, new Vector3(
+                squashObject.transform.localScale = Vector3.Lerp(_originalScale, new Vector3(
                     _originalScale.x * squashX,
                     _originalScale.y * squashY,
                     _originalScale.z), t);
@@ -49,14 +50,14 @@ namespace Game.Core.Effects
             {
                 elapsed += Time.deltaTime;
                 float t = elapsed / half;
-                transform.localScale = Vector3.Lerp(new Vector3(
+                squashObject.transform.localScale = Vector3.Lerp(new Vector3(
                     _originalScale.x * squashX,
                     _originalScale.y * squashY,
                     _originalScale.z), _originalScale, t);
                 yield return null;
             }
 
-            transform.localScale = _originalScale;
+            squashObject.transform.localScale = _originalScale;
         }
     }
 }

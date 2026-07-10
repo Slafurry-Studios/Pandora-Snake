@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using Game.Core.Effects;
-using Game.Entities;
-using Game.Entity;
 using UnityEngine;
-using UnityEngine.VFX;
 
 namespace Game.Entities
 {
@@ -34,13 +31,18 @@ namespace Game.Entities
 
             visualEffects = GetComponentsInChildren<IVisualEffect>();
 
-            entityHealth.Initialize(entityData.Health, entityBrain, entityCollider, visualEffects);
+            foreach (var state in entityStates)
+            {
+                state.Initialize(entityData);
+            }
+
+            entityHealth.Initialize(entityData.Health, entityData.DeathChatType, entityBrain, entityCollider, visualEffects);
             entityBrain.Initialize(entityStates, entityMovement, entityShoot, animator);
 
             entityMovement.Initialize(entityBrain, spriteRenderer, rb);
 
-            entityShoot.Initialize(entityBrain, entityData.BulletFireData, animator);
-            entityShoot.InitKeys(entityData.AudioCategory, entityData.ShootSFX);
+            entityShoot?.Initialize(entityBrain, entityData.BulletFireData, animator);
+            entityShoot?.InitKeys(entityData.AudioCategory, entityData.ShootSFX);
         }
     }
 }

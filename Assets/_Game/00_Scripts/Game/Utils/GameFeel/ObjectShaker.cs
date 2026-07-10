@@ -19,6 +19,9 @@ namespace Game.Core.Effects
         [SerializeField] private bool shakeY = true;
         [SerializeField] private bool shakeZ = false;
 
+        [Header("Object")]
+        [SerializeField] private GameObject shakeObject;
+
         private float currentDuration;
         private float currentIntensity;
         private bool isShaking = false;
@@ -43,7 +46,7 @@ namespace Game.Core.Effects
             if (isShaking)
             {
                 isShaking = false;
-                transform.localPosition -= currentPosOffset;
+                shakeObject.transform.localPosition -= currentPosOffset;
                 currentPosOffset = Vector3.zero;
             }
         }
@@ -69,7 +72,7 @@ namespace Game.Core.Effects
                 
                 Vector3 newPosOffset = new Vector3(px, py, pz);
 
-                transform.localPosition = (transform.localPosition - currentPosOffset) + newPosOffset;
+                shakeObject.transform.localPosition = shakeObject.transform.localPosition - currentPosOffset + newPosOffset;
                 currentPosOffset = newPosOffset;
 
                 currentDuration -= Time.deltaTime;

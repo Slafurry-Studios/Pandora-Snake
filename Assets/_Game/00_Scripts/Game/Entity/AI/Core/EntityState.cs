@@ -8,6 +8,11 @@ namespace Game.Entities
     /// </summary>
     public abstract class EntityState : MonoBehaviour
     {
+        protected EntityData entityData;
+        public virtual void Initialize(EntityData entityData)
+        {
+            this.entityData = entityData;
+        }
         /// <summary>
         /// Evaluates whether this state should currently be active.
         /// Return true if conditions are met (e.g. target in range), false otherwise.

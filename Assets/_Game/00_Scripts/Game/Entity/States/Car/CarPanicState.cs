@@ -42,9 +42,7 @@ namespace Game.Entities
 
         public override void UpdateState(EntityBrain brain)
         {
-            var player = brain.Target.GetComponent<Game.Player.PlayerMovement>();
-            float playerSpeed = (player != null) ? player.CurrentSpeed : 5f;
-            float fleeSpeed = playerSpeed * speedMultiplier;
+            float fleeSpeed = entityData.MoveSpeed * speedMultiplier;
 
             Vector2 fleeDirection = ((Vector2)transform.position - (Vector2)brain.Target.position).normalized;
             brain.EntityMovement.SetMovement(fleeDirection, fleeSpeed);

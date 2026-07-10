@@ -1,8 +1,7 @@
-using Slafurry.System.Audio;
 using Slafurry.Utils.Attributes;
 using UnityEngine;
 
-namespace Game.Entity
+namespace Game.Entities
 {
     [GameAssetCreator ("Entity/Non Hostile", "Civilian", order: 4)]
     public class EntityData : ScriptableObject

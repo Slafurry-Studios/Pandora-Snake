@@ -44,10 +44,8 @@ namespace Game.Entities
 
         private void PickNewWanderDirection(EntityBrain brain)
         {
-            var player = brain.Target != null ? brain.Target.GetComponent<Game.Player.PlayerMovement>() : null;
-            float playerSpeed = (player != null) ? player.CurrentSpeed : 5f;
 
-            wanderSpeed = playerSpeed * speedMultiplier;
+            wanderSpeed = entityData.MoveSpeed * speedMultiplier;
             wanderDirection = Random.insideUnitCircle.normalized;
             stateTimer = Random.Range(minWanderTime, maxWanderTime);
         }

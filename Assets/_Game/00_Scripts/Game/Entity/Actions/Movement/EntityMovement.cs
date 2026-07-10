@@ -5,7 +5,6 @@ using UnityEngine;
 namespace Game.Entities
 {
 
-
     public class EntityMovement : MonoBehaviour, IEntityMovement
     {
         [Header("Steering Settings")]
@@ -31,6 +30,11 @@ namespace Game.Entities
             this.rb = rb;
             this.brain = brain;
             this.spriteRenderer = spriteRenderer;
+        }
+
+        public void Initialize(EntityBrain brain, EntityData entityData, SpriteRenderer spriteRenderer, Rigidbody2D rb)
+        {
+            throw new System.NotImplementedException();
         }
 
         public void FaceDirection(Vector2 direction)
@@ -128,5 +132,6 @@ namespace Game.Entities
 
             return final.normalized;
         }
+
     }
 }

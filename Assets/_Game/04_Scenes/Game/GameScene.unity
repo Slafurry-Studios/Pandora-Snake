@@ -4115,6 +4115,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 652446927984887247, guid: 1039221f47789f14bb4a2b70317c0e20, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 678400938762762027, guid: 1039221f47789f14bb4a2b70317c0e20, type: 3}
       propertyPath: OnBorderEntered.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -4193,7 +4197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3337948859608710005, guid: 1039221f47789f14bb4a2b70317c0e20, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3586609182430550594, guid: 1039221f47789f14bb4a2b70317c0e20, type: 3}
       propertyPath: player
@@ -4319,6 +4323,22 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1159870839}
+    - target: {fileID: 6260738375830212751, guid: 1039221f47789f14bb4a2b70317c0e20, type: 3}
+      propertyPath: entityPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 798790902345116482, guid: 8c02f3d5d2939609abda2ea7b6d0e299, type: 3}
+    - target: {fileID: 6260738375830212751, guid: 1039221f47789f14bb4a2b70317c0e20, type: 3}
+      propertyPath: entityPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 798790902345116482, guid: ac5dad1295577efe7a4a927c96c7fa5b, type: 3}
+    - target: {fileID: 6260738375830212751, guid: 1039221f47789f14bb4a2b70317c0e20, type: 3}
+      propertyPath: entityPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 798790902345116482, guid: fb260d2090f04f37e8a74f8722614bae, type: 3}
+    - target: {fileID: 6260738375830212751, guid: 1039221f47789f14bb4a2b70317c0e20, type: 3}
+      propertyPath: entityPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 798790902345116482, guid: 5790cb4e0a2bd17e2b2b7ffeda5cbf7c, type: 3}
     - target: {fileID: 7476817081686596276, guid: 1039221f47789f14bb4a2b70317c0e20, type: 3}
       propertyPath: player
       value: 

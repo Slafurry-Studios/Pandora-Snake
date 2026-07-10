@@ -21,11 +21,7 @@ namespace Game.Entities
 
         public override void UpdateState(EntityBrain brain)
         {
-            var player = brain.Target.GetComponent<Game.Player.PlayerMovement>();
-
-            float playerSpeed = (player != null) ? player.CurrentSpeed : 5f;
-
-            float chaseSpeed = playerSpeed * speedMultiplier;
+            float chaseSpeed = entityData.MoveSpeed * speedMultiplier;
 
             Vector2 moveDirection = (brain.Target.position - transform.position).normalized;
 

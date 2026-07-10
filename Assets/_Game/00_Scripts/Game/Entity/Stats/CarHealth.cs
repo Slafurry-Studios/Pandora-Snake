@@ -15,36 +15,25 @@ public class CarHealth : EntityHealth
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        CheckCollision(collision.gameObject);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        CheckCollision(other.gameObject);
-    }
-
-    private void CheckCollision(GameObject obj)
+    public void CheckCollision(GameObject obj)
     {
         if (isDead)
             return;
 
         if (obj.CompareTag("Body"))
         {
-            // knockback logic 
-            GetComponent<Rigidbody2D>().AddForce((transform.position - obj.transform.position).normalized * 1f, ForceMode2D.Impulse);
+            GetComponentInChildren<Rigidbody2D>().AddForce((transform.position - obj.transform.position).normalized * 1f, ForceMode2D.Impulse);
         }
 
-        if (obj.GetComponent<EntityHealth>() != null && obj.CompareTag("Entity"))
+        if (obj.GetComponentInChildren<EntityHealth>() != null && obj.CompareTag("Entity"))
         {
-            obj.GetComponent<EntityHealth>().TakeDamage(99999999f);
+            obj.GetComponentInChildren<EntityHealth>().TakeDamage(99999999f);
             TakeDamage(collisionDmg);
         }
 
         if (obj.CompareTag("Building"))
         {
-            obj.GetComponent<BuildingHealth>().TakeDamage(999999999f);
+            obj.GetComponentInChildren<BuildingHealth>().TakeDamage(999999999f);
             TakeDamage(collisionDmg);
         }
     }

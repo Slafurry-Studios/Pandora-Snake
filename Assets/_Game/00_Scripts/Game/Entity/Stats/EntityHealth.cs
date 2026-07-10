@@ -14,7 +14,6 @@ namespace Game.Entities
 
         [Header("Death")]
         [SerializeField] private LayerMask deathLayerMask;
-        [SerializeField] private StreamChatType deathChatType = StreamChatType.KILL_HOSTILES;
 
         [Header("Animation")]
         [SerializeField] private string dieAnim;
@@ -25,12 +24,14 @@ namespace Game.Entities
         [SerializeField] private string hitSound;
         [SerializeField] private string deathSound;
 
+        private StreamChatType deathChatType;
         protected IVisualEffect[] visualEffects;
         private EntityBrain entityBrain;
         private Collider2D entityCollider;
 
-        public void Initialize(float health, EntityBrain entityBrain, Collider2D entityCollider, IVisualEffect[] visualEffects)
+        public void Initialize(float health, StreamChatType deathChatType, EntityBrain entityBrain, Collider2D entityCollider, IVisualEffect[] visualEffects)
         {
+            this.deathChatType = deathChatType;
             this.entityBrain = entityBrain;
             this.entityCollider = entityCollider;
             this.visualEffects = visualEffects;
