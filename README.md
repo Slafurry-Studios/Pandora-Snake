@@ -18,6 +18,13 @@ Pandora Snake follows Pandora, a clueless witch streamer, and Jormungandr, the l
 
 ---
 
+## PLAY IT ON
+<p align="left">
+  <a href="https://lordzaini.itch.io/pandoras-snake"><img src="https://img.shields.io/badge/ITCH.IO-ffffff?style=for-the-badge&logo=itch.io&logoColor=000000" /></a>
+</p>
+
+---
+
 ## FEATURES
 - **Destroy Everything** — Smash buildings and devour humans or items to fill the Threat Point bar
 - **Eat Consumables** — Destroyed buildings drop items with a chance to heal the player
