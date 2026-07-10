@@ -28,6 +28,14 @@ namespace Game.Core.Effects
         
         private Vector3 currentPosOffset = Vector3.zero;
 
+        void Awake()
+        {
+            if (shakeObject == null)
+            {
+                shakeObject = gameObject;
+            }
+        }
+
         public void PlayEffect()
         {
             currentDuration = duration;

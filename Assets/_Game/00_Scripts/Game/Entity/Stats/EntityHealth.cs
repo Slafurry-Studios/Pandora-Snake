@@ -13,6 +13,7 @@ namespace Game.Entities
         [SerializeField] private ObjectiveScriptableObject objective;
 
         [Header("Death")]
+        [SerializeField] private GameObject parentGameObject;
         [SerializeField] private LayerMask deathLayerMask;
 
         [Header("Animation")]
@@ -60,7 +61,7 @@ namespace Game.Entities
             base.Die();
             Audio.PlaySFX2D(sfxCategory, deathSound);
 
-            SetLayerRecursively(gameObject, LayerMaskToLayer(deathLayerMask));
+            SetLayerRecursively(parentGameObject, LayerMaskToLayer(deathLayerMask));
 
             foreach (BaseObjectiveChannel channel in destroyChannel)
             {

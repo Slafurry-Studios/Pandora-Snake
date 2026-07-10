@@ -9,6 +9,7 @@ namespace Game.Gameplay
     {
         [Header("Collectible Settings")]
         public List<AttributeModifier> attributes = new List<AttributeModifier>();
+        [SerializeField] Collider2D parentCollider;
 
         [Header("Consume Animation Settings")]
         [SerializeField] private float duration = 0.5f;
@@ -48,6 +49,7 @@ namespace Game.Gameplay
         public void Consume(GameObject player, Vector2 direction)
         {
             eatableCollider.enabled = false;
+            parentCollider.enabled = false;
             if (isConsumed) return;
             isConsumed = true;
 
@@ -73,10 +75,10 @@ namespace Game.Gameplay
                 }
             }
 
-            Vector3 startPosition = transform.position;
+            Vector3 startPosition = parentCollider.transform.position;
             Vector3 targetPosition = startPosition + (Vector3)(dir * pullDistance);
 
-            Vector3 startScale = transform.localScale;
+            Vector3 startScale = parentCollider.transform.localScale;
             Color startColor = spriteRenderer != null ? spriteRenderer.color : Color.white;
 
             float elapsedTime = 0f;
@@ -86,8 +88,8 @@ namespace Game.Gameplay
                 elapsedTime += Time.deltaTime;
                 float t = elapsedTime / duration;
 
-                transform.position = Vector3.Lerp(startPosition, targetPosition, t);
-                transform.localScale = Vector3.Lerp(startScale, Vector3.zero, t);
+                parentCollider.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+                parentCollider.transform.localScale = Vector3.Lerp(startScale, Vector3.zero, t);
 
                 if (spriteRenderer != null)
                 {
@@ -99,7 +101,7 @@ namespace Game.Gameplay
                 yield return null;
             }
 
-            transform.localScale = Vector3.zero;
+            parentCollider.transform.localScale = Vector3.zero;
             Destroy(gameObject);
         }
     }

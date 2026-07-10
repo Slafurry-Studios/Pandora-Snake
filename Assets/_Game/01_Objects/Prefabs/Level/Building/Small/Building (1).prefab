@@ -171,6 +171,7 @@ MonoBehaviour:
   shakeX: 1
   shakeY: 1
   shakeZ: 0
+  shakeObject: {fileID: 0}
 --- !u!114 &7074029953208339294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +187,7 @@ MonoBehaviour:
   blinkColor: {r: 1, g: 0.5682776, b: 0.5682776, a: 1}
   blinkDuration: 0.1
   includeChildren: 1
+  blinkObject: {fileID: 0}
 --- !u!61 &-5643737536395116143
 BoxCollider2D:
   m_ObjectHideFlags: 0

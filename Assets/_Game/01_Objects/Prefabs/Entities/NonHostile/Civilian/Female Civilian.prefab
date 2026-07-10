@@ -280,6 +280,7 @@ MonoBehaviour:
   squashX: 1.3
   squashY: 0.7
   duration: 0.15
+  squashObject: {fileID: 0}
 --- !u!114 &8773639258221135927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +296,7 @@ MonoBehaviour:
   blinkColor: {r: 1, g: 0.55212283, b: 0.55212283, a: 1}
   blinkDuration: 0.1
   includeChildren: 1
+  blinkObject: {fileID: 0}
 --- !u!1 &5340636457954070318
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,6 +394,7 @@ MonoBehaviour:
     amount: 1
   - attribute: {fileID: 11400000, guid: cb77d6b820a3379878cc18cf05ef5bbc, type: 2}
     amount: 10
+  parentCollider: {fileID: 9012994225865180231}
   duration: 0.5
   pullDistance: 4
   consumeChannel: []
@@ -445,7 +448,6 @@ MonoBehaviour:
   deathLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  deathChatType: 2
   dieAnim: Death
   hitAnim: Hit
   sfxCategory: Civilian

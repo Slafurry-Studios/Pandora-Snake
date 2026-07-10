@@ -101,10 +101,10 @@ MonoBehaviour:
   player: {fileID: 0}
   entityPrefabs:
   - {fileID: 798790902345116482, guid: b22551d05c3c55491a2eecad63f40943, type: 3}
-  - {fileID: 798790902345116482, guid: d5df3152e3853ef0d88e7c4d71e80e8c, type: 3}
-  - {fileID: 798790902345116482, guid: 139d1dd8b40a7f3728ebfbc167b23479, type: 3}
-  - {fileID: 798790902345116482, guid: 43e33ddcc3564abce9c832156ee00ebf, type: 3}
-  - {fileID: 798790902345116482, guid: 511d6619d9bd23e6198598b5b055f870, type: 3}
+  - {fileID: 798790902345116482, guid: 8c02f3d5d2939609abda2ea7b6d0e299, type: 3}
+  - {fileID: 798790902345116482, guid: ac5dad1295577efe7a4a927c96c7fa5b, type: 3}
+  - {fileID: 798790902345116482, guid: fb260d2090f04f37e8a74f8722614bae, type: 3}
+  - {fileID: 798790902345116482, guid: 5790cb4e0a2bd17e2b2b7ffeda5cbf7c, type: 3}
   maxEntities: 100
   spawnInterval: 2
   spawnsPerTick: 1
@@ -263,6 +263,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Game.Dialog.DialogManager, Assembly-CSharp
         m_MethodName: StartDialog
         m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: border_exit
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6865613653801151997}
+        m_TargetAssemblyTypeName: Game.Gameplay.PlayerFinisher, Assembly-CSharp
+        m_MethodName: TriggerFinisher
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -434885,6 +434897,55 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!1 &2858754692052388168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 257239481101821310}
+  - component: {fileID: 3503519373681051356}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &257239481101821310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2858754692052388168}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 45.592056, y: 56.376434, z: -0.43230638}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 476346433084964770}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3503519373681051356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2858754692052388168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a409e5704c3f618bb1b12bfd85e52e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  order: 2
+  bossMarginRange: {x: 4, y: 6}
+  bossSize: {x: 4, y: 4}
+  bossBuildings:
+  - {fileID: 2912016698548783312, guid: 2bb96e4efb49415d59713c9feea067c0, type: 3}
 --- !u!1 &3171268645075799672
 GameObject:
   m_ObjectHideFlags: 0
@@ -435044,6 +435105,18 @@ MonoBehaviour:
           m_StringArgument: border_exit
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6865613653801151997}
+        m_TargetAssemblyTypeName: Game.Gameplay.PlayerFinisher, Assembly-CSharp
+        m_MethodName: TriggerFinisher
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: border_exit
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3267130787908938767
 GameObject:
   m_ObjectHideFlags: 0
@@ -435149,6 +435222,18 @@ MonoBehaviour:
           m_StringArgument: border_exit
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6865613653801151997}
+        m_TargetAssemblyTypeName: Game.Gameplay.PlayerFinisher, Assembly-CSharp
+        m_MethodName: TriggerFinisher
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: border_exit
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3337948859608710005
 GameObject:
   m_ObjectHideFlags: 0
@@ -435195,7 +435280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   entityPrefabs:
-  - {fileID: 7315821036877757477, guid: dc5520f279f47206cb4d6eaea260e820, type: 3}
+  - {fileID: 7315821036877757477, guid: edaee6f1b0b1be754a9bf14910f4d447, type: 3}
   - {fileID: 7315821036877757477, guid: 62f757d2ea07cb8a9816a89f642ec5d5, type: 3}
   maxEntities: 100
   spawnInterval: 2
@@ -435240,6 +435325,7 @@ Transform:
   - {fileID: 1918216831971122321}
   - {fileID: 8188503557361630977}
   - {fileID: 6676289901346650494}
+  - {fileID: 257239481101821310}
   m_Father: {fileID: 6656300709399086097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3825471979713611889
@@ -435730,6 +435816,18 @@ MonoBehaviour:
           m_StringArgument: border_exit
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6865613653801151997}
+        m_TargetAssemblyTypeName: Game.Gameplay.PlayerFinisher, Assembly-CSharp
+        m_MethodName: TriggerFinisher
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: border_exit
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7967836753404309566
 GameObject:
   m_ObjectHideFlags: 0
@@ -435772,6 +435870,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9058145965963809345}
+  - component: {fileID: 6865613653801151997}
   m_Layer: 0
   m_Name: Borders
   m_TagString: Untagged
@@ -435798,6 +435897,32 @@ Transform:
   - {fileID: 4056623543092591088}
   m_Father: {fileID: 4016166453176487220}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6865613653801151997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154195203921836145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b904fc2976eb4dccebc4104020e71a78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finisherBulletPrefab: {fileID: -2552241777892693065, guid: 52bb9acbdebc3a9419750a35cbc48558, type: 3}
+  player: {fileID: 0}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  bulletsPerRing: 24
+  ringRadius: 8
+  bulletSpeed: 15
+  bulletDamage: 1
+  bulletHitRadius: 0.2
+  maxShootDistance: 20
+  ringCount: 3
+  delayBetweenRings: 0.01
+  holdBeforeFire: 0.5
 --- !u!1 &8361278682160543948
 GameObject:
   m_ObjectHideFlags: 0

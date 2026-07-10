@@ -14,7 +14,13 @@ namespace Game.Core.Effects
 
         private void Awake()
         {
+            if (squashObject == null)
+            {
+                squashObject = gameObject;
+            }
             _originalScale = squashObject.transform.localScale;
+
+
         }
 
         public void PlayEffect()

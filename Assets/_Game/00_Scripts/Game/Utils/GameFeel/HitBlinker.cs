@@ -22,6 +22,11 @@ namespace Game.Core.Effects
 
         private void Awake()
         {
+            if (blinkObject == null)
+            {
+                blinkObject = gameObject;
+            }
+
             if (includeChildren)
             {
                 spriteRenderers = blinkObject.GetComponentsInChildren<SpriteRenderer>(true);
@@ -52,11 +57,11 @@ namespace Game.Core.Effects
         public void PlayEffect()
         {
             currentBlinkTimer = blinkDuration;
-            
+
             if (!isBlinking)
             {
                 isBlinking = true;
-                
+
                 for (int i = 0; i < spriteRenderers.Length; i++)
                 {
                     if (spriteRenderers[i] != null)
@@ -79,7 +84,7 @@ namespace Game.Core.Effects
             if (isBlinking)
             {
                 isBlinking = false;
-                
+
                 for (int i = 0; i < spriteRenderers.Length; i++)
                 {
                     if (spriteRenderers[i] != null)
