@@ -2,7 +2,7 @@
 An absurd comedy action-destruction game where a reckless witch streamer and a machine-gun-toting World Serpent rampage across the multiverse for viewers, subscribers, and revenge.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/9dee6058-b82a-43b4-ae26-eab6ffe699da" width="100%" alt="Pandora Snake banner" />
+  <img src="https://github.com/user-attachments/assets/45bda635-caf8-4080-91d1-c77f0863761f" width="100%" alt="Pandora Snake banner" />
 </p>
 <br>
 <p align="left">
